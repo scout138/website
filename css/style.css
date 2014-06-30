@@ -1,0 +1,67 @@
+body {
+    background-color: green;
+}
+
+.header {
+    width: 960px;
+    height: 80px;
+    background-color: #ffffff;
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-top-right-radius: 15px;
+    -moz-border-radius-topleft: 15px;
+    -moz-border-radius-topright: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: 1px solid gray;
+    margin: 100px auto 0 auto;
+    padding: 5px 25px;
+    position: relative;
+}
+
+.header .logo {
+    height: 144px;
+    width: 180px;
+    background-image: url(http://www.scouts.ca/brandcentre/resources/logo/scouts-logo-notagline-web.png);
+    background-repeat: no-repeat;
+    background-size: 180px;
+    position: absolute;
+    bottom: 0;
+}
+
+.header h2 {
+    margin-left: 180px;
+    color: red;
+    text-shadow: 1px 2px 3px rgba(0,0,0, 0.5);
+    float: left;
+}
+
+.header ul.nav {
+    list-style-image: none;
+    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 25px;
+}
+
+.header ul.nav li {
+    list-style-image: none;
+    float: left;
+}
+
+.header ul.nav li a {
+    padding: 10px 20px;
+}
+
+.header ul.nav li a:hover {
+    background: -webkit-radial-gradient(50% 100%, farthest-side, #ddd, white); /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(50% 100%, farthest-side, #ddd, white); /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(50% 100%, farthest-side, #ddd, white); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(50% 100%, farthest-side, #ddd, white); /* Standard syntax (must be last) */
+}
+
+.content-wrapper {
+    width: 960px;
+    background-color: #ffffff;
+    margin: 0 auto;
+    height: 80%;
+}
