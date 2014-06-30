@@ -1,5 +1,16 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 body {
     background-color: green;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    margin: 0;
 }
 
 .header {
@@ -28,8 +39,11 @@ body {
     bottom: 0;
 }
 
-.header h2 {
+.header .title {
+    font-weight: normal;
+    font-size: 2em;
     margin-left: 180px;
+    margin-top: 15px;
     color: red;
     text-shadow: 1px 2px 3px rgba(0,0,0, 0.5);
     float: left;
@@ -39,17 +53,21 @@ body {
     list-style-image: none;
     float: right;
     position: absolute;
+    padding: 0;
+    margin: 10px 0;
     bottom: 0;
     right: 25px;
 }
 
 .header ul.nav li {
     list-style-image: none;
+    height: auto;
     float: left;
 }
 
 .header ul.nav li a {
-    padding: 10px 20px;
+    height: 20px !important;
+    padding: 12px 20px;
 }
 
 .header ul.nav li a:hover {
@@ -63,5 +81,46 @@ body {
     width: 960px;
     background-color: #ffffff;
     margin: 0 auto;
-    height: 80%;
+    padding: 25px;
+    min-height: 90%;
+}
+
+.content-wrapper .main-content {
+    width: 610px;
+    float: left;
+    padding: 10px;
+}
+
+.content-wrapper .main-content .post {
+    margin-bottom: 50px;
+}
+
+.content-wrapper .main-content .post .title {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.content-wrapper .main-content .post .photo {
+    width: 590px;
+    height: 332px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.content-wrapper .main-content .post .words {
+    margin-top: 10px;
+}
+
+.content-wrapper .main-content .post > a.read-more::before {
+    content: "Read More »";
+    float: right;
+    color: red;
+    text-decoration: underline;
+}
+
+.content-wrapper .right-side {
+    width: 300px;
+    float: right;
+    padding: 10px;
 }
