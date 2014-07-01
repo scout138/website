@@ -71,6 +71,7 @@ body {
 .header ul.nav li a {
     height: 20px !important;
     padding: 12px 20px;
+    text-decoration: none;
 }
 
 .header ul.nav li a:hover {
@@ -109,6 +110,12 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+}
+
+.content-wrapper .main-content .post .photo.loading {
+    height: 11px !important;
+    background-size: contain !important;
+    background-image: url(../images/fbloading.gif);
 }
 
 .content-wrapper .main-content .post .words {

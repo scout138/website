@@ -6,8 +6,6 @@
         <title>The 138th East Vancouver Scout Group</title>
         <meta name="description" content="">
 
-        <script src="js/angular.min.js"></script>
-
         <link rel="stylesheet" href="css/style.css"/>
         <link rel="author" href="https://github.com/askho/138Website/graphs/contributors">
     </head>
@@ -23,24 +21,14 @@
             </ul>
         </div>
         <div class="content-wrapper">
-            <div class="main-content">
-                <div class="post">
+            <div class="main-content" ng-controller="PostsCtrl">
+                <div class="post" ng-controller="AlbumCtrl" ng-repeat="post in posts" ng-init="init(post.albumId)">
                     <div class="title">
-                        Family Camp 2014 (July 27-29)
+                        {{post.title}}
                     </div>
-                    <div class="photo" style="background-image: url(https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xaf1/t31.0-8/p480x480/10450038_409582685846640_5423485124702970947_o.jpg);"></div>
+                    <div class="photo" ng-class="{ loading: coverStyle == null }" ng-style="coverStyle"></div>
                     <div class="words">
-                        Bacon ipsum dolor sit amet filet mignon short loin t-bone hamburger. Tenderloin shank kielbasa jerky andouille drumstick spare ribs bacon hamburger cow tri-tip jowl biltong t-bone. Capicola prosciutto shoulder landjaeger bresaola shankle corned beef leberkas. Ground round andouille pancetta salami meatball. Ham pork chop flank corned beef, turkey shoulder t-bone rump doner sausage. Flank jowl turkey bresaola, turducken pork frankfurter tongue cow. Tail tenderloin doner, salami pig drumstick jerky corned beef meatloaf.
-                    </div>
-                    <a href="javascript:void(0);" class="read-more"></a>
-                </div>
-                <div class="post">
-                    <div class="title">
-                        Swimming at Eileen Daily Pool (July 21)
-                    </div>
-                    <div class="photo" style="background-image: url(https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xaf1/t31.0-8/p480x480/1908352_407692306035678_2426469687376946577_o.jpg);"></div>
-                    <div class="words">
-                        Bacon ipsum dolor sit amet filet mignon short loin t-bone hamburger. Tenderloin shank kielbasa jerky andouille drumstick spare ribs bacon hamburger cow tri-tip jowl biltong t-bone. Capicola prosciutto shoulder landjaeger bresaola shankle corned beef leberkas. Ground round andouille pancetta salami meatball. Ham pork chop flank corned beef, turkey shoulder t-bone rump doner sausage. Flank jowl turkey bresaola, turducken pork frankfurter tongue cow. Tail tenderloin doner, salami pig drumstick jerky corned beef meatloaf.
+                        {{post.description}}
                     </div>
                     <a href="javascript:void(0);" class="read-more"></a>
                 </div>
@@ -50,5 +38,61 @@
             </div>
             <div style="clear: both;"></div>
         </div>
+        <div fb-album-viewer></div>
+        <script src="//connect.facebook.net/en_US/sdk.js"></script>
+        <script>
+            var ACCESS_TOKEN = "access_token=524905380971501|vwvIt1ualZz_1V5DX17el6NJPe0";
+            FB.init({
+                version: 'v2.0',
+                appId: 524905380971501
+            });
+        </script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-animate.js"></script>
+        <script type="application/javascript">
+            angular.module('app', ['ngAnimate']);
+            function PostsCtrl($scope) {
+                $scope.posts = [
+                    {
+                        title: "Family Camp 2014 (July 27-29)",
+                        albumId: 409578535847055,
+                        description: "Bacon ipsum dolor sit amet filet mignon short loin t-bone hamburger. Tenderloin shank kielbasa jerky andouille drumstick spare ribs bacon hamburger cow tri-tip jowl biltong t-bone. Capicola prosciutto shoulder landjaeger bresaola shankle corned beef leberkas. Ground round andouille pancetta salami meatball. Ham pork chop flank corned beef, turkey shoulder t-bone rump doner sausage. Flank jowl turkey bresaola, turducken pork frankfurter tongue cow. Tail tenderloin doner, salami pig drumstick jerky corned beef meatloaf."
+                    },
+                    {
+                        title: "Swimming at Eileen Daily Pool (July 21)",
+                        albumId: 407587682712807,
+                        description: "Bacon ipsum dolor sit amet filet mignon short loin t-bone hamburger. Tenderloin shank kielbasa jerky andouille drumstick spare ribs bacon hamburger cow tri-tip jowl biltong t-bone. Capicola prosciutto shoulder landjaeger bresaola shankle corned beef leberkas. Ground round andouille pancetta salami meatball. Ham pork chop flank corned beef, turkey shoulder t-bone rump doner sausage. Flank jowl turkey bresaola, turducken pork frankfurter tongue cow. Tail tenderloin doner, salami pig drumstick jerky corned beef meatloaf."
+                    }
+                ];
+            }
+            function AlbumCtrl($scope) {
+                $scope.coverStyle = null;
+                $scope.album = {};
+
+                $scope.init = function(albumId) {
+                    FB.api(
+                            "/" + albumId + "?" + ACCESS_TOKEN,
+                            function (response) {
+                                if (response && !response.error) {
+                                    $scope.album = response;
+                                    $scope.getPhotoData($scope.album.cover_photo, function(response) {
+                                        $scope.$apply(function () {
+                                            $scope.coverStyle = {
+                                                'background-image': 'url(' + response.images[4].source + ')'
+                                            };
+                                        });
+                                    });
+                                }
+                            }
+                    );
+                };
+
+                $scope.getPhotoData = function(photoId, callback) {
+                    FB.api("/" + photoId + "?" + ACCESS_TOKEN, callback);
+                };
+            }
+
+        </script>
     </body>
 </html>
