@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['id'])) {
+		header('Location: login.html');
+
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,16 +30,16 @@
 		</div>
 		<div id = "content">
 			<div id = "create"><h1>Create Post</h1>
-				<form name="input" action="createPost.php" method="post">
+				<form name="input" action="php/createPost.php" method="post">
 					Header:<br />
-					<input type = "text" name = "Header"><br />
+					<input type = "text" name = "header"><br />
 					Add facebook photo album(copy and paste the url of album)<br />
 					<input type = "text" name = "album"><br />
 					Additional Details<br />
-					<textarea style="width:80%; height:500px;"></textarea><br />
-					<button value = "Preview Post">Preview Post</button>
+					<textarea style="width:80%; height:500px;" name = "description"></textarea><br />
 					<input type="submit" value="Create Post">
 				</form>	
+				<button value = "Preview Post">Preview Post</button>
 			</div>	
 			
 			<div id = "edit"><h1>Edit Post</h1> 

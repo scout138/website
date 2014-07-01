@@ -7,7 +7,7 @@ body {
 }
 #loginContainer {
 	position: fixed;
- 	top: 50%;
+ 	top: 45%;
  	left: 50%;
  	margin-top: -50px;
  	margin-left: -100px;
@@ -73,4 +73,7 @@ a:active {
 }
 #calender {
 	display: none;
+}
+#error {
+	color: red;
 }
