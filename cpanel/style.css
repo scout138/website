@@ -1,0 +1,76 @@
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    margin: 0;
+}
+#loginContainer {
+	position: fixed;
+ 	top: 50%;
+ 	left: 50%;
+ 	margin-top: -50px;
+ 	margin-left: -100px;
+}
+#logo {
+    height: 144px;
+    width: 180px;
+	float: left;
+}
+#header {
+	position:fixed;
+	height: 153px;
+	width: 100%;
+	z-index: 999;
+    background-color: white;
+}
+#title {
+    position: absolute;
+    left: 180px;
+    bottom: 15px;
+    font-weight: normal;
+    font-size: 2em;
+    color: red;
+    text-shadow: 1px 2px 3px rgba(0,0,0, 0.5);
+}
+#menu {
+	position: fixed;
+	top: 153px;
+	height: 100%;
+	width: 15%;
+	float:left;
+	border-right-style: solid;
+	border-width: 1px;
+}
+#content {
+	position: relative;
+	top: 153px;
+	width: 80%;
+	float: right;
+	margin-top: 25px;
+}
+#menuItems {
+	list-style-type: none;
+	padding-top: 25px;
+	font-size: 1.5em;
+}
+a:link {
+	color: #3366FF;
+	text-decoration: none;
+}
+a:visited {
+	color: #3366FF;
+	text-decoration: none;
+}
+a:hover {
+	color: #000066;
+}
+a:active {
+	color: #000066;
+}
+#edit {
+	display: none;
+}
+#calender {
+	display: none;
+}
