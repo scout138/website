@@ -35,7 +35,7 @@ body {
 .header .logo {
     height: 144px;
     width: 180px;
-    background-image: url(http://www.scouts.ca/brandcentre/resources/logo/scouts-logo-notagline-web.png);
+    background-image: url(//www.scouts.ca/brandcentre/resources/logo/scouts-logo-notagline-web.png);
     background-repeat: no-repeat;
     background-size: 180px;
     position: absolute;
