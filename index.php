@@ -8,6 +8,7 @@
 
         <link rel="stylesheet" href="css/style.css"/>
         <link rel="author" href="https://github.com/askho/138Website/graphs/contributors">
+        <link rel="icon" type="image/png" href="favicon.png">
     </head>
     <body>
         <div class="header">
