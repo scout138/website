@@ -61,7 +61,7 @@
                             '</div>' +
                             '<div class="photo loading" onclick="fbAlbumInit(' + posts[i].albumId + ');"></div>' +
                             '<div class="words">' +
-                            posts[i].description +
+                            cropWords(posts[i].description, 40) + "..." +
                             '</div>' +
                             '<a href="javascript:void(0);" class="read-more"></a>' +
                             '</div>');
@@ -107,6 +107,10 @@
                 }
                 return -1;
             };
+
+            var cropWords = function( str, count ) {
+                return str.split(/\s+/, count).join(" ");
+            }
 
         </script>
 
