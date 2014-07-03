@@ -46,13 +46,20 @@ $(document).keyup(function(e) {
             unlockScroll();
             isAlbumOpen = false;
         });
+        next = "";
     }
 });
 
 function loadPhotos( albumId ) {
     isLoadingNext = true;
     FB.api(
-        "/" + albumId + "/photos?pretty=0&after=" + next + "&" + ACCESS_TOKEN,
+        "/" + albumId + "/photos",
+        'get',
+        {
+            pretty: 0,
+            access_token: ACCESS_TOKEN,
+            after: next
+        },
         function ( response ) {
             console.log(response);
             var wrapper = $(".album-wrapper");

@@ -30,7 +30,7 @@
         </div>
         <script src="//connect.facebook.net/en_US/sdk.js"></script>
         <script>
-            var ACCESS_TOKEN = "access_token=524905380971501|vwvIt1ualZz_1V5DX17el6NJPe0";
+            var ACCESS_TOKEN = "524905380971501|vwvIt1ualZz_1V5DX17el6NJPe0";
             FB.init({
                 version: 'v2.0',
                 appId: 524905380971501
@@ -67,7 +67,12 @@
                     $(".main-content").append(posts[i].elem);
 
                     FB.api(
-                                    "/" + posts[i].albumId + "?" + ACCESS_TOKEN,
+                                    "/" + posts[i].albumId,
+                            'get',
+                            {
+                                pretty: 0,
+                                access_token: ACCESS_TOKEN
+                            },
                             function ( response ) {
                                 var coverElem = posts[getPostByAlbumId(response.id)].elem.find(".photo");
                                 if (response && !response.error) {
@@ -91,7 +96,7 @@
             });
 
             var getPhotoData = function( photoId, callback ) {
-                FB.api("/" + photoId + "?" + ACCESS_TOKEN, callback);
+                FB.api("/" + photoId, 'get', {pretty: 0, access_token: ACCESS_TOKEN}, callback);
             };
 
             var getPostByAlbumId = function( albumId ) {
