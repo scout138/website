@@ -38,6 +38,7 @@
         </script>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/isotope.pkgd.min.js"></script>
         <script type="application/javascript">
             posts = [
                 {
@@ -61,7 +62,7 @@
                             '<div class="words">' +
                             posts[i].description +
                             '</div>' +
-                            '<a href="javascript:fbAlbumInit();" class="read-more"></a>' +
+                            '<a href="javascript:fbAlbumInit(' + posts[i].albumId + ');" class="read-more"></a>' +
                             '</div>');
                     $(".main-content").append(posts[i].elem);
 

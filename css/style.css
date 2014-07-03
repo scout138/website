@@ -134,3 +134,12 @@ body {
     float: right;
     padding: 10px;
 }
+
+.album-wrapper .item {
+    width: 162px;
+    margin: 15px;
+    border: 10px solid white;
+    box-shadow: 4px 2px 6px rgba(0,0,0, 0.5);
+    -moz-box-shadow: 4px 2px 6px rgba(0,0,0, 0.5);
+    -webkit-box-shadow: 4px 2px 6px rgba(0,0,0, 0.5);
+}
