@@ -18,6 +18,11 @@ var fbAlbumInit = function( albumId ) {
     base.animate({
         opacity: 1
     }, 250);
+    base.click(function() {
+        closeAlbum();
+    }).children().click(function() {
+        return false;
+    });
 
     base.find(".album-wrapper").isotope({
         // options
