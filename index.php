@@ -59,11 +59,11 @@
                             '<div class="title">' +
                             posts[i].title +
                             '</div>' +
-                            '<div class="photo loading"></div>' +
+                            '<div class="photo loading" onclick="fbAlbumInit(' + posts[i].albumId + ');"></div>' +
                             '<div class="words">' +
                             posts[i].description +
                             '</div>' +
-                            '<a href="javascript:fbAlbumInit(' + posts[i].albumId + ');" class="read-more"></a>' +
+                            '<a href="javascript:void(0);" class="read-more"></a>' +
                             '</div>');
                     $(".main-content").append(posts[i].elem);
 
