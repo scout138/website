@@ -39,16 +39,20 @@ var fbAlbumInit = function( albumId ) {
 
 $(document).keyup(function(e) {
     if (e.keyCode == 27 && isAlbumOpen) { // ESC
-        $(".tablecloth").animate({
-            opacity: 0
-        }, 250, function() {
-            $(".tablecloth").remove();
-            unlockScroll();
-            isAlbumOpen = false;
-        });
-        next = "";
+        closeAlbum();
     }
 });
+
+function closeAlbum() {
+    $(".tablecloth").animate({
+        opacity: 0
+    }, 250, function() {
+        $(".tablecloth").remove();
+        unlockScroll();
+        isAlbumOpen = false;
+    });
+    next = "";
+}
 
 function loadPhotos( albumId ) {
     isLoadingNext = true;
