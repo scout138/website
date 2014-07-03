@@ -1,63 +1,62 @@
-var template = '<div class="tablecloth" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background-color:gray;background-color:rgba(0,0,0,0.6);overflow-y: scroll; overflow-x: hidden;">' +
+var template = $('<div class="tablecloth" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background-color:gray;background-color:rgba(0,0,0,0.6);overflow-y: scroll; overflow-x: hidden;">' +
     '<div class="album-wrapper" style="margin: 0 auto; padding: 50px 0; max-width: 960px;">' +
     '</div>' +
-    '</div>';
+    '</div>');
 var next = "";
 var isAlbumOpen = false;
 var isLoadingNext = false;
 var bigPictureResizing = false;
 var bigPicture = null;
+var wrapper = template.find(".album-wrapper");
+var iso = wrapper.isotope({
+    // options
+    itemSelector: '.item',
+    masonry: {
+        columnWidth: 192
+    }
+});
+
+template.hide();
+template.appendTo("body");
+template.click(function () {
+    closeAlbum();
+}).children().click(function() {
+    return false;
+});
+template.scroll(function() {
+    if(template.scrollTop() + template.height() > iso.height() - 100 && !isLoadingNext) {
+        loadPhotos(template.data("albumId"));
+    }
+});
 
 var fbAlbumInit = function( albumId ) {
     lockScroll();
 
-    var base = $(template);
-    base.data("albumId", albumId);
-    base.css("opacity", '0');
-    base.appendTo("body");
-    base.animate({
-        opacity: 1
-    }, 250);
-    base.click(function() {
-        closeAlbum();
-    }).children().click(function() {
-        return false;
+    template.data("albumId", albumId);
+    template.show(250, function() {
+        loadPhotos(albumId);
     });
 
-    base.find(".album-wrapper").isotope({
-        // options
-        itemSelector: '.item',
-        masonry: {
-            columnWidth: 192
-        }
-    });
-
-    loadPhotos(albumId);
-
-    $(".tablecloth").scroll(function() {
-        if($(".tablecloth").scrollTop() + $(".tablecloth").height() > $(".album-wrapper").height() - 100 && !isLoadingNext) {
-            loadPhotos($(".tablecloth").data("albumId"));
-        }
-    });
     isAlbumOpen = true;
 };
+
+function closeAlbum() {
+    iso.isotope('remove', iso.children());
+    iso.isotope('once', 'removeComplete', function() {
+        template.hide(250, function() {
+            unlockScroll();
+            isAlbumOpen = false;
+        });
+    });
+    template.removeData("albumId");
+    next = "";
+}
 
 $(document).keyup(function(e) {
     if (e.keyCode == 27 && isAlbumOpen) { // ESC
         closeAlbum();
     }
 });
-
-function closeAlbum() {
-    $(".tablecloth").animate({
-        opacity: 0
-    }, 250, function() {
-        $(".tablecloth").remove();
-        unlockScroll();
-        isAlbumOpen = false;
-    });
-    next = "";
-}
 
 function loadPhotos( albumId ) {
     isLoadingNext = true;
@@ -71,7 +70,6 @@ function loadPhotos( albumId ) {
         },
         function ( response ) {
             console.log(response);
-            var wrapper = $(".album-wrapper");
             if (response && !response.error) {
                 for(var i = 0; i < response.data.length; i++) {
                     var photo = response.data[i];
@@ -116,15 +114,15 @@ function loadPhotos( albumId ) {
                                     bigPicture = $(this);
                                     bigPictureResizing = false;
                                     wrapper.isotope( 'once', 'layoutComplete', function() {
-                                        $(".tablecloth").animate({
-                                            scrollTop: bigPicture.offset().top + $(".tablecloth").scrollTop() - $("body").scrollTop()
+                                        template.animate({
+                                            scrollTop: bigPicture.offset().top + template.scrollTop() - $("body").scrollTop()
                                         }, 200);
                                     });
                                 });
                             }
                         });
                         if($(this).data("i") == 24) {
-                            if($(".tablecloth").scrollTop() + $(".tablecloth").height() > $(".album-wrapper").height() - 100) {
+                            if(template.scrollTop() + template.height() > wrapper.height() - 100) {
                                 loadPhotos(albumId);
                             } else {
                                 isLoadingNext = false;
