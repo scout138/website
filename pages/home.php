@@ -6,13 +6,17 @@
     </div>
     <div style="clear: both;"></div>
 </div>
-<script src="//connect.facebook.net/en_US/sdk.js"></script>
-<script src="js/fbinit.js"></script>
+<script>
+    $LAB
+        .script("//connect.facebook.net/en_US/sdk.js").wait()
+        .script("js/fbinit.js")
+        .script("//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js").wait()
+        .script("js/isotope.pkgd.min.js").wait()
+        .script("js/albumviewer.js").wait(function() {
+            genPosts();
+        });
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="js/isotope.pkgd.min.js"></script>
-<script type="application/javascript">
-    posts = [
+    var posts = [
         {
             title: "Family Camp 2014 (July 27-29)",
             albumId: 409578535847055,
@@ -24,7 +28,8 @@
             description: "Bacon ipsum dolor sit amet filet mignon short loin t-bone hamburger. Tenderloin shank kielbasa jerky andouille drumstick spare ribs bacon hamburger cow tri-tip jowl biltong t-bone. Capicola prosciutto shoulder landjaeger bresaola shankle corned beef leberkas. Ground round andouille pancetta salami meatball. Ham pork chop flank corned beef, turkey shoulder t-bone rump doner sausage. Flank jowl turkey bresaola, turducken pork frankfurter tongue cow. Tail tenderloin doner, salami pig drumstick jerky corned beef meatloaf."
         }
     ];
-    $( document ).ready(function() {
+
+    var genPosts = function() {
         for(var i = 0; i < posts.length; i++) {
             posts[i].elem = $('<div class="post">' +
                     '<div class="title">' +
@@ -65,7 +70,7 @@
                     }
             );
         }
-    });
+    };
 
     var getPhotoData = function( photoId, callback ) {
         FB.api("/" + photoId, 'get', {pretty: 0, access_token: ACCESS_TOKEN}, callback);
@@ -84,5 +89,3 @@
     }
 
 </script>
-
-<script src="js/albumviewer.js"></script>
