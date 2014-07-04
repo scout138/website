@@ -9,9 +9,9 @@ function getNavClass($p) {
         <h2 class="title">138 Scout Group</h2>
     </a>
     <ul class="nav">
-        <li><a href="javascript:void(0);"<?=getNavClass("home");?>>Home</a></li>
-        <li><a href="javascript:void(0);"<?=getNavClass("about");?>>About Us</a></li>
-        <li><a href="javascript:void(0);"<?=getNavClass("calendar");?>>Calendar</a></li>
-        <li><a href="javascript:void(0);"<?=getNavClass("registration");?>>Registration</a></li>
+        <!--li><a href="/home"<?=getNavClass("home");?>>Home</a></li-->
+        <li><a href="/about"<?=getNavClass("about");?>>About Us</a></li>
+        <li><a href="/calendar"<?=getNavClass("calendar");?>>Calendar</a></li>
+        <li><a href="/registration"<?=getNavClass("registration");?>>Registration</a></li>
     </ul>
 </div>
