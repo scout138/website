@@ -6,11 +6,11 @@
     <title>The 138th East Vancouver Scout Group</title>
     <meta name="description" content="">
 
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
     <link rel="author" href="https://github.com/askho/138Website/graphs/contributors">
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <script src="js/LAB.min.js"></script>
+    <script src="/js/LAB.min.js"></script>
 </head>
 <body>
 <?php include("template/navigation.php"); ?>

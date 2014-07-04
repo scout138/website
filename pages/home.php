@@ -9,10 +9,10 @@
 <script>
     $LAB
         .script("//connect.facebook.net/en_US/sdk.js").wait()
-        .script("js/fbinit.js")
+        .script("/js/fbinit.js")
         .script("//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js").wait()
-        .script("js/isotope.pkgd.min.js").wait()
-        .script("js/albumviewer.js").wait(function() {
+        .script("/js/isotope.pkgd.min.js").wait()
+        .script("/js/albumviewer.js").wait(function() {
             genPosts();
         });
 
