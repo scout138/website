@@ -1,1 +1,4 @@
+RewriteEngine On
+RewriteRule ^([a-zA-Z]+)$ /?page=$1 [L]
+
 ErrorDocument 404 /?page=404
