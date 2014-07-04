@@ -67,10 +67,11 @@ body {
     float: left;
 }
 
-.header ul.nav li a {
+.header ul.nav li a, .header ul.nav li a:visited {
     height: 20px !important;
     padding: 12px 20px;
     text-decoration: none;
+    color: rgb(0, 0, 238);
 }
 
 .header ul.nav li a:hover,.header ul.nav li a.selected {
