@@ -73,7 +73,7 @@ body {
     text-decoration: none;
 }
 
-.header ul.nav li a:hover {
+.header ul.nav li a:hover,.header ul.nav li a.selected {
     background: -webkit-radial-gradient(50% 100%, farthest-side, #ddd, white); /* Safari 5.1 to 6.0 */
     background: -o-radial-gradient(50% 100%, farthest-side, #ddd, white); /* For Opera 11.6 to 12.0 */
     background: -moz-radial-gradient(50% 100%, farthest-side, #ddd, white); /* For Firefox 3.6 to 15 */
