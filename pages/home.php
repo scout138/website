@@ -65,16 +65,18 @@
                         if (response && !response.error) {
                             var img = $('<img/>');
                             getPhotoData(response.cover_photo, function( response ) {
-                                img[0].src = response.images[4].source;
-                                img.load(function() {
-                                    coverElem.css('background-image', "url(" + response.images[4].source + ")");
-                                    coverElem.animate({
-                                        height: "332px"
-                                    }, 1000, function() {
-                                        coverElem.css("height", "");
+                                if (response && !response.error) {
+                                    img[0].src = response.images[4].source;
+                                    img.load(function () {
+                                        coverElem.css('background-image', "url(" + response.images[4].source + ")");
+                                        coverElem.animate({
+                                            height: "332px"
+                                        }, 1000, function () {
+                                            coverElem.css("height", "");
+                                        });
+                                        coverElem.removeClass("loading");
                                     });
-                                    coverElem.removeClass("loading");
-                                });
+                                }
                             });
                         }
                     }
