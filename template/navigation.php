@@ -1,6 +1,12 @@
 <?php
-function getNavClass($p) {
-    return ($_GET["page"] == $p ? " class=\"selected\"" : "");
+function makeNav() {
+    $nav = array(
+        "about" => "About Us",
+        "calendar" => "Calendar",
+        "registration" => "Registration");
+
+    foreach($nav as $k => $v)
+        echo '<li><a href="/' . $k . '"' . ($_GET["page"] == $k ? " class=\"selected\"" : "") . '>' . $v . '</a></li>';
 }
 ?>
 <div class="header">
@@ -9,9 +15,6 @@ function getNavClass($p) {
         <h2 class="title">138 Scout Group</h2>
     </a>
     <ul class="nav">
-        <!--li><a href="/home"<?=getNavClass("home");?>>Home</a></li-->
-        <li><a href="/about"<?=getNavClass("about");?>>About Us</a></li>
-        <li><a href="/calendar"<?=getNavClass("calendar");?>>Calendar</a></li>
-        <li><a href="/registration"<?=getNavClass("registration");?>>Registration</a></li>
+        <?php makeNav(); ?>
     </ul>
 </div>
