@@ -4,8 +4,10 @@ function getNavClass($p) {
 }
 ?>
 <div class="header">
-    <div class="logo"></div>
-    <h2 class="title">138 Scout Group</h2>
+    <a href="/">
+        <div class="logo"></div>
+        <h2 class="title">138 Scout Group</h2>
+    </a>
     <ul class="nav">
         <li><a href="javascript:void(0);"<?=getNavClass("home");?>>Home</a></li>
         <li><a href="javascript:void(0);"<?=getNavClass("about");?>>About Us</a></li>
