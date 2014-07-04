@@ -2,7 +2,13 @@
     <div class="main-content">
     </div>
     <div class="right-side">
-        there is something here
+        <div class="widget">
+            <div class="title">
+                Upcoming Events
+            </div>
+            <ul class="events">
+            </ul>
+        </div>
     </div>
     <div style="clear: both;"></div>
 </div>
@@ -14,6 +20,10 @@
         .script("/js/isotope.pkgd.min.js").wait()
         .script("/js/albumviewer.js").wait(function() {
             genPosts();
+        })
+        .script("//www.datejs.com/build/date.js")
+        .script("//apis.google.com/js/client.js?onload=makeEvents").wait(function() {
+            makeEvents();
         });
 
     var posts = [
@@ -83,6 +93,45 @@
         }
         return -1;
     };
+
+    var makeEvents = function() {
+        gapi.client.setApiKey('AIzaSyCvuJzS-Q7uGdliRFqySq0mYar0YOBQEGE');
+        gapi.client.load('calendar', 'v3', function(){
+            var request = gapi.client.calendar.events.list({
+                calendarId: 'pccrovers.com_pojeic2sd1ojijt7ohop7gt338@group.calendar.google.com',
+                maxResults: '5',
+                orderBy: 'startTime',
+                q: '-LEADERS',
+                singleEvents: true,
+                timeMin: new Date().toISOString(),
+                timeZone: 'America/Vancouver',
+                fields: 'items(summary,description,start,end,endTimeUnspecified,location,htmlLink,updated)'
+            });
+            request.execute(function(response) {
+                console.log(response);
+                if (response && !response.error) {
+                    for(var i = 0; i < response.items.length; i++) {
+                        var item = response.items[i];
+                        var useDateTime = (item.start.dateTime ? true : false);
+                        var start = Date.parse(useDateTime ? item.start.dateTime : item.start.date);
+                        var end = Date.parse(useDateTime ? item.end.dateTime : item.end.date);
+                        var isMultiDay = (Date.parse(start.toString('M/d/yyyy')).compareTo(Date.parse(end.toString('M/d/yyyy'))) == -1);
+                        console.log(isMultiDay);
+                        $(".events").append('<li class="item">' +
+                            '<a href="javascript: void(0);" class="summary" onclick="$(this).parent().find(\'.details\').slideToggle(200);$(this).toggleClass(\'open\');">' +
+                            item.summary +
+                            '</a>' +
+                            '<div class="details" style="display:none;">' +
+                            '<b>Date:</b> ' + start.toString('dddd MMMM d, yyyy') + '<br/>' +
+                            '<b>Time:</b> ' + (useDateTime ? start.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') + ' &ndash; ' + end.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') : 'All Day') + '<br/>' +
+                            (item.location ? '<b>Location:</b> <a href="//maps.google.ca/maps?hl=en&q=' + item.location + '&source=calendar">' + item.location + '</a><br/>' : '') +
+                            '</div>' +
+                            '</li>');
+                    }
+                }
+            });
+        });
+    }
 
     var cropWords = function( str, count ) {
         return str.split(/\s+/, count).join(" ");

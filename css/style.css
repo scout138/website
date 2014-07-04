@@ -135,6 +135,48 @@ body {
     padding: 10px;
 }
 
+.content-wrapper .right-side .widget .title {
+    font-size: 1.5em;
+}
+
+.content-wrapper .right-side .widget .events {
+    padding: 0;
+    margin: 0;
+}
+
+.content-wrapper .right-side .widget .events .item {
+    list-style-type: none;
+    border-bottom: 1px solid #ccc;
+    padding: 12px 0;
+}
+
+.content-wrapper .right-side .widget .events .item > a {
+    color: #BF9608;
+    text-decoration: none;
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    padding: 3px 0 3px 15px;
+    margin: 0 20px 0 5px;
+    background-image: url(../images/plus.png);
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+}
+
+.content-wrapper .right-side .widget .events .item > a:hover {
+    text-decoration: underline;
+}
+
+.content-wrapper .right-side .widget .events .item > a.open {
+    background-image: url(../images/minus.png);
+}
+
+.content-wrapper .right-side .widget .events .item .details {
+    padding-left: 20px;
+}
+
 .album-wrapper .item {
     width: 162px;
     margin: 15px;
