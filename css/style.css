@@ -53,7 +53,7 @@ body {
 }
 
 .header ul.nav {
-    list-style-image: none;
+    list-style-type: none;
     float: right;
     position: absolute;
     padding: 0;
@@ -63,7 +63,6 @@ body {
 }
 
 .header ul.nav li {
-    list-style-image: none;
     height: auto;
     float: left;
 }
