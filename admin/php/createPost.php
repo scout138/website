@@ -8,22 +8,36 @@
 		if (mysqli_connect_errno()) {
 		  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		}
-		$album = "";
 		$description = "";
 		$header = $_POST['header'];
-
-		if(isset($_POST['album'])) {
-			$album = explode(".",$_POST['album']);
-			$i = 0;
-			while(!is_numeric($album[$i])) {
-				$i++;
+		$albumID = "";
+		if(isset($_POST['album']) && $_POST['album'] != "") {
+			$album = explode(".",$_POST['album'],10);
+			
+			$count = 0;
+			foreach($album as $value) {
+				if(is_numeric($value) && $albumID == "") {
+					$albumID = $album[$count];
+				}
+				$count++;
 			}
+		} else {
+			$i = 0;
+			$album[$i] = "";
 		}
+		//echo $albumID;
 		if(isset($_POST['description'])) {
 			$description = $_POST['description'];
+		} else {
+			echo "You need to put a description";
 		}
-		$request = "INSERT INTO post (heading, albumID, description) VALUES ('$header', '$album[$i]', '$description')";
-		mysqli_query($con, $request);
+		$request = "INSERT INTO post (heading, albumID, description) VALUES ('$header', '$albumID', '$description')";
+		//echo $request;
+		if(mysqli_query($con, $request)) {
+			echo "Successful.";
+		} else {
+			echo "Failed";
+		}
 		mysqli_close($con);
 	}	
 ?>

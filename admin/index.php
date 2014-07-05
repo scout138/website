@@ -11,8 +11,18 @@
 <title>Control Panel</title>
 <link rel="stylesheet" href="style.css"/>
 <script src="js/main.js"></script>
+<script src="ckeditor/ckeditor.js"></script>
+<script src="//connect.facebook.net/en_US/sdk.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
+<script>
+	var ACCESS_TOKEN = "524905380971501|vwvIt1ualZz_1V5DX17el6NJPe0";
+	FB.init({
+	    version: 'v2.0',
+	    appId: 524905380971501
+	});
 
+</script>
 <body>
 	<div id = "header">
 		<div id = "logo">
@@ -30,16 +40,20 @@
 		</div>
 		<div id = "content">
 			<div id = "create"><h1>Create Post</h1>
-				<form name="input" action="php/createPost.php" method="post">
+				<div id = "error"></div>
+				<form name="input" action="#" method="post">
 					Header:<br />
-					<input type = "text" name = "header"><br />
+					<input type = "text" name = "header" id = "postHeader"><br />
 					Add facebook photo album(copy and paste the url of album)<br />
-					<input type = "text" name = "album"><br />
+					<input type = "text" name = "album" id = "album"><br />
 					Additional Details<br />
-					<textarea style="width:80%; height:500px;" name = "description"></textarea><br />
-					<input type="submit" value="Create Post">
+					<textarea rows = "50" cols = "100" name = "description" id = "description"></textarea><br />
+					<script>CKEDITOR.replace('description');</script>
 				</form>	
-				<button value = "Preview Post">Preview Post</button>
+				<button value = "Create" onclick = "submit()">Create Post</button>
+				<button value = "Preview Post" onclick = "preview()">Preview Post</button>
+				<h1>Preview</h1>
+				<div id = "preview"></div>
 			</div>	
 			
 			<div id = "edit"><h1>Edit Post</h1> 
