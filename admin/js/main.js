@@ -1,8 +1,12 @@
+var editPostLoaded = 0;
 function showHide(element) {
 	//hide all the elements
 	var id = document.getElementById("create");
 	id.style.display = 'none';
 	id = document.getElementById("edit");
+	if(editPostLoaded ==0) {
+		grabPosts(1, 25);
+	}
 	id.style.display = "none";
 	id = document.getElementById("calender");
 	id.style.display = "none";
@@ -63,4 +67,28 @@ function submit() {
 			$("#error").html(data);
 	    },
 	});
+}
+
+
+function grabPosts(pageNum, numOfItems) {
+	var posts;
+	posts = "<table style='width:80%'><tr><td><b>Heading</b></td><td><b>Created On</b></td><td><b>Action</b></td></tr>";
+	$.ajax({
+	    type: 'POST',
+	    url: 'php/grabPosts.php',
+	    data: {
+	    	page: pageNum,
+	    	limit: numOfItems
+	    },
+	    dataType: 'json',
+	    success: function (data) {
+			for (i in data) {
+    			posts += "<tr><td class = 'heading'>" +data[i].heading + "</td> <td>" + data[i].time + "</td><td><a href = 'delete(" + data[i].id + ")'>Delete</a></td></tr>";
+			}
+			posts += "</table";
+			$("#editPosts").html(posts);
+			//alert(data);
+	    },
+	});
+	
 }

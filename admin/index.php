@@ -4,6 +4,19 @@
 		header('Location: login.html');
 
 	}
+	require('../php/config.php');
+	// Check connection
+	$con=mysqli_connect("$host","$user","$password","$db");
+	if (mysqli_connect_errno()) {
+	  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	}
+	$request = "SELECT COUNT(id) FROM post";
+	$result = mysqli_query($con,$request);
+	while($row = mysqli_fetch_array($result)) {
+		$numOfRows = $row;
+	}
+	$numOfRows = $numOfRows[0];
+	mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,6 +49,7 @@
 				<li id = "menuItems" onclick = "showHide('create')"><a href = "#">Create Post</a></li>
 				<li id = "menuItems" onclick = "showHide('edit')"><a href = "#">Edit Post</a></li>
 				<li id = "menuItems" onclick = "showHide('calender')"><a href = "#">Calender</a></li>
+				<li id = "menuItems" ><a href = "php/logoff.php">Log Off</a></li>
 			</ul>
 		</div>
 		<div id = "content">
@@ -57,7 +71,16 @@
 			</div>	
 			
 			<div id = "edit"><h1>Edit Post</h1> 
-				Words
+				<div id = "editPosts">
+				</div>
+				<div id = "pagination">
+				<?php
+					$numOfPages = $numOfRows / 25;
+					for ($i = 1; $i <= $numOfPages; $i++) {
+						echo "<a href = '#' onclick = 'grabPosts($i, 25)'>$i</a> ";
+					}
+				?>
+				</div>
 			</div>
 			<div id = "calender"><h1>Calender</h1>
 				<iframe src="https://www.google.com/calendar/embed?src=pccrovers.com_pojeic2sd1ojijt7ohop7gt338%40group.calendar.google.com&ctz=America/Vancouver" style="border: 0" width="80%" height="600" frameborder="0" scrolling="no">
