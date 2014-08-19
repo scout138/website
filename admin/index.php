@@ -26,7 +26,7 @@
 <script src="js/main.js"></script>
 <script src="ckeditor/ckeditor.js"></script>
 <script src="//connect.facebook.net/en_US/sdk.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../js/jquery.min.js"></script>
 </head>
 <script>
 	var ACCESS_TOKEN = "524905380971501|vwvIt1ualZz_1V5DX17el6NJPe0";
