@@ -19,7 +19,7 @@ if($result = mysqli_query($link, "SELECT heading, albumID, description FROM post
     while($row = mysqli_fetch_array($result)) {
         array_push($return_array, array(
             "title" => $row["heading"],
-            "albumId" => intval($row["albumID"]),
+            "albumId" => $row["albumID"],
             "description" => $row["description"]
         ));
     }
