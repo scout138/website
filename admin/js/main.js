@@ -91,4 +91,46 @@ $(function(){
         });
 
     };
+
+    fbAlbumPicker = function() {
+        FB.api('/292891094182467/albums', 'get', {
+            pretty: 0,
+            limit: 100,
+            access_token: ACCESS_TOKEN
+        }, function (response) {
+            for(i in response.data) {
+                var album = response.data[i];
+                var img = $("<img />", {
+                    src: "http://graph.facebook.com/" + album.id + "/picture",
+                    width: "140"
+                });
+                var item = $("<div />", {
+                    text: album.name,
+                    class: "item",
+                    style: "background-image: url(" + img.src + ");",
+                    onclick: "$(\"input#album\").val(" + album.id + ");$(\"input#postHeader\").val(\"" + album.name + "\");"
+                });
+                item.data("isLast", (response.data.length -1 == i));
+                img.load(function() {
+                    var item = $(this).parent();
+                    iso.append(item).isotope("appended", item);
+                });
+                item.prepend(img);
+            }
+
+            Lightview.refresh();
+        });
+
+        Lightview.show({
+            url: 'album-selector',
+            type: 'inline',
+            viewport: 'scale',
+            options: {
+                onHide: function () {
+                    iso.isotope('remove', iso.children());
+                }
+            }
+        });
+    };
+
 });

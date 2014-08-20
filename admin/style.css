@@ -83,3 +83,35 @@ a:active {
 	border-color: blue;
 	padding: 4px;
 }
+
+
+/* fb album picker stuff */
+#album-selector {
+    width: 750px;
+}
+
+#album-selector #masonr {
+    width: 750px;
+}
+
+#album-selector .item img {
+    margin-bottom: 5px;
+}
+
+#album-selector .item img {
+    margin-bottom: 5px;
+}
+
+#album-selector .item {
+    width: 140px;
+    padding: 5px;
+    background-size: 140px;
+    background-repeat: no-repeat;
+    background-position: center 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#album-selector .item:hover {
+    background-color: lightskyblue;
+}

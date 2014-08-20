@@ -21,19 +21,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Control Panel</title>
-<link rel="stylesheet" href="style.css"/>
-<script src="//connect.facebook.net/en_US/sdk.js"></script>
-<script src="../js/jquery.min.js"></script>
+	<title>Control Panel</title>
 	<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="../css/froala_editor.min.css" rel="stylesheet" type="text/css">
 	<link href="../css/froala_reset.min.css" rel="stylesheet" type="text/css">
+
+	<link href="../css/lightview.css" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" href="style.css"/>
+
+	<script src="//connect.facebook.net/en_US/sdk.js"></script>
+	<script src="../js/jquery.min.js"></script>
 	<script src="../js/beautify/beautify-html.js"></script>
 	<script src="../js/froala_editor.min.js"></script>
 	<script src="../js/plugins/block_styles.min.js"></script>
+
+	<script type="text/javascript" src="../js/lightview/lightview.js"></script>
+	<script type="text/javascript" src="../js/spinners/spinners.min.js"></script>
+	<script type="text/javascript" src="../js/lightview/lightview.js"></script>
+
+	<script type="text/javascript" src="../js/isotope.pkgd.min.js"></script>
+
+
 	<!--[if lt IE 9]>
 	<script src="../js/froala_editor_ie8.min.js"></script>
+	<script type="text/javascript" src="../js/excanvas/excanvas.js"></script>
 	<![endif]-->
+
 	<script src="js/main.js"></script>
 </head>
 <script>
@@ -66,16 +80,23 @@
 				<form name="input" action="#" method="post">
 					Header:<br />
 					<input type = "text" name = "header" id = "postHeader"><br />
-					Add facebook photo album(copy and paste the url of album)<br />
-					<input type = "text" name = "album" id = "album"><br />
-					Additional Details<br />
+					Facebook Photo Album:<br />
+					<input type = "text" name = "album" id = "album" pattern = "\d*"> <a href="javascript: fbAlbumPicker();">pick</a><br />
+					Additional Details:<br />
 					<textarea rows = "50" cols = "100" name = "description" id = "description"></textarea><br />
-				</form>	
+				</form>
 				<button value = "Create" onclick = "submit()">Create Post</button>
 				<button value = "Preview Post" onclick = "preview()">Preview Post</button>
 				<h1>Preview</h1>
 				<div id = "preview"></div>
-			</div>	
+			</div>
+
+			<div id="album-selector" style="display:none;">
+				<h1>Please pick an album</h1>
+				<div id="masonr">
+
+				</div>
+			</div>
 			
 			<div id = "edit"><h1>Edit Post</h1> 
 				<div id = "editPosts">
@@ -95,11 +116,22 @@
 			</div>
 		</div>
 
+
 	<script>
 		$(function(){
 			$('#description').editable({
 				inlineMode: false
 			})
+		});
+
+		var iso = $("#masonr").isotope({
+			itemSelector: '.item',
+			masonry: {
+				columnWidth: 150
+			}
+		});
+		iso.isotope("on", "layoutComplete", function() {
+			Lightview.refresh();
 		});
 	</script>
 
