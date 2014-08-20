@@ -23,10 +23,18 @@
 <head>
 <title>Control Panel</title>
 <link rel="stylesheet" href="style.css"/>
-<script src="js/main.js"></script>
-<script src="ckeditor/ckeditor.js"></script>
 <script src="//connect.facebook.net/en_US/sdk.js"></script>
 <script src="../js/jquery.min.js"></script>
+	<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="../css/froala_editor.min.css" rel="stylesheet" type="text/css">
+	<link href="../css/froala_reset.min.css" rel="stylesheet" type="text/css">
+	<script src="../js/beautify/beautify-html.js"></script>
+	<script src="../js/froala_editor.min.js"></script>
+	<script src="../js/plugins/block_styles.min.js"></script>
+	<!--[if lt IE 9]>
+	<script src="../js/froala_editor_ie8.min.js"></script>
+	<![endif]-->
+	<script src="js/main.js"></script>
 </head>
 <script>
 	var ACCESS_TOKEN = "524905380971501|vwvIt1ualZz_1V5DX17el6NJPe0";
@@ -62,7 +70,6 @@
 					<input type = "text" name = "album" id = "album"><br />
 					Additional Details<br />
 					<textarea rows = "50" cols = "100" name = "description" id = "description"></textarea><br />
-					<script>CKEDITOR.replace('description');</script>
 				</form>	
 				<button value = "Create" onclick = "submit()">Create Post</button>
 				<button value = "Preview Post" onclick = "preview()">Preview Post</button>
@@ -87,6 +94,14 @@
 				</iframe>
 			</div>
 		</div>
+
+	<script>
+		$(function(){
+			$('#description').editable({
+				inlineMode: false
+			})
+		});
+	</script>
 
 </body>
 
