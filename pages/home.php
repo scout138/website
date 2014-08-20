@@ -19,8 +19,7 @@
         .script("./js/jquery.min.js").wait()
         .script("./js/isotope.pkgd.min.js").wait()
         .script("./js/albumviewer.js").wait(function() {
-		    $.ajax()
-            genPosts();
+            getPosts();
         })
         .script("//www.datejs.com/build/date.js")
         .script("//apis.google.com/js/client.js?onload=makeEvents").wait(function() {
@@ -40,6 +39,21 @@
         }
     ];
 
+    var getPosts = function(page, limit) {
+	    $.ajax({
+		    url: "json.php",
+		    dataType: "json",
+		    data: {
+				page: page,
+			    limit: limit
+		    }
+	    })
+		    .done(function(data) {
+			    posts = data;
+			    genPosts();
+		    })
+    };
+
     var genPosts = function() {
         for(var i = 0; i < posts.length; i++) {
             posts[i].elem = $('<div class="post">' +
@@ -55,7 +69,7 @@
             $(".main-content").append(posts[i].elem);
 
             FB.api(
-                            "/" + posts[i].albumId,
+		            "/" + posts[i].albumId,
                     'get',
                     {
                         pretty: 0,
@@ -119,7 +133,7 @@
                         var start = Date.parse(useDateTime ? item.start.dateTime : item.start.date);
                         var end = Date.parse(useDateTime ? item.end.dateTime : item.end.date);
                         var isMultiDay = (Date.parse(start.toString('M/d/yyyy')).compareTo(Date.parse(end.toString('M/d/yyyy'))) == -1);
-                        console.log(isMultiDay);
+
                         $(".events").append('<li class="item">' +
                             '<a href="javascript: void(0);" class="summary" onclick="$(this).parent().find(\'.details\').slideToggle(200);$(this).toggleClass(\'open\');">' +
                             item.summary +
