@@ -4,6 +4,7 @@ body {
     line-height: 1.42857143;
     color: #333;
     margin: 0;
+    display: table;
 }
 #loginContainer {
 	position: fixed;
@@ -12,47 +13,64 @@ body {
  	margin-top: -50px;
  	margin-left: -100px;
 }
+
+#structure {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#header {
+    position: relative;
+    height: 144px;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid black;
+}
 #logo {
     height: 144px;
     width: 180px;
-	float: left;
-}
-#header {
-	position:fixed;
-	height: 153px;
-	width: 100%;
-	z-index: 999;
-    background-color: white;
+	display: inline-block;
+    background-image: url('http://www.scouts.ca/brandcentre/resources/logo/scouts-logo-notagline-web.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 #title {
-    position: absolute;
-    left: 180px;
-    bottom: 15px;
-    font-weight: normal;
     font-size: 2em;
     color: red;
+    display: inline-block;
     text-shadow: 1px 2px 3px rgba(0,0,0, 0.5);
 }
+#title::after {
+    content: "138 Scout Group Control Panel";
+}
+
 #menu {
-	position: fixed;
-	top: 153px;
-	height: 100%;
-	width: 15%;
-	float:left;
-	border-right-style: solid;
-	border-width: 1px;
+    height: 100%;
+    border-right: 1px solid black;
 }
+#menu ul {
+    width: 200px;
+    display: inline-block;
+}
+#menu li {
+    list-style-type: none;
+    padding-top: 25px;
+    font-size: 1.5em;
+}
+
 #content {
-	position: relative;
-	top: 153px;
-	width: 80%;
-	float: right;
-	margin-top: 25px;
+	width: 100%;
 }
-#menuItems {
-	list-style-type: none;
-	padding-top: 25px;
-	font-size: 1.5em;
+#content #scroll-wrap {
+    height: 100%;
+    padding: 0px 20px 10px 20px;
+    overflow-y: scroll;
 }
 a:link {
 	color: #3366FF;
@@ -67,12 +85,6 @@ a:hover {
 }
 a:active {
 	color: #000066;
-}
-#edit {
-	display: none;
-}
-#calender {
-	display: none;
 }
 #error {
 	color: red;
