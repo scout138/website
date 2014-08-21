@@ -4,19 +4,6 @@
 		header('Location: login.html');
 		die();
 	}
-	require('../php/config.php');
-	// Check connection
-	$con=mysqli_connect("$host","$user","$password","$db");
-	if (mysqli_connect_errno()) {
-	  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	}
-	$request = "SELECT COUNT(id) FROM post";
-	$result = mysqli_query($con,$request);
-	while($row = mysqli_fetch_array($result)) {
-		$numOfRows = $row;
-	}
-	$numOfRows = $numOfRows[0];
-	mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html>
@@ -102,12 +89,6 @@
 				<div id = "editPosts">
 				</div>
 				<div id = "pagination">
-				<?php
-					$numOfPages = $numOfRows / 25;
-					for ($i = 1; $i <= $numOfPages; $i++) {
-						echo "<a href = '#' onclick = 'grabPosts($i, 25)'>$i</a> ";
-					}
-				?>
 				</div>
 			</div>
 			<div id = "calender"><h1>Calender</h1>
@@ -117,23 +98,26 @@
 		</div>
 
 
-	<script>
-		$(function(){
-			$('#description').editable({
-				inlineMode: false
-			})
-		});
 
-		var iso = $("#masonr").isotope({
-			itemSelector: '.item',
-			masonry: {
-				columnWidth: 150
-			}
+<script>
+	$(function(){
+		grabPosts();
+
+		$('#description').editable({
+			inlineMode: false
 		});
-		iso.isotope("on", "layoutComplete", function() {
-			Lightview.refresh();
-		});
-	</script>
+	});
+
+	var iso = $("#masonr").isotope({
+		itemSelector: '.item',
+		masonry: {
+			columnWidth: 150
+		}
+	});
+	iso.isotope("on", "layoutComplete", function() {
+		Lightview.refresh();
+	});
+</script>
 
 </body>
 
