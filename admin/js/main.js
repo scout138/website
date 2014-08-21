@@ -8,6 +8,17 @@ $(function(){
         $(element).show();
     };
 
+    toggleSpinner = function(on) {
+        if(typeof on == 'undefined') on = !$("#spinner").is(":visible");
+        if(on) {
+            $("#spinner").show();
+            spinners.play();
+        } else {
+            $("#spinner").hide();
+            spinners.pause();
+        }
+    }
+
     getPhotoData = function(photoId, callback) {
         FB.api("/" + photoId, 'get', {pretty: 0, access_token: ACCESS_TOKEN}, callback);
     };
@@ -93,6 +104,7 @@ $(function(){
     };
 
     fbAlbumPicker = function() {
+        toggleSpinner(true);
         FB.api('/292891094182467/albums', 'get', {
             pretty: 0,
             limit: 100,
@@ -110,27 +122,33 @@ $(function(){
                     style: "background-image: url(" + img.src + ");",
                     onclick: "$(\"input#album\").val(" + album.id + ");$(\"input#postHeader\").val(\"" + album.name + "\");"
                 });
-                item.data("isLast", (response.data.length -1 == i));
+                item.data("isLast", (response.data.length-1) == i);
                 img.load(function() {
                     var item = $(this).parent();
                     iso.append(item).isotope("appended", item);
+                    if(item.data("isLast")) {
+                        toggleSpinner(false);
+                        Lightview.show({
+                            url: 'album-selector',
+                            type: 'inline',
+                            skin: 'light',
+                            viewport: 'crop',
+                            options: {
+                                afterUpdate: function() {
+                                    console.log("hide!");
+                                    iso.isotope('layout');
+                                },
+                                onHide: function () {
+                                    iso.isotope('remove', iso.children());
+                                }
+                            }
+                        });
+                    }
                 });
                 item.prepend(img);
             }
-
-            Lightview.refresh();
         });
 
-        Lightview.show({
-            url: 'album-selector',
-            type: 'inline',
-            viewport: 'scale',
-            options: {
-                onHide: function () {
-                    iso.isotope('remove', iso.children());
-                }
-            }
-        });
     };
 
 });

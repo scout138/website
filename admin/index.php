@@ -97,7 +97,9 @@
 			</div>
 		</div>
 
+<div id="spinner" style="display: none;">
 
+</div>
 
 <script>
 	$(function(){
@@ -106,6 +108,15 @@
 		$('#description').editable({
 			inlineMode: false
 		});
+	});
+
+	var spinners = Spinners.create('#spinner', {
+		radius: 16,
+		dashes: 25,
+		width: 1.5,
+		height: 25,
+		opacity: 1,
+		padding: 3,
 	});
 
 	var iso = $("#masonr").isotope({
