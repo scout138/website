@@ -23,47 +23,39 @@ $(function(){
         FB.api("/" + photoId, 'get', {pretty: 0, access_token: ACCESS_TOKEN}, callback);
     };
 
-    preview = function() {
-        $("#preview").html("");
-        var header = $("#postHeader").val();
-        var album = $("#postHeader").val().split(".");
-        var details = $("#description").editable("getHTML");
-        var i = 0;
-        var post;
-        if (typeof header != 'undefined') {
-            $( "#preview" ).append( "<h1>" + header + "</h1>" );
-        }
-        if(typeof album != 'undefined') {
+    preview = function(title, album, details) {
+        console.log(title);
+        console.log(album);
+        console.log(details);
 
-            while (!isFinite(album[i]) && i <= 15) {
-                i++;
-            }
-            if (i == 15) {
-                alert("Invalid facebook photo album ");
-            }
+        $("#pre-title").text(title);
+        $("#pre-image").css('background-image', "");
+        $("#pre-desc").html(details);
 
-            var cover;
+        if(album != "" || album != null || typeof album != "undefined")
             FB.api(
-                    '/' + album[i],
-                    'get',
-                    {
-                        pretty: 0,
-                        access_token: ACCESS_TOKEN
-                    },
-                    function (response) {
-                        console.log(response);
+                    "/" + album,
+                'get',
+                {
+                    pretty: 0,
+                    access_token: ACCESS_TOKEN
+                },
+                function ( response ) {
+                    if (response && !response.error) {
                         getPhotoData(response.cover_photo, function (response) {
-                            console.log(response);
-                            cover = response.images[(response.images.length - 3)].source;
-                            $("#preview").append("<br /><img src = \"" + cover + "\" alt = \"coverPhoto\"/><br />");
+                            if (response && !response.error) {
+                                $("#pre-image").css('background-image', "url(" + response.images[4].source + ")");
+                            }
                         });
                     }
+                }
             );
-        }
 
-        if(typeof details != 'undefined') {
-            $( "#preview" ).append(details);
-        }
+        Lightview.show({
+            url: 'preview',
+            type: 'inline',
+            viewport: 'crop'
+        });
 
     };
 

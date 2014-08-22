@@ -79,9 +79,7 @@
 						<textarea rows = "50" cols = "100" name = "description" id = "description"></textarea><br />
 					</form>
 					<button value = "Create" onclick = "submit()">Create Post</button>
-					<button value = "Preview Post" onclick = "preview()">Preview Post</button>
-					<h1>Preview</h1>
-					<div id="preview"></div>
+					<button value = "Preview Post" onclick = "preview($('#postHeader').val(),$('#album').val(),$('#description').editable('getHTML')[0])">Preview Post</button>
 				</div>
 
 				<div id="album-selector" style="display:none;">
@@ -104,9 +102,14 @@
 	</tr>
 </table>
 
-<div id="spinner" style="display: none;">
+<div id="preview" style="display: none;">
+		<div style="font-size: 2em; margin-bottom: 10px;" id="pre-title"></div>
+		<div style="width: 590px;height: 332px;background-repeat: no-repeat;background-size: cover;background-position: center;" id="pre-image"></div>
+		<div style="margin-top: 10px;" id="pre-desc"></div>
 
 </div>
+
+<div id="spinner" style="display: none;"></div>
 
 <script>
 	$(function(){
