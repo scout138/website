@@ -47,7 +47,6 @@
 	    version: 'v2.0',
 	    appId: 524905380971501
 	});
-
 </script>
 <body>
 <table id="structure" width="100%" cellpadding="0" cellspacing="0">
@@ -61,7 +60,7 @@
 		<td id="menu" valign="top">
 			<ul>
 				<li><a href="#" onclick="showHide('#create');return false;">Create Post</a></li>
-				<li><a href="#" onclick="showHide('#list');return false;">Past Post</a></li>
+				<li><a href="#" onclick="showHide('#list');return false;">Past Posts</a></li>
 				<li><a href="#" onclick="showHide('#calendar');return false;">Calendar</a></li>
 				<li><a href="php/logoff.php">Log Off</a></li>
 			</ul>
@@ -83,7 +82,7 @@
 
 				<div id="list" class="multi page" style="display: none;">
 					<div class="slide" id="rlist" style="display: block;">
-						<h1 style="display:inline-block;margin-right: 15px;">Past Post</h1><a href="javascript: grabPosts()">refresh</a>
+						<h1 style="display:inline-block;margin-right: 15px;">Past Posts</h1><a href="javascript: grabPosts()">refresh</a>
 						<div id="post-list">
 						</div>
 					</div>
