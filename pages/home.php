@@ -19,13 +19,14 @@
         .script("./js/jquery.min.js").wait()
         .script("./js/isotope.pkgd.min.js").wait()
         .script("./js/albumviewer.js").wait(function() {
-            getPosts();
+            getPosts(nextPage);
         })
         .script("//www.datejs.com/build/date.js")
         .script("//apis.google.com/js/client.js?onload=makeEvents").wait(function() {
             makeEvents();
         });
 
+    var nextPage = 0;
     var posts = [
         {
             title: "Family Camp 2014 (July 27-29)",
@@ -40,18 +41,24 @@
     ];
 
     var getPosts = function(page, limit) {
+	    if(page == null) return;
 	    $.ajax({
 		    url: "json.php",
 		    dataType: "json",
+		    method: "post",
 		    data: {
 				page: page,
 			    limit: limit
 		    }
+	    }).done(function(data) {
+		    posts = data;
+
+		    nextPage = data.nextPage;
+		    if(typeof data.nextPage != "undefined")
+		        nextPage = null;
+
+		    genPosts();
 	    })
-		    .done(function(data) {
-			    posts = data;
-			    genPosts();
-		    })
     };
 
     var genPosts = function() {
@@ -151,7 +158,7 @@
     }
 
     var cropWords = function( str, count ) {
-        return str.split(/\s+/, count).join(" ");
+        return str.replace(/(<([^>]+)>)/ig,"").split(/\s+/, count).join(" ");
     }
 
 </script>
