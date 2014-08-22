@@ -156,7 +156,7 @@ body {
     color: #BF9608;
     text-decoration: none;
     background-repeat: no-repeat;
-    background-position: 0 50%;
+    background-position: 0 9px;
     padding: 3px 0 3px 15px;
     margin: 0 20px 0 5px;
     background-image: url(../images/plus.png);
@@ -173,6 +173,7 @@ body {
 
 .content-wrapper .right-side .widget .events .item > a.open {
     background-image: url(../images/minus.png);
+    white-space: normal;
 }
 
 .content-wrapper .right-side .widget .events .item .details {
