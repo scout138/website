@@ -75,10 +75,11 @@ $(function(){
     };
 
     grabPosts = function(pageNum, numOfItems) {
-        var posts = $("<table style='width:80%'><tr><td><b>Heading</b></td><td><b>Created On</b></td><td><b>Action</b></td></tr></table>");
+        var posts = $("<table style='width:100%'><tr><td><b>Heading</b></td><td><b>Created On</b></td><td><b>Action</b></td></tr></table>");
+        $("#post-list").html(posts);
         $.ajax({
             type: 'POST',
-            url: 'php/grabPosts.php',
+            url: '../json.php',
             data: {
                 page: pageNum,
                 limit: numOfItems
@@ -86,11 +87,11 @@ $(function(){
             dataType: 'json',
             success: function (data) {
                 for (i in data) {
-                    posts.append("<tr><td class = 'heading'>" + data[i].heading + "</td> <td>" + data[i].time + "</td><td><a href = 'delete(" + data[i].id + ")'>Delete</a></td></tr>");
+                    posts.append("<tr id=\"listedpostid" + data[i].id + "\"><td class='heading'>" + data[i].title + "</td> <td>" + data[i].time + "</td><td><a href='javascript: delete(" + data[i].id + ");'>Delete</a> | <a href='javascript: edit(" + data[i].id + ");'>Edit</a></td></tr>");
+                    posts.find("#listedpostid" + data[i].id).data("post", data[i]);
                 }
-                $("#editPosts").html(posts);
-                //alert(data);
-            },
+                $.jGrowl("Posts Loaded");
+            }
         });
 
     };
