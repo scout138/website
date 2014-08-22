@@ -62,7 +62,8 @@
     };
 
     var genPosts = function() {
-        for(var i = 0; i < posts.length; i++) {
+	    var count = (typeof data.nextPage == "undefined" ? posts.length : posts.length - 1);
+        for(var i = 0; i < count; i++) {
             posts[i].elem = $('<div class="post">' +
                     '<div class="title">' +
                     posts[i].title +
