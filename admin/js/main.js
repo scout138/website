@@ -2,7 +2,7 @@ $(function(){
 
     showHide = function(element) {
         // hide all the elements
-        $("#create,#edit,#calendar").hide();
+        $("#create,#list,#calendar").hide();
 
         // show the one we want
         $(element).show();
@@ -17,7 +17,7 @@ $(function(){
             $("#spinner").hide();
             spinners.pause();
         }
-    }
+    };
 
     getPhotoData = function(photoId, callback) {
         FB.api("/" + photoId, 'get', {pretty: 0, access_token: ACCESS_TOKEN}, callback);
@@ -66,10 +66,20 @@ $(function(){
             data: {
                 header: $("#postHeader").val(),
                 album: $("#album").val(),
-                description: CKEDITOR.instances.description.getData()
+                description: $("#description").editable("getHTML")[0]
             },
             success: function (data) {
-                $("#error").html(data);
+                if(data == "ok") {
+                    $.jGrowl("Post successful");
+                    $("#postHeader").val("");
+                    $("#album").val("");
+                    $("#description").editable("setHTML", "");
+                    $("#preview").children().html("");
+                    grabPosts();
+                    showHide($("#list"));
+                } else {
+                    $.jGrowl(data)
+                }
             },
         });
     };
@@ -142,6 +152,41 @@ $(function(){
             }
         });
 
+    };
+
+    edit = function(postId) {
+        var data = $("#listedpostid" + postId).data("post");
+        var $formy = $("#edit-post");
+
+        $formy.find("#edit-title").val(data.title);
+        $formy.find("#edit-album").val(data.albumId);
+        $formy.find("#edit-description").editable("setHTML", data.description);
+
+        goToSlideFrom("#edit", "#rlist");
+    };
+
+    goToSlideFrom = function(target, current) {
+        $(target).css("left", $(target).outerWidth());
+        $(target).show();
+        $(target).animate({ left: 0 }, 400, "swing", function() {
+            $(target).css("left", "");
+        });
+        $(current).animate({ left: -$(current).outerWidth() }, 400, "swing", function() {
+            $(current).hide();
+            $(current).css("left", "");
+        });
+    };
+
+    backToSlideFrom = function(target, current) {
+        $(target).css("left", -$(target).outerWidth());
+        $(target).show();
+        $(target).animate({ left: 0 }, 400, "swing", function() {
+            $(target).css("left", "");
+        });
+        $(current).animate({ left: $(current).outerWidth() }, 400, "swing", function() {
+            $(current).hide();
+            $(current).css("left", "");
+        });
     };
 
 });
