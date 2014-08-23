@@ -2,6 +2,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+$_POST["mode"] = (isset($_POST["mode"]) ? $_POST["mode"] : "new");
+
+if($_POST['mode'] && (!isset($_POST['id']) || $_POST['id'] == ""))
+	die("Post ID is missing");
+
 if(!isset($_POST['header']) || $_POST['header'] == "")
 	die("Title is missing");
 
@@ -30,7 +35,11 @@ if(isset($album_data["error"]) || !isset($album_data["from"]))
 if($album_data["from"]["id"] != "292891094182467")
 	die("We do not own that Facebook album");
 
-$request = "INSERT INTO post (heading, albumID, description) VALUES ('$header', '$albumID', '$description')";
+if($_POST["mode"] == "new") {
+	$request = "INSERT INTO post (heading, albumID, description) VALUES ('$header', '$albumID', '$description')";
+} else if($_POST["mode"] == "edit") {
+	$request = "UPDATE post SET heading='" . $header . "', albumID='" . $albumID . "', description='" . $description . "' WHERE id=" . $_POST['id'] . ";";
+}
 
 if(!mysqli_query($con, $request))
 	die(mysqli_error($con));

@@ -88,8 +88,8 @@
 					</div>
 					<div class="slide" id="edit">
 						<h1>Edit Post</h1>
-						<form id="edit-post">
-							<input type="hidden" name="post-id" />
+						<form id="edit-post" onsubmit="save(); return false;">
+							<input type="hidden" name="postId" id="edit-id" />
 
 							<label for="edit-title">Title:</label><br />
 							<input type="text" name="title" id="edit-title" /><br />
@@ -100,7 +100,7 @@
 							<label for="edit-description">Description:</label><br />
 							<textarea rows="20" cols="150" name="description" id="edit-description"></textarea><br />
 
-							<input type="submit" value="Save" onsubmit="save(); return false;" />
+							<input type="submit" value="Save" />
 							<input type="button" value="Preview" onclick="preview($('#edit-title').val(),$('#edit-album').val(),$('#edit-description').editable('getHTML')[0])" />
 							<input type="button" value="Cancel" onclick="backToSlideFrom('#rlist', '#edit');" />
 						</form>

@@ -62,7 +62,7 @@ $(function(){
     submit = function() {
         $.ajax({
             type: 'POST',
-            url: 'php/createPost.php',
+            url: 'php/post.php',
             data: {
                 header: $("#postHeader").val(),
                 album: $("#album").val(),
@@ -158,11 +158,39 @@ $(function(){
         var data = $("#listedpostid" + postId).data("post");
         var $formy = $("#edit-post");
 
+        $formy.find("#edit-id").val(data.id);
         $formy.find("#edit-title").val(data.title);
         $formy.find("#edit-album").val(data.albumId);
         $formy.find("#edit-description").editable("setHTML", data.description);
 
         goToSlideFrom("#edit", "#rlist");
+    };
+
+    save = function() {
+        $.ajax({
+            type: 'POST',
+            url: 'php/post.php',
+            data: {
+                mode: "edit",
+                id: $("#edit-id").val(),
+                header: $("#edit-title").val(),
+                album: $("#edit-album").val(),
+                description: $("#edit-description").editable("getHTML")[0]
+            },
+            success: function (data) {
+                if(data == "ok") {
+                    $.jGrowl("Post successful");
+                    $("#postHeader").val("");
+                    $("#album").val("");
+                    $("#description").editable("setHTML", "");
+                    $("#preview").children().html("");
+                    grabPosts();
+                    backToSlideFrom('#rlist', '#edit');
+                } else {
+                    $.jGrowl(data)
+                }
+            }
+        });
     };
 
     goToSlideFrom = function(target, current) {
