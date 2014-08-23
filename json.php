@@ -33,6 +33,8 @@ $return_array["currentPage"] = $_POST["page"];
 if(count($return_array) >= $_POST["limit"])
 	$return_array["nextPage"] = $_POST["page"] + 1;
 
+header('Content-Type: application/json');
+
 if($_POST["pretty"] == 1)
 	echo json_encode($return_array, JSON_PRETTY_PRINT);
 else
