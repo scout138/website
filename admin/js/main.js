@@ -88,15 +88,15 @@ $(function(){
         var posts = $("<table style='width:100%'><tr><td><b>Heading</b></td><td><b>Created On</b></td><td><b>Action</b></td></tr></table>");
         $("#post-list").html(posts);
         $.ajax({
-            type: 'POST',
             url: '../json.php',
+            dataType: 'json',
+            type: 'post',
             data: {
                 limit: 0
             },
-            dataType: 'json',
-            success: function (data) {
-                for (i in data) {
-                    if(i == "nextPage") continue;
+            success: function (response) {
+                var data = response.data;
+                for (var i in data) {
                     posts.append("<tr id=\"listedpostid" + data[i].id + "\"><td class='heading'>" + data[i].title + "</td> <td>" + data[i].time + "</td><td><a href='javascript: delete(" + data[i].id + ");'>Delete</a> | <a href='javascript: edit(" + data[i].id + ");'>Edit</a></td></tr>");
                     posts.find("#listedpostid" + data[i].id).data("post", data[i]);
                 }
@@ -113,7 +113,7 @@ $(function(){
             limit: 100,
             access_token: ACCESS_TOKEN
         }, function (response) {
-            for(i in response.data) {
+            for(var i in response.data) {
                 var album = response.data[i];
                 var img = $("<img />", {
                     src: "http://graph.facebook.com/" + album.id + "/picture",

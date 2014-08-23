@@ -10,11 +10,12 @@ if (mysqli_connect_errno())
     die("Failed to connect to MySQL: " . mysqli_connect_error());
 
 $return_array = array();
+$data = array();
 
 if($result = mysqli_query($link, "SELECT id, heading, albumID, description, time FROM post ORDER BY id DESC" . (intval($_POST["limit"]) > 0 ? " LIMIT " . $_POST["limit"] . " OFFSET " . $_POST["page"] * $_POST["limit"] : ""))) {
 
     while($row = mysqli_fetch_array($result)) {
-        array_push($return_array, array(
+        array_push($data, array(
             "id" => $row["id"],
             "title" => $row["heading"],
             "albumId" => $row["albumID"],
@@ -24,6 +25,10 @@ if($result = mysqli_query($link, "SELECT id, heading, albumID, description, time
     }
 
 }
+
+$return_array["data"] = $data;
+$return_array["limit"] = $_POST["limit"];
+$return_array["currentPage"] = $_POST["page"];
 
 if(count($return_array) >= $_POST["limit"])
 	$return_array["nextPage"] = $_POST["page"] + 1;

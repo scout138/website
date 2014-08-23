@@ -50,19 +50,20 @@
 				page: page,
 			    limit: limit
 		    }
-	    }).done(function(data) {
-		    posts = data;
+	    }).done(function(response) {
+		    posts = response.data;
 
-		    nextPage = data.nextPage;
-		    if(typeof data.nextPage != "undefined")
+		    if(typeof response.nextPage != "undefined")
 		        nextPage = null;
+		    else
+			    nextPage = response.nextPage;
 
 		    genPosts();
-	    })
+	    });
     };
 
     var genPosts = function() {
-	    var count = (typeof data.nextPage == "undefined" ? posts.length : posts.length - 1);
+	    var count = (typeof posts.nextPage == "undefined" ? posts.length : posts.length - 1);
         for(var i = 0; i < count; i++) {
             posts[i].elem = $('<div class="post">' +
                     '<div class="title">' +
