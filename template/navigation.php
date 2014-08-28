@@ -12,7 +12,7 @@ function makeNav() {
 <div class="header">
     <a href=".">
         <div class="logo"></div>
-        <h2 class="title">138 Scout Group</h2>
+        <h2 class="title">138th Scout Group</h2>
     </a>
     <ul class="nav">
         <?php makeNav(); ?>
