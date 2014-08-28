@@ -97,7 +97,7 @@ $(function(){
             success: function (response) {
                 var data = response.data;
                 for (var i in data) {
-                    posts.append("<tr id=\"listedpostid" + data[i].id + "\"><td class='heading'>" + data[i].title + "</td> <td>" + data[i].time + "</td><td><a href='javascript: delete(" + data[i].id + ");'>Delete</a> | <a href='javascript: edit(" + data[i].id + ");'>Edit</a></td></tr>");
+                    posts.append("<tr id=\"listedpostid" + data[i].id + "\"><td class='heading'>" + data[i].title + "</td> <td>" + data[i].time + "</td><td><a href='javascript: remove(" + data[i].id + ");'>Delete</a> | <a href='javascript: edit(" + data[i].id + ");'>Edit</a></td></tr>");
                     posts.find("#listedpostid" + data[i].id).data("post", data[i]);
                 }
                 $.jGrowl("Posts Loaded");
@@ -218,3 +218,16 @@ $(function(){
     };
 
 });
+function remove(postId) {
+        $.ajax({
+            type: 'POST',
+            url: 'php/delete.php',
+            data: {
+                id: postId
+
+            },
+            success: function (data) {
+                grabPosts();
+            }
+        });
+}
