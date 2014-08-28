@@ -4,7 +4,7 @@ ini_set('display_errors', '1');
 
 $_POST["mode"] = (isset($_POST["mode"]) ? $_POST["mode"] : "new");
 
-if($_POST['mode'] && (!isset($_POST['id']) || $_POST['id'] == ""))
+if($_POST['mode'] != "new" && (!isset($_POST['id']) || $_POST['id'] == ""))
 	die("Post ID is missing");
 
 if(!isset($_POST['header']) || $_POST['header'] == "")
