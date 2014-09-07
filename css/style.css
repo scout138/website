@@ -180,6 +180,14 @@ body {
     padding-left: 20px;
 }
 
+.footer {
+    width: 960px;
+    background-color: #ffffff;
+    border-top: 1px solid black;
+    margin: 0 auto;
+    padding: 15px 25px;
+}
+
 .album-wrapper .item {
     width: 162px;
     margin: 15px;
