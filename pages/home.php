@@ -16,7 +16,19 @@
     $LAB
         .script("//connect.facebook.net/en_US/sdk.js").wait()
         .script("./js/fbinit.js")
-        .script("./js/jquery.min.js").wait()
+        .script("./js/jquery.min.js").wait(function() {
+            var originalHeight = $(".content-wrapper").outerHeight();
+
+            if (window.innerHeight > originalHeight + $(".header").outerHeight() + $(".footer").outerHeight()) {
+                $(".content-wrapper").css("min-height", window.innerHeight - $(".header").outerHeight() - $(".footer").outerHeight() - 100);
+            }
+
+            $(window).on('resize', function() {
+                if ($(this).height() > originalHeight + $(".header").outerHeight() + $(".footer").outerHeight()) {
+                    $(".content-wrapper").css("min-height", $(this).height() - $(".header").outerHeight() - $(".footer").outerHeight() - 100);
+                }
+            });
+        })
         .script("./js/isotope.pkgd.min.js").wait()
         .script("./js/albumviewer.js").wait(function() {
             getPosts(nextPage);
@@ -161,6 +173,6 @@
 
     var cropWords = function( str, count ) {
         return str.replace(/(<([^>]+)>)/ig,"").split(/\s+/, count).join(" ");
-    }
+    };
 
 </script>
