@@ -1,6 +1,6 @@
 <div class="content-wrapper">
     <div style="width:700px;margin: 0 auto;">
-        <img src="/images/campfire.png" style="width: 300px;float: left;padding: 10px;"/>
+        <img src="<?= BASE_URL ?>images/campfire.png" style="width: 300px;float: left;padding: 10px;"/>
         <div style="float: left;padding: 10px;">
             <br/>
             <br/>
