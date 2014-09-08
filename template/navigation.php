@@ -3,13 +3,24 @@ function make_nav() {
     $nav = array(
         "Sections" => array(
             "Beavers" => array(
-                "Posts" => "tag/beavers",
-                "Attendance" => "section/beavers/attendance",
-                "Badges" => "section/beavers/badges",
+                "Posts" => BASE_URL . "tag/beavers",
+                "Attendance" => BASE_URL . "section/beavers/attendance",
             ),
-            "Cubs" => BASE_URL . "section/cubs",
-            "Scouts" => BASE_URL . "section/scouts",
-            "Venturers" => BASE_URL . "section/venturers",
+            "Cubs" => array(
+                "Posts" => BASE_URL . "tag/cubs",
+                "Attendance" => BASE_URL . "section/cubs/attendance",
+                "Badges" => BASE_URL . "section/cubs/badges",
+            ),
+            "Scouts" => array(
+                "Posts" => BASE_URL . "tag/scouts",
+                "Attendance" => BASE_URL . "section/scouts/attendance",
+                "Badges" => BASE_URL . "section/scouts/badges",
+            ),
+            "Venturers" => array(
+                "Posts" => BASE_URL . "tag/venturers",
+                "Attendance" => BASE_URL . "section/venturers/attendance",
+                "Badges" => BASE_URL . "section/venturers/badges",
+            ),
         ),
         "Calendar" => BASE_URL . "calendar",
         "Leaders' Resources" => "javascript: void(); /*files*/",
