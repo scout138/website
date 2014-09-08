@@ -169,7 +169,7 @@
                 }
             });
         });
-    }
+    };
 
     var cropWords = function( str, count ) {
         return str.replace(/(<([^>]+)>)/ig,"").split(/\s+/, count).join(" ");
