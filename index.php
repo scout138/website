@@ -1,6 +1,6 @@
 <?php
 $_GET["page"] = (isset($_GET["page"]) ? $_GET["page"] : "home");
-if(!in_array($_GET["page"], array("home", "registration", "about", "calendar"))) {
+if(!in_array($_GET["page"], array("home", "registration", "about", "calendar", "files", "section"))) {
     header("HTTP/1.0 404 Not Found");
     $_GET["page"] = "404";
 }

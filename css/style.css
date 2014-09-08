@@ -63,23 +63,83 @@ body {
     right: 25px;
 }
 
-.header ul.nav li {
+.header ul.nav > li {
     height: auto;
     float: left;
 }
 
-.header ul.nav li a, .header ul.nav li a:visited {
+ul.nav > li a, ul.nav > li a:visited {
     height: 20px !important;
-    padding: 12px 20px;
+    padding: 12px 15px;
     text-decoration: none;
     color: rgb(0, 0, 238);
 }
 
-.header ul.nav li a:hover,.header ul.nav li a.selected {
-    background: -webkit-radial-gradient(50% 100%, farthest-side, #ddd, white); /* Safari 5.1 to 6.0 */
-    background: -o-radial-gradient(50% 100%, farthest-side, #ddd, white); /* For Opera 11.6 to 12.0 */
-    background: -moz-radial-gradient(50% 100%, farthest-side, #ddd, white); /* For Firefox 3.6 to 15 */
-    background: radial-gradient(50% 100%, farthest-side, #ddd, white); /* Standard syntax (must be last) */
+ul.nav li:hover > a {
+    text-decoration: underline;
+}
+
+.header ul.nav > li:hover > a, .header ul.nav > li > a.selected {
+    background: -webkit-radial-gradient(50% 100%, 40px, #ddd, transparent); /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(50% 100%, 40px, #ddd, transparent); /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(50% 100%, 40px, #ddd, transparent); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(40px at 50% 100%, #ddd, transparent); /* Standard syntax (must be last) */
+}
+
+ul.nav li.parent > ul {
+    list-style-type: none;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 30px;
+    border: 1px solid gray;
+    border-top: 0;
+    padding-bottom: 12px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display: none;
+    background: -webkit-radial-gradient(20% 0%, 40px, #ddd, white); /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(50% 0%, 40px, #ddd, white); /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(50% 0%, 40px, #ddd, white); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(40px at 50% 0%, #ddd, white); /* Standard syntax (must be last) */
+}
+ul.nav li.parent:hover > ul {
+    display: block;
+}
+ul.nav li.parent > ul > li > a {
+    padding: 0;
+}
+ul.nav li.parent > ul > li {
+    padding: 3px 15px;
+}
+
+ul.nav li.parent > ul > li.parent > ul {
+    top: 0;
+    left: 100%;
+    border-left: 0;
+    border-top: 1px solid gray;
+    padding-top: 12px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 0px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomleft: 0px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 0px;
+    background: white;
+}
+
+ul.nav li.parent > ul > li.parent > ul:before {
+    content:"";
+    background: lightgray;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    width: 1px;
 }
 
 .content-wrapper {
