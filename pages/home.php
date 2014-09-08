@@ -13,30 +13,17 @@
     <div style="clear: both;"></div>
 </div>
 <script>
-    $LAB
-        .script("//connect.facebook.net/en_US/sdk.js").wait()
-        .script("./js/fbinit.js")
-        .script("./js/jquery.min.js").wait(function() {
-            var originalHeight = $(".content-wrapper").outerHeight();
-
-            if (window.innerHeight > originalHeight + $(".header").outerHeight() + $(".footer").outerHeight()) {
-                $(".content-wrapper").css("min-height", window.innerHeight - $(".header").outerHeight() - $(".footer").outerHeight() - 100);
-            }
-
-            $(window).on('resize', function() {
-                if ($(this).height() > originalHeight + $(".header").outerHeight() + $(".footer").outerHeight()) {
-                    $(".content-wrapper").css("min-height", $(this).height() - $(".header").outerHeight() - $(".footer").outerHeight() - 100);
-                }
-            });
-        })
-        .script("./js/isotope.pkgd.min.js").wait()
-        .script("./js/albumviewer.js").wait(function() {
-            getPosts(nextPage);
-        })
-        .script("//www.datejs.com/build/date.js")
-        .script("//apis.google.com/js/client.js?onload=makeEvents").wait(function() {
-            makeEvents();
-        });
+    var initialize = function() {
+        $LAB
+            .script("//connect.facebook.net/en_US/sdk.js").wait()
+            .script("./js/fbinit.js")
+            .script("./js/isotope.pkgd.min.js").wait()
+            .script("./js/albumviewer.js").wait(function() {
+                getPosts(nextPage);
+            })
+            .script("//www.datejs.com/build/date.js")
+            .script("//apis.google.com/js/client.js?onload=makeEvents").wait();
+    }
 
     var nextPage = 0;
     var posts = [
@@ -63,6 +50,7 @@
 			    limit: limit
 		    }
 	    }).done(function(response) {
+            console.log(response);
 		    posts = response.data;
 
 		    if(typeof response.nextPage != "undefined")
