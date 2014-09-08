@@ -5,6 +5,8 @@ if(!in_array($_GET["page"], array("home", "registration", "about", "calendar")))
     $_GET["page"] = "404";
 }
 
+define("BASE_URL", "/scout-web/");
+
 include("template/header.php");
 include("pages/" . $_GET["page"] . ".php");
 include("template/footer.php");
