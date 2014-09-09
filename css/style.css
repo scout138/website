@@ -228,6 +228,10 @@ ul.nav li.parent > ul > li.parent > ul:before {
     display: block;
 }
 
+.content-wrapper .right-side .widget .events .item > a.day {
+    color: #4DB810;
+}
+
 .content-wrapper .right-side .widget .events .item > a:hover {
     text-decoration: underline;
 }
@@ -237,8 +241,18 @@ ul.nav li.parent > ul > li.parent > ul:before {
     white-space: normal;
 }
 
-.content-wrapper .right-side .widget .events .item .details {
+.content-wrapper .right-side .widget .events .item div {
     padding-left: 20px;
+}
+
+.content-wrapper .right-side .widget .events .item div span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+}
+.content-wrapper .right-side .widget .events .item div span.open {
+    white-space: normal;
 }
 
 .footer {

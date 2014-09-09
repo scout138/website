@@ -6,7 +6,7 @@
             <div class="title">
                 Upcoming Events
             </div>
-            <ul class="events">
+            <ul class="events top">
             </ul>
         </div>
     </div>
@@ -121,38 +121,73 @@
     };
 
     var makeEvents = function() {
+        var today = new Date().clearTime();
         gapi.client.setApiKey('AIzaSyCvuJzS-Q7uGdliRFqySq0mYar0YOBQEGE');
-        gapi.client.load('calendar', 'v3', function(){
+        gapi.client.load('calendar', 'v3', function() {
             var request = gapi.client.calendar.events.list({
                 calendarId: 'pccrovers.com_pojeic2sd1ojijt7ohop7gt338@group.calendar.google.com',
-                maxResults: '5',
                 orderBy: 'startTime',
-                q: '-LEADERS',
                 singleEvents: true,
-                timeMin: new Date().toISOString(),
+                timeMin: today.toISOString(),
+                timeMax: today.moveToDayOfWeek(0).addWeeks(3).toISOString(),
                 timeZone: 'America/Vancouver',
-                fields: 'items(summary,description,start,end,endTimeUnspecified,location,htmlLink,updated)'
+                fields: 'items(summary,description,start,end,endTimeUnspecified,location,htmlLink,updated, description)'
             });
             request.execute(function(response) {
                 console.log(response);
                 if (response && !response.error) {
+                    var dates = {};
                     for(var i = 0; i < response.items.length; i++) {
                         var item = response.items[i];
-                        var useDateTime = (item.start.dateTime ? true : false);
-                        var start = Date.parse(useDateTime ? item.start.dateTime : item.start.date);
-                        var end = Date.parse(useDateTime ? item.end.dateTime : item.end.date);
-                        var isMultiDay = (Date.parse(start.toString('M/d/yyyy')).compareTo(Date.parse(end.toString('M/d/yyyy'))) == -1);
+                        var start = Date.parse(item.start.dateTime ? item.start.dateTime : item.start.date);
 
-                        $(".events").append('<li class="item">' +
-                            '<a href="javascript: void(0);" class="summary" onclick="$(this).parent().find(\'.details\').slideToggle(200);$(this).toggleClass(\'open\');">' +
-                            item.summary +
-                            '</a>' +
-                            '<div class="details" style="display:none;">' +
-                            '<b>Date:</b> ' + start.toString('dddd MMMM d, yyyy') + '<br/>' +
-                            '<b>Time:</b> ' + (useDateTime ? start.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') + ' &ndash; ' + end.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') : 'All Day') + '<br/>' +
-                            (item.location ? '<b>Location:</b> <a href="//maps.google.ca/maps?hl=en&q=' + item.location + '&source=calendar">' + item.location + '</a><br/>' : '') +
-                            '</div>' +
-                            '</li>');
+                        if(!dates[start.clearTime().toString("MMM d")]) dates[start.clearTime().toString("MMM d")] = [];
+
+                        dates[start.clearTime().toString("MMM d")].push(item);
+                    }
+
+                    for(var date in dates) {
+                        var $dateLabel = $("<a href=\"javascript: void(0);\" class=\"summary day\" onclick=\"$(this).next().slideToggle(200);$(this).toggleClass('open');\">" + date + "</a>");
+                        var elem = "<li class=\"item\"><div style=\"display:none;\"><ul class=\"events\">";
+
+                        dates[date].sort(function(a, b){
+                            var rowA = a.summary.toLowerCase(), rowB = b.summary.toLowerCase();
+                            if (rowA < rowB)
+                                return -1;
+                            if (rowA > rowB)
+                                return 1;
+                            return 0;
+                        })
+
+                        for(var index in dates[date]) {
+                            var event = dates[date][index];
+
+                            if(event.summary.substring(0, 2) == "GC") {
+                                $dateLabel.append(event.summary.substring(2));
+                                continue;
+                            }
+
+                            var useDateTime = (event.start.dateTime ? true : false);
+                            var startTime = Date.parse(useDateTime ? event.start.dateTime : event.start.date);
+                            var endTime = Date.parse(useDateTime ? event.end.dateTime : event.end.date);
+                            var isMultiDay = (Date.parse(startTime.toString('M/d/yyyy')).compareTo(Date.parse(endTime.toString('M/d/yyyy'))) == -1);
+
+                            elem += '<li class="item">' +
+                                '<a href="javascript: void(0);" class="summary" onclick="$(this).next().slideToggle(200);$(this).toggleClass(\'open\');">' +
+                                event.summary +
+                                '</a>' +
+                                '<div style="display:none;">' +
+                                '<b>Date:</b> ' + start.toString('dddd MMMM d, yyyy') + '<br/>' +
+                                '<b>Time:</b> ' + (useDateTime ? startTime.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') + ' &ndash; ' + endTime.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') : 'All Day') + '<br/>' +
+                                (event.location ? '<b>Location:</b> <a href="//maps.google.ca/maps?hl=en&q=' + event.location + '&source=calendar">' + event.location + '</a><br/>' : '') +
+                                '<span onclick="$(this).toggleClass(\'open\')"><b>Description:</b> ' + event.description + '</span><br/>' +
+                                '</div>' +
+                                '</li>';
+                        }
+
+                        elem += "</ul></div></li>";
+                        var $elem = $(elem).prepend($dateLabel);
+                        $("ul.events.top").append($elem);
                     }
                 }
             });
