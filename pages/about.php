@@ -2,27 +2,15 @@
     <div class="main-content">
         <div class="post">
             Both boys and girls are welcome to come and join our program.<br><br>
-            <table border="0">
-                <tr>
-                    <td>Group Chair<br>
-                        Group Commissioner<br>
-                        Group Registrar
-                    </td><td>:<br>:<br>:</td><td>
-                        Mr. Arthur Li<br>
-                        Mr. Jackson Li<br>
-                        Ms. Lilian Chu
-                    </td><td>
-                        (sikwing@hotmail.com)<br>
-                        (jackson.li@pccrovers.com)<br>
-                        (lc3190@gmail.com)
-                    </td></tr></table>
-            <br>
             <div>
                 <h3>Time of regular meetings:</h3>
                 Saturdays 2:30pm to 4:00pm (Beaver Section)<br>
                 Saturdays 2:30pm to 4:30pm (All Other Sections)<br><br>
+
                 <h3>Section Structure</h3>
-                <table><tr><td>
+                <table>
+	                <tr>
+		                <td>
                             Beavers<br>
                             Cubs<br>
                             Scouts<br>
@@ -33,7 +21,43 @@
                             8 - 10 Years old<br>
                             11 - 14 Years old<br>
                             14 - 17 Years old<br>
-                            18 - 26 Years old<br></td></tr></table>
+                            18 - 26 Years old<br>
+		                </td>
+	                </tr>
+                </table><br><br>
+
+	            <h3>Contact Information</h3>
+	            <table border="0">
+		            <tr>
+			            <td>Group Chair<br>
+				            Group Commissioner<br>
+				            Group Registrar<br><br>
+
+				            Beaver Leader<br>
+				            Cub Leader<br>
+				            Scout Leader<br>
+				            Venturer Leader<br>
+			            </td><td>:<br>:<br>:<br><br>:<br>:<br>:<br>:</td><td>
+				            Mr. Arthur Li<br>
+				            Mr. Jackson Li<br>
+				            Ms. Lilian Chu<br><br>
+
+				            Rita Ho<br>
+				            Robin Tsui<br>
+				            Karen Wong<br>
+				            Lawrence Lai<br>
+			            </td><td>
+				            (<a href="mailto:sikwing@hotmail.com">sikwing@hotmail.com</a>)<br>
+				            (<a href="mailto:jackson.li@pccrovers.com">jackson.li@pccrovers.com</a>)<br>
+				            (<a href="mailto:lc3190@gmail.com">lc3190@gmail.com</a>)<br><br>
+
+				            (<a href="mailto:rhritaho@gmail.com">rhritaho@gmail.com</a>)<br>
+				            (<a href="mailto:robin.tsui@scout138.com">robin.tsui@scout138.com</a>)<br>
+				            (<a href="mailto:karenwong138th@gmail.com">karenwong138th@gmail.com</a>)<br>
+				            (<a href="mailto:lawrence.lai@scout138.com">lawrence.lai@scout138.com</a>)
+			            </td>
+		            </tr>
+	            </table>
             </div>
         </div>
     </div>
