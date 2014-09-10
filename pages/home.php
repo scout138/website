@@ -131,7 +131,7 @@
                 timeMin: today.toISOString(),
                 timeMax: today.moveToDayOfWeek(0).addWeeks(3).toISOString(),
                 timeZone: 'America/Vancouver',
-                fields: 'items(summary,description,start,end,endTimeUnspecified,location,htmlLink,updated, description)'
+                fields: 'items(summary,description,start,end,endTimeUnspecified,location,htmlLink,updated)'
             });
             request.execute(function(response) {
                 console.log(response);
@@ -180,7 +180,6 @@
                                 '<b>Date:</b> ' + start.toString('dddd MMMM d, yyyy') + '<br/>' +
                                 '<b>Time:</b> ' + (useDateTime ? startTime.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') + ' &ndash; ' + endTime.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') : 'All Day') + '<br/>' +
                                 (event.location ? '<b>Location:</b> <a href="//maps.google.ca/maps?hl=en&q=' + event.location + '&source=calendar">' + event.location + '</a><br/>' : '') +
-                                '<span onclick="$(this).toggleClass(\'open\')"><b>Description:</b> ' + event.description + '</span><br/>' +
                                 '</div>' +
                                 '</li>';
                         }
