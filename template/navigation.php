@@ -23,7 +23,9 @@ function make_nav() {
             ),
         ),
         "Calendar" => BASE_URL . "calendar",
-        "Leaders' Resources" => "javascript: void(); /*files*/",
+        "Leaders' Resources" => array(
+            "Reimbursement Form" => "//files.scout138.com/leader-reimbursement-form-2014.pdf",
+        ),
         "Registration" => BASE_URL . "registration",
         "About Us" => BASE_URL . "about",);
 

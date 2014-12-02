@@ -177,7 +177,7 @@
                                 event.summary +
                                 '</a>' +
                                 '<div style="display:none;">' +
-                                '<b>Date:</b> ' + start.toString('dddd MMMM d, yyyy') + '<br/>' +
+                                '<b>Date:</b> ' + startTime.toString('dddd MMMM d, yyyy') + '<br/>' +
                                 '<b>Time:</b> ' + (useDateTime ? startTime.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') + ' &ndash; ' + endTime.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') : 'All Day') + '<br/>' +
                                 (event.location ? '<b>Location:</b> <a href="//maps.google.ca/maps?hl=en&q=' + event.location + '&source=calendar">' + event.location + '</a><br/>' : '') +
                                 '</div>' +
