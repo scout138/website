@@ -200,6 +200,22 @@ ul.nav li.parent > ul > li.parent > ul {
     text-decoration: underline;
 }
 
+.content-wrapper .main-content .load-more {
+    text-decoration: none;
+}
+.content-wrapper .main-content .load-more::after {
+    content: "Load More Posts";
+    line-height: 80px;
+    font-weight: bolder;
+    font-size: 1.5em;
+    color: black;
+    display: block;
+    text-align: center;
+}
+.content-wrapper .main-content .load-more:hover::after {
+    background: #eeeeee;
+}
+
 .content-wrapper .right-side {
     width: 300px;
     float: right;
