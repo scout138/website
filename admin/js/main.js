@@ -23,10 +23,10 @@ $(function(){
         FB.api("/" + photoId, 'get', {pretty: 0, access_token: ACCESS_TOKEN}, callback);
     };
 
-    preview = function(title, album, details) {
-        console.log(title);
-        console.log(album);
-        console.log(details);
+    preview = function(form) {
+        var title = $(form).find("input[name=title]").val();
+        var album = $(form).find("input[name=album]").val();
+        var details = $(form).find("textarea").editable('getHTML')[0];
 
         $("#pre-title").text(title);
         $("#pre-image").css('background-image', "");
@@ -142,7 +142,7 @@ $(function(){
                     text: album.name,
                     class: "item",
                     style: "background-image: url(" + img.src + ");",
-                    onclick: "$(\"input#new-album\").val(" + album.id + ");$(\"input#new-title\").val(\"" + album.name + "\");"
+                    onclick: "$(\"#new-post input[name='album']\").val(" + album.id + ");$(\"#new-post input[name='title']\").val(\"" + album.name + "\");"
                 });
                 item.data("isLast", (response.data.length-1) == i);
                 img.load(function() {
@@ -176,14 +176,14 @@ $(function(){
     edit = function(data) {
         var $formy = $("#edit-post");
 
-        $formy.find("#edit-id").val(data.id);
-        $formy.find("#edit-title").val(data.title);
-        $formy.find("#edit-album").val(data.albumId);
-        $formy.find("#edit-date").val(Date.parseExact(data.date, 'MMMM d, yyyy').toString('yyyy.MM.dd'));
+        $formy.find("input[name='post-id']").val(data.id);
+        $formy.find("input[name='title']").val(data.title);
+        $formy.find("input[name='album']").val(data.albumId);
+        $formy.find("input[name='date']").val(Date.parseExact(data.date, 'MMMM d, yyyy').toString('yyyy.MM.dd'));
         data.sections.split("|").forEach(function(section) {
-            $formy.find("#edit-section-" + section).prop("checked", true);
+            $formy.find("input[name='sections[]'][value='" + section + "']").prop("checked", true);
         });
-        $formy.find("#edit-description").editable("setHTML", data.description);
+        $formy.find("textarea").editable("setHTML", data.description);
 
         goToSlideFrom("#edit", "#rlist");
     };

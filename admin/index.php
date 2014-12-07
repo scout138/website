@@ -69,31 +69,31 @@ date_default_timezone_set('America/Vancouver');
             <div id="create" class="page"><h1>Create Post</h1>
                 <form id="new-post" mode="new" onsubmit="submitPost(this); return false;">
                     <div style="float: left; margin-right: 50px;">
-                        <label for="new-title">Title:</label><br />
-                        <input type="text" name="title" id="new-title" /><br /><br />
+                        <label>Title:<br />
+                        <input type="text" name="title" /></label><br /><br />
 
                         Sections Involved:<br />
-                        <input type="checkbox" name="sections[]" value="beavers" id="new-section-beavers" /><label for="new-section-beavers">Beavers</label><br />
-                        <input type="checkbox" name="sections[]" value="cubs" id="new-section-cubs" /><label for="new-section-cubs">Cubs</label><br />
-                        <input type="checkbox" name="sections[]" value="scouts" id="new-section-scouts" /><label for="new-section-scouts">Scouts</label><br />
-                        <input type="checkbox" name="sections[]" value="venturers" id="new-section-venturers" /><label for="new-section-venturers">Venturers</label><br />
+                        <label><input type="checkbox" name="sections[]" value="beavers" />Beavers</label><br />
+                        <label><input type="checkbox" name="sections[]" value="cubs" />Cubs</label><br />
+                        <label><input type="checkbox" name="sections[]" value="scouts" />Scouts</label><br />
+                        <label><input type="checkbox" name="sections[]" value="venturers" />Venturers</label><br />
                     </div>
 
                     <div style="float: left;">
-                        <label for="new-album">Facebook Photo Album:</label><br />
-                        <input type="number" name="album" id="new-album" /> <a href="#" onclick="fbAlbumPicker();return false;">pick</a><br /><br />
+                        <label>Facebook Photo Album:<br />
+                        <input type="number" name="album" /></label> <a href="#" onclick="fbAlbumPicker();return false;">pick</a><br /><br />
 
-                        <label for="new-date">Date: (YYYY.MM.DD)</label><br />
-                        <input type="text" name="date" id="new-date" value="<?= date("Y.m.d"); ?>"/><br />
+                        <label>Date: (YYYY.MM.DD)<br />
+                        <input type="text" name="date" value="<?= date("Y.m.d"); ?>" /></label><br />
                     </div>
 
                     <div style="clear: both;"></div><br/>
 
-                    <label for="new-description">Facebook Photo Album:</label><br />
-                    <textarea rows="50" cols="100" name="description" id="new-description"></textarea><br />
+                    <label>Descriptions:<br />
+                    <textarea rows="50" cols="100" name="description"></textarea></label><br />
 
                     <input type="submit" value="Create Post" />
-                    <button value = "Preview Post" onclick = "preview($('#new-title').val(),$('#new-album').val(),$('#new-description').editable('getHTML')[0])">Preview Post</button>
+                    <button value="Preview Post" onclick="preview($(this).parent());">Preview Post</button>
                 </form>
             </div>
 
@@ -106,34 +106,34 @@ date_default_timezone_set('America/Vancouver');
                 <div class="slide" id="edit">
                     <h1>Edit Post</h1>
                     <form id="edit-post" mode="edit" onsubmit="submitPost(this); return false;">
-                        <input type="hidden" name="post-id" id="edit-id" />
+                        <input type="hidden" name="post-id" />
 
                         <div style="float: left; margin-right: 50px;">
-                            <label for="edit-title">Title:</label><br />
-                            <input type="text" name="title" id="edit-title" /><br /><br />
+                            <label>Title:<br />
+                                <input type="text" name="title" /></label><br /><br />
 
                             Sections Involved:<br />
-                            <input type="checkbox" name="sections[]" value="beavers" id="edit-section-beavers" /><label for="edit-section-beavers">Beavers</label><br />
-                            <input type="checkbox" name="sections[]" value="cubs" id="edit-section-cubs" /><label for="edit-section-cubs">Cubs</label><br />
-                            <input type="checkbox" name="sections[]" value="scouts" id="edit-section-scouts" /><label for="edit-section-scouts">Scouts</label><br />
-                            <input type="checkbox" name="sections[]" value="venturers" id="edit-section-venturers" /><label for="edit-section-venturers">Venturers</label><br />
+                            <label><input type="checkbox" name="sections[]" value="beavers" />Beavers</label><br />
+                            <label><input type="checkbox" name="sections[]" value="cubs" />Cubs</label><br />
+                            <label><input type="checkbox" name="sections[]" value="scouts" />Scouts</label><br />
+                            <label><input type="checkbox" name="sections[]" value="venturers" />Venturers</label><br />
                         </div>
 
                         <div style="float: left;">
-                            <label for="edit-album">Facebook Photo Album:</label><br />
-                            <input type="number" name="album" id="edit-album" /> <a href="#" onclick="fbAlbumPicker();return false;">pick</a><br /><br />
+                            <label>Facebook Photo Album:<br />
+                                <input type="number" name="album" disabled/></label><br /><br />
 
-                            <label for="edit-date">Date: (YYYY.MM.DD)</label><br />
-                            <input type="text" name="date" id="edit-date" /><br />
+                            <label>Date: (YYYY.MM.DD)<br />
+                                <input type="text" name="date" value="<?= date("Y.m.d"); ?>" /></label><br />
                         </div>
 
                         <div style="clear: both;"></div><br/>
 
-                        <label for="edit-description">Facebook Photo Album:</label><br />
-                        <textarea rows="50" cols="100" name="description" id="edit-description"></textarea><br />
+                        <label>Descriptions:<br />
+                            <textarea rows="50" cols="100" name="description"></textarea></label><br />
 
                         <input type="submit" value="Save" />
-                        <input type="button" value="Preview" onclick="preview($('#edit-title').val(),$('#edit-album').val(),$('#edit-description').editable('getHTML')[0])" />
+                        <input type="button" value="Preview" onclick="preview($(this).parent())" />
                         <input type="button" value="Cancel" onclick="backToSlideFrom('#rlist', '#edit');" />
                     </form>
                 </div>
@@ -162,11 +162,7 @@ date_default_timezone_set('America/Vancouver');
 	$(function(){
 		grabPosts();
 
-		$("#new-post > textarea").editable({
-			inlineMode: false
-		});
-
-		$("#edit-post > textarea").editable({
+		$("textarea").editable({
 			inlineMode: false
 		});
 	});
