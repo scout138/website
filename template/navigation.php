@@ -3,21 +3,21 @@ function make_nav() {
     $nav = array(
         "Sections" => array(
             "Beavers" => array(
-                "Posts" => BASE_URL . "tag/beavers",
+                "Posts" => BASE_URL . "section/beavers",
                 "Attendance" => BASE_URL . "section/beavers/attendance",
             ),
             "Cubs" => array(
-                "Posts" => BASE_URL . "tag/cubs",
+                "Posts" => BASE_URL . "section/cubs",
                 "Attendance" => BASE_URL . "section/cubs/attendance",
                 "Badges" => BASE_URL . "section/cubs/badges",
             ),
             "Scouts" => array(
-                "Posts" => BASE_URL . "tag/scouts",
+                "Posts" => BASE_URL . "section/scouts",
                 "Attendance" => BASE_URL . "section/scouts/attendance",
                 "Badges" => BASE_URL . "section/scouts/badges",
             ),
             "Venturers" => array(
-                "Posts" => BASE_URL . "tag/venturers",
+                "Posts" => BASE_URL . "section/venturers",
                 "Attendance" => BASE_URL . "section/venturers/attendance",
                 "Badges" => BASE_URL . "section/venturers/badges",
             ),
@@ -27,7 +27,8 @@ function make_nav() {
             "Reimbursement Form" => "//files.scout138.com/leader-reimbursement-form-2014.pdf",
         ),
         "Registration" => BASE_URL . "registration",
-        "About Us" => BASE_URL . "about",);
+        "About Us" => BASE_URL . "about",
+    );
 
     echo "<ul class=\"nav\">";
         generate_dom($nav);

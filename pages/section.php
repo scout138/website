@@ -19,11 +19,13 @@ if($_GET["part"] == "attendance") {
         <iframe src="//attendance.scout138.com/embed.php?section=<?=$section_id?>" frameborder="0" style="width:100%;height:700px;"></iframe>
     </div>
 <?php
-} else {
+} else if($_GET["part"] == "badges") {
 ?>
     <div class="content-wrapper">
         <h1>This area of the site is currently unavailable.</h1>
     </div>
 <?php
+} else {
+    include "home.php";
 }
 ?>

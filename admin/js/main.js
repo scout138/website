@@ -59,34 +59,49 @@ $(function(){
 
     };
 
-    submit = function() {
+    submitPost = function(form) {
+        var sections = [];
+        $(form).find("input[name='sections[]']").each(function() {
+            if($(this).is(":checked")) sections.push($(this).val());
+        });
         $.ajax({
             type: 'POST',
             url: 'php/post.php',
             data: {
-                header: $("#postHeader").val(),
-                album: $("#album").val(),
-                description: $("#description").editable("getHTML")[0]
+                mode: $(form).attr("mode"),
+                id: $(form).find("input[name='post-id']").val(),
+                header: $(form).find("input[name='title']").val(),
+                album:  $(form).find("input[name='album']").val(),
+                date:  $(form).find("input[name='date']").val(),
+                sections: sections,
+                description:  $(form).find("textarea").editable("getHTML")[0]
             },
             success: function (data) {
                 if(data == "ok") {
                     $.jGrowl("Post successful");
-                    $("#postHeader").val("");
-                    $("#album").val("");
-                    $("#description").editable("setHTML", "");
+                    $(form).find("input[name='post-id']").val("");
+                    $(form).find("input[name='title']").val("");
+                    $(form).find("input[name='album']").val("");
+                    $(form).find("input[name='album']").val("");
+                    $(form).find("input[name='sections[]']").each(function() {
+                        if($(this).is(":checked")) $(this).prop('checked', false);
+                    });
+                    $(form).find("textarea").editable("setHTML", "");
                     $("#preview").children().html("");
                     grabPosts();
+                    if($("#list").is(":visible")) backToSlideFrom('#rlist', '#edit');
                     showHide($("#list"));
                 } else {
-                    $.jGrowl(data)
+                    $.jGrowl(data);
                 }
             }
         });
     };
 
     grabPosts = function() {
-        var posts = $("<table style='width:100%'><tr><td><b>Heading</b></td><td><b>Created On</b></td><td><b>Action</b></td></tr></table>");
+        var posts = $("<table style='width:100%'><tr><td><b>Heading</b></td><td><b>Sections</b></td><td><b>Date</b></td><td><b>Action</b></td></tr></table>");
         $("#post-list").html(posts);
+        toggleSpinner(true);
         $.ajax({
             url: '../json.php',
             dataType: 'json',
@@ -97,10 +112,14 @@ $(function(){
             success: function (response) {
                 var data = response.data;
                 for (var i in data) {
-                    posts.append("<tr id=\"listedpostid" + data[i].id + "\"><td class='heading'>" + data[i].title + "</td> <td>" + data[i].time + "</td><td><a href=\"javascript: if(confirm('Delete " + data[i].title + "?')) remove(" + data[i].id + ");\">Delete</a> | <a href='javascript: edit(" + data[i].id + ");'>Edit</a></td></tr>");
-                    posts.find("#listedpostid" + data[i].id).data("post", data[i]);
+                    var $listing = $("<tr><td class='heading'>" + data[i].title + "</td><td>" + data[i].sections.split("|").join(", ") + "</td><td>" + data[i].date + "</td><td><a href=\"javascript: if(confirm('Delete " + data[i].title + "?')) remove(" + data[i].id + ");\">Delete</a> | <a href=\"#\" onclick=\"edit($(this).parent().parent().data('post'));return false;\">Edit</a></td></tr>");
+                    $listing.data("post", data[i]);
+                    posts.append($listing);
                 }
                 $.jGrowl("Posts Loaded");
+            },
+            complete: function() {
+                toggleSpinner(false);
             }
         });
 
@@ -123,7 +142,7 @@ $(function(){
                     text: album.name,
                     class: "item",
                     style: "background-image: url(" + img.src + ");",
-                    onclick: "$(\"input#album\").val(" + album.id + ");$(\"input#postHeader\").val(\"" + album.name + "\");"
+                    onclick: "$(\"input#new-album\").val(" + album.id + ");$(\"input#new-title\").val(\"" + album.name + "\");"
                 });
                 item.data("isLast", (response.data.length-1) == i);
                 img.load(function() {
@@ -154,43 +173,19 @@ $(function(){
 
     };
 
-    edit = function(postId) {
-        var data = $("#listedpostid" + postId).data("post");
+    edit = function(data) {
         var $formy = $("#edit-post");
 
         $formy.find("#edit-id").val(data.id);
         $formy.find("#edit-title").val(data.title);
         $formy.find("#edit-album").val(data.albumId);
+        $formy.find("#edit-date").val(Date.parseExact(data.date, 'MMMM d, yyyy').toString('yyyy.MM.dd'));
+        data.sections.split("|").forEach(function(section) {
+            $formy.find("#edit-section-" + section).prop("checked", true);
+        });
         $formy.find("#edit-description").editable("setHTML", data.description);
 
         goToSlideFrom("#edit", "#rlist");
-    };
-
-    save = function() {
-        $.ajax({
-            type: 'POST',
-            url: 'php/post.php',
-            data: {
-                mode: "edit",
-                id: $("#edit-id").val(),
-                header: $("#edit-title").val(),
-                album: $("#edit-album").val(),
-                description: $("#edit-description").editable("getHTML")[0]
-            },
-            success: function (data) {
-                if(data == "ok") {
-                    $.jGrowl("Post successful");
-                    $("#postHeader").val("");
-                    $("#album").val("");
-                    $("#description").editable("setHTML", "");
-                    $("#preview").children().html("");
-                    grabPosts();
-                    backToSlideFrom('#rlist', '#edit');
-                } else {
-                    $.jGrowl(data)
-                }
-            }
-        });
     };
 
     goToSlideFrom = function(target, current) {
@@ -219,15 +214,15 @@ $(function(){
 
 });
 function remove(postId) {
-        $.ajax({
-            type: 'POST',
-            url: 'php/delete.php',
-            data: {
-                id: postId
+    $.ajax({
+        type: 'POST',
+        url: 'php/delete.php',
+        data: {
+            id: postId
 
-            },
-            success: function (data) {
-                grabPosts();
-            }
-        });
+        },
+        success: function (data) {
+            grabPosts();
+        }
+    });
 }

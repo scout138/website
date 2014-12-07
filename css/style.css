@@ -169,9 +169,27 @@ ul.nav li.parent > ul > li.parent > ul {
     margin-bottom: 50px;
 }
 
+.content-wrapper .main-content .post .top {
+    position: relative;
+    height: 40px;
+}
+
 .content-wrapper .main-content .post .title {
     font-size: 2em;
-    margin-bottom: 10px;
+    width: 470px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.content-wrapper .main-content .post .date {
+    color: #545454;
+    position: absolute;
+    bottom: 5px;
+    right: 0;
 }
 
 .content-wrapper .main-content .post .photo {

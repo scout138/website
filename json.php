@@ -2,6 +2,7 @@
 
 $_POST["limit"] = (isset($_POST["limit"]) ? $_POST["limit"] : 5);
 $_POST["page"] = (isset($_POST["page"]) ? $_POST["page"] : 0);
+$_POST["sections"] = (isset($_POST["sections"]) ? $_POST["sections"] : null);
 $_POST["pretty"] = (isset($_POST["pretty"]) ? $_POST["pretty"] : 0);
 
 require("php/config.php");
@@ -12,7 +13,7 @@ if (mysqli_connect_errno())
 $return_array = array();
 $data = array();
 
-if($result = mysqli_query($link, "SELECT id, heading, albumID, description, time FROM post ORDER BY id DESC" . (intval($_POST["limit"]) > 0 ? " LIMIT " . $_POST["limit"] . " OFFSET " . $_POST["page"] * $_POST["limit"] : ""))) {
+if($result = mysqli_query($link, "SELECT id, heading, albumID, description, tags, date, time FROM post" . ($_POST["sections"] != null ? " WHERE tags LIKE '%" . implode("%' OR tags LIKE '%", $_POST["sections"]) . "%'" : "") . " ORDER BY date DESC" . (intval($_POST["limit"]) > 0 ? " LIMIT " . $_POST["limit"] . " OFFSET " . $_POST["page"] * $_POST["limit"] : ""))) {
 
     while($row = mysqli_fetch_array($result)) {
         array_push($data, array(
@@ -20,6 +21,8 @@ if($result = mysqli_query($link, "SELECT id, heading, albumID, description, time
             "title" => $row["heading"],
             "albumId" => $row["albumID"],
             "description" => $row["description"],
+            "sections" => $row["tags"],
+            "date" => date_create_from_format("Y.m.d", $row["date"])->format("F j, Y"),
             "time" => $row["time"],
         ));
     }

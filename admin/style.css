@@ -145,11 +145,11 @@ a:active {
     padding: 0 20px 10px 20px;
     overflow-x: hidden;
     box-sizing: border-box;
+    position: relative;
 }
 .multi.page {
     padding: 0;
     height: 100%;
-    position: relative;
 }
 
 .multi.page .slide {
@@ -183,7 +183,6 @@ a:active {
     margin-left: -45px;
     z-index: 999999999;
     background: white;
-    padding: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
