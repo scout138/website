@@ -16,14 +16,14 @@
     var initialize = function() {
         $LAB
             .script("//connect.facebook.net/en_US/sdk.js").wait()
-            .script("./js/fbinit.js")
-            .script("./js/isotope.pkgd.min.js").wait()
-            .script("./js/albumviewer.js").wait(function() {
+            .script("<?= BASE_URL ?>js/fbinit.js")
+            .script("<?= BASE_URL ?>js/isotope.pkgd.min.js").wait()
+            .script("<?= BASE_URL ?>js/albumviewer.js").wait(function() {
                 getPosts(nextPage);
             })
             .script("//www.datejs.com/build/date.js")
             .script("//apis.google.com/js/client.js?onload=makeEvents").wait();
-    }
+    };
 
     var nextPage = 0;
     var posts = [
@@ -42,7 +42,7 @@
     var getPosts = function(page, limit) {
 	    if(page == null) return;
 	    $.ajax({
-		    url: "json.php",
+		    url: "<?= BASE_URL ?>json.php",
 		    dataType: "json",
 		    method: "post",
 		    data: {

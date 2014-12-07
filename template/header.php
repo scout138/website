@@ -10,7 +10,7 @@
     <link rel="author" href="https://github.com/askho/138Website/graphs/contributors">
     <link rel="icon" type="image/png" href="<?= BASE_URL ?>favicon.png">
 
-    <script src="./js/LAB.min.js"></script>
+    <script src="<?= BASE_URL ?>js/LAB.min.js"></script>
 </head>
 <body>
 <?php include("template/navigation.php"); ?>
