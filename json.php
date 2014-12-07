@@ -27,10 +27,10 @@ if($result = mysqli_query($link, "SELECT id, heading, albumID, description, time
 }
 
 $return_array["data"] = $data;
-$return_array["limit"] = $_POST["limit"];
-$return_array["currentPage"] = $_POST["page"];
+$return_array["limit"] = intval($_POST["limit"]);
+$return_array["currentPage"] = intval($_POST["page"]);
 
-if(count($return_array) >= $_POST["limit"])
+if(count($return_array["data"]) >= $_POST["limit"])
 	$return_array["nextPage"] = $_POST["page"] + 1;
 
 header('Content-Type: application/json');
