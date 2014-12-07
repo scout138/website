@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("America/Vancouver");
 
 $_POST["limit"] = (isset($_POST["limit"]) ? $_POST["limit"] : 5);
 $_POST["page"] = (isset($_POST["page"]) ? $_POST["page"] : 0);
