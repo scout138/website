@@ -49,71 +49,65 @@
 	});
 </script>
 <body>
-<table id="structure" width="100%" cellpadding="0" cellspacing="0">
-	<tr>
-		<td colspan="2" id="header" valign="bottom">
-			<div id="logo"></div>
-			<div id="title"></div>
-		</td>
-	</tr>
-	<tr>
-		<td id="menu" valign="top">
-			<ul>
-				<li><a href="#" onclick="showHide('#create');return false;">Create Post</a></li>
-				<li><a href="#" onclick="showHide('#list');return false;">Past Posts</a></li>
-				<li><a href="#" onclick="showHide('#calendar');return false;">Calendar</a></li>
-				<li><a href="php/logoff.php">Log Off</a></li>
-			</ul>
-		</td>
-		<td id="content" valign="top">
-			<div class="scroll-wrap">
-				<div id="create" class="page"><h1>Create Post</h1>
-					<form name="input" action="#" method="post">
-						Title:<br />
-						<input type = "text" name = "header" id = "postHeader"><br />
-						Facebook Photo Album:<br />
-						<input type = "number" name = "album" id = "album"> <a href="#" onclick="fbAlbumPicker();return false;">pick</a><br />
-						Additional Details:<br />
-						<textarea rows = "50" cols = "100" name = "description" id = "description"></textarea><br />
-					</form>
-					<button value = "Create" onclick = "submit()">Create Post</button>
-					<button value = "Preview Post" onclick = "preview($('#postHeader').val(),$('#album').val(),$('#description').editable('getHTML')[0])">Preview Post</button>
-				</div>
+    <div id="header">
+        <div id="title"></div>
+    </div>
+    <div id="menu" valign="top">
+        <ul>
+            <li id="nav-create" class="selected"><a href="#" onclick="showHide('#create');return false;">Create Post</a></li>
+            <li id="nav-edit"><a href="#" onclick="showHide('#list');return false;">Edit Posts</a></li>
+            <li id="nav-calendar"><a href="#" onclick="showHide('#calendar');return false;">Calendar</a></li>
+            <li id="nav-logout"><a href="php/logoff.php" onclick="if(!confirm('Log off?')) return false;">Log Off</a></li>
+        </ul>
+    </div>
 
-				<div id="list" class="multi page" style="display: none;">
-					<div class="slide" id="rlist" style="display: block;">
-						<h1 style="display:inline-block;margin-right: 15px;">Past Posts</h1><a href="javascript: grabPosts()">refresh</a>
-						<div id="post-list">
-						</div>
-					</div>
-					<div class="slide" id="edit">
-						<h1>Edit Post</h1>
-						<form id="edit-post" onsubmit="save(); return false;">
-							<input type="hidden" name="postId" id="edit-id" />
+    <div id="content" valign="top">
+        <div class="scroll-wrap">
+            <div id="create" class="page"><h1>Create Post</h1>
+                <form name="input" action="#" method="post">
+                    Title:<br />
+                    <input type = "text" name = "header" id = "postHeader"><br />
+                    Facebook Photo Album:<br />
+                    <input type = "number" name = "album" id = "album"> <a href="#" onclick="fbAlbumPicker();return false;">pick</a><br />
+                    Additional Details:<br />
+                    <textarea rows = "50" cols = "100" name = "description" id = "description"></textarea><br />
+                </form>
+                <button value = "Create" onclick = "submit()">Create Post</button>
+                <button value = "Preview Post" onclick = "preview($('#postHeader').val(),$('#album').val(),$('#description').editable('getHTML')[0])">Preview Post</button>
+            </div>
 
-							<label for="edit-title">Title:</label><br />
-							<input type="text" name="title" id="edit-title" /><br />
+            <div id="list" class="multi page" style="display: none;">
+                <div class="slide" id="rlist" style="display: block;">
+                    <h1 style="display:inline-block;margin-right: 15px;">Past Posts</h1><a href="javascript: grabPosts()">refresh</a>
+                    <div id="post-list">
+                    </div>
+                </div>
+                <div class="slide" id="edit">
+                    <h1>Edit Post</h1>
+                    <form id="edit-post" onsubmit="save(); return false;">
+                        <input type="hidden" name="postId" id="edit-id" />
 
-							<label for="edit-album">Facebook Photo Album:</label><br />
-							<input type="number" name="album" id="edit-album" disabled /><br />
+                        <label for="edit-title">Title:</label><br />
+                        <input type="text" name="title" id="edit-title" /><br />
 
-							<label for="edit-description">Description:</label><br />
-							<textarea rows="20" cols="150" name="description" id="edit-description"></textarea><br />
+                        <label for="edit-album">Facebook Photo Album:</label><br />
+                        <input type="number" name="album" id="edit-album" disabled /><br />
 
-							<input type="submit" value="Save" />
-							<input type="button" value="Preview" onclick="preview($('#edit-title').val(),$('#edit-album').val(),$('#edit-description').editable('getHTML')[0])" />
-							<input type="button" value="Cancel" onclick="backToSlideFrom('#rlist', '#edit');" />
-						</form>
-					</div>
-				</div>
+                        <label for="edit-description">Description:</label><br />
+                        <textarea rows="20" cols="150" name="description" id="edit-description"></textarea><br />
 
-				<div id="calendar" class="page" style="display: none;"><h1>Calendar</h1>
-					<iframe src="https://www.google.com/calendar/embed?src=pccrovers.com_pojeic2sd1ojijt7ohop7gt338%40group.calendar.google.com&ctz=America/Vancouver" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
-				</div>
-			</div>
-		</td>
-	</tr>
-</table>
+                        <input type="submit" value="Save" />
+                        <input type="button" value="Preview" onclick="preview($('#edit-title').val(),$('#edit-album').val(),$('#edit-description').editable('getHTML')[0])" />
+                        <input type="button" value="Cancel" onclick="backToSlideFrom('#rlist', '#edit');" />
+                    </form>
+                </div>
+            </div>
+
+            <div id="calendar" class="page" style="display: none;"><h1>Calendar</h1>
+                <iframe src="https://www.google.com/calendar/embed?src=pccrovers.com_pojeic2sd1ojijt7ohop7gt338%40group.calendar.google.com&ctz=America/Vancouver" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </div>
+    </div>
 
 <div id="preview" style="display: none;">
 		<div style="font-size: 2em; margin-bottom: 10px;" id="pre-title"></div>
