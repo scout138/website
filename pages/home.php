@@ -51,14 +51,14 @@
         for(var i = 0; i < newposts.length; i++) {
             posts.push(newposts[i]);
             posts[posts.length - 1].elem = $('<div class="post">' +
-                    '<div class="top">' +
+//                    '<div class="top">' +
                     '<div class="title" title="' + newposts[i].title + '">' +
                     newposts[i].title +
                     '</div>' +
-                    '<div class="date">' +
-                    Date.parseExact(newposts[i].date, 'yyyy.MM.dd').toString('MMMM d, yyyy') +
-                    '</div>' +
-                    '</div>' +
+//                    '<div class="date">' +
+//                    Date.parseExact(newposts[i].date, 'yyyy.MM.dd').toString('MMMM d, yyyy') +
+//                    '</div>' +
+//                    '</div>' +
                     '<div class="photo loading" onclick="fbAlbumInit(' + newposts[i].albumId + ');"></div>' +
                     '<div class="words">' +
                     newposts[i].description +
