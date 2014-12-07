@@ -34,6 +34,10 @@ body {
     position: relative;
 }
 
+.header a {
+    text-decoration: none;
+}
+
 .header .logo {
     height: 144px;
     width: 131px;
