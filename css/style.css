@@ -34,6 +34,10 @@ body {
     position: relative;
 }
 
+.header a {
+    text-decoration: none;
+}
+
 .header .logo {
     height: 144px;
     width: 131px;
@@ -60,32 +64,51 @@ body {
     float: right;
     position: absolute;
     padding: 0;
-    margin: 10px 0;
+    margin: 0;
     bottom: 0;
     right: 25px;
+    z-index: 10;
 }
 
 .header ul.nav > li {
     height: auto;
     float: left;
+    position: relative;
+}
+
+ul.nav > li.parent:hover::after {
+    content: "";
+    height: 1px;
+    background-color: #eeeeee;
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    left: 0;
+    z-index: 10;
 }
 
 ul.nav > li a, ul.nav > li a:visited {
-    height: 20px !important;
-    padding: 12px 15px;
+    line-height: 40px;
+    padding: 0 15px;
     text-decoration: none;
     color: rgb(0, 0, 238);
+    display: inline-block
 }
 
 ul.nav li:hover > a {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
+    background-color: #eeeeee;
 }
 
 .header ul.nav > li:hover > a, .header ul.nav > li > a.selected {
-    background: -webkit-radial-gradient(50% 100%, 40px, #ddd, transparent); /* Safari 5.1 to 6.0 */
-    background: -o-radial-gradient(50% 100%, 40px, #ddd, transparent); /* For Opera 11.6 to 12.0 */
-    background: -moz-radial-gradient(50% 100%, 40px, #ddd, transparent); /* For Firefox 3.6 to 15 */
-    background: radial-gradient(40px at 50% 100%, #ddd, transparent); /* Standard syntax (must be last) */
+    background: rgba(255,255,255,0);
+    background: -moz-linear-gradient(top, rgba(255,255,255,0) 50%, rgba(238,238,238,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(50%, rgba(255,255,255,0)), color-stop(100%, rgba(238,238,238,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 50%, rgba(238,238,238,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,0) 50%, rgba(238,238,238,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,0) 50%, rgba(238,238,238,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(238,238,238,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0 );
 }
 
 ul.nav li.parent > ul {
@@ -93,50 +116,39 @@ ul.nav li.parent > ul {
     position: absolute;
     padding: 0;
     margin: 0;
-    top: 30px;
+    top: 40px;
+    left: -1px;
     border: 1px solid gray;
-    border-top: 0;
-    padding-bottom: 12px;
     display: none;
-    background: -webkit-radial-gradient(20% 0%, 40px, #ddd, white); /* Safari 5.1 to 6.0 */
-    background: -o-radial-gradient(50% 0%, 40px, #ddd, white); /* For Opera 11.6 to 12.0 */
-    background: -moz-radial-gradient(50% 0%, 40px, #ddd, white); /* For Firefox 3.6 to 15 */
-    background: radial-gradient(40px at 50% 0%, #ddd, white); /* Standard syntax (must be last) */
+    background: white;
 }
 ul.nav li.parent:hover > ul {
     display: block;
 }
 ul.nav li.parent > ul > li > a {
-    padding: 0;
+    padding: 0 15px;
+    line-height: 40px;
+    display: block;
+    white-space: nowrap;
 }
 ul.nav li.parent > ul > li {
-    padding: 3px 15px;
     position: relative;
 }
 
-ul.nav li.parent > ul > li.parent > ul {
+ul.nav ul > li.parent:hover::after {
+    content: "";
+    width: 1px;
+    background-color: #eeeeee;
+    position: absolute;
     top: 0;
-    left: 100%;
-    border-left: 0;
-    border-top: 1px solid gray;
-    padding-top: 12px;
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    -moz-border-radius-topright: 5px;
-    -moz-border-radius-bottomright: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background: white;
+    bottom: 0;
+    right: -1px;
 }
 
-ul.nav li.parent > ul > li.parent > ul:before {
-    content:"";
-    background: lightgray;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    top: 0;
-    width: 1px;
+ul.nav li.parent > ul > li.parent > ul {
+    top: -1px;
+    left: 100%;
+    background: white;
 }
 
 .content-wrapper {
@@ -157,9 +169,27 @@ ul.nav li.parent > ul > li.parent > ul:before {
     margin-bottom: 50px;
 }
 
+.content-wrapper .main-content .post .top {
+    position: relative;
+    height: 40px;
+}
+
 .content-wrapper .main-content .post .title {
     font-size: 2em;
-    margin-bottom: 10px;
+    width: 470px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.content-wrapper .main-content .post .date {
+    color: #545454;
+    position: absolute;
+    bottom: 5px;
+    right: 0;
 }
 
 .content-wrapper .main-content .post .photo {
@@ -186,6 +216,22 @@ ul.nav li.parent > ul > li.parent > ul:before {
     float: right;
     color: red;
     text-decoration: underline;
+}
+
+.content-wrapper .main-content .load-more {
+    text-decoration: none;
+}
+.content-wrapper .main-content .load-more::after {
+    content: "Load More Posts";
+    line-height: 80px;
+    font-weight: bolder;
+    font-size: 1.5em;
+    color: black;
+    display: block;
+    text-align: center;
+}
+.content-wrapper .main-content .load-more:hover::after {
+    background: #eeeeee;
 }
 
 .content-wrapper .right-side {

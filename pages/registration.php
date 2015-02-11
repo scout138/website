@@ -97,7 +97,7 @@
 		    </div>
 	    </div>
 	    <div class="post">
-		    <div class="title">Uniform Requirements</div>
+		    <div class="title">Uniform Requirements<small style="font-size: 0.5em; margin-left: 10px;">(<a href="//files.scout138.com/scouts-uniform-brochure.pdf">brochure</a>)</small></div>
 		    <div class="words">
 			    <table style="text-align: left; width: 100%">
 				    <thead style="text-decoration: underline; ">
@@ -140,8 +140,8 @@
 		    <div class="title">
 			    Download Forms
 		    </div>
-		    <a href="#">Participant Registration Form</a><br>
-		    <a href="#">Volunteer Registration Form</a>
+		    <a href="http://files.scout138.com/participant-registration-form-2014.pdf">Participant Registration Form</a><br>
+		    <a href="http://files.scout138.com/volunteer-registration-form-2014.pdf">Volunteer Registration Form</a>
 	    </div>
     </div>
     <div style="clear: both;"></div>

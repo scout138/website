@@ -16,69 +16,59 @@
     var initialize = function() {
         $LAB
             .script("//connect.facebook.net/en_US/sdk.js").wait()
-            .script("./js/fbinit.js")
-            .script("./js/isotope.pkgd.min.js").wait()
-            .script("./js/albumviewer.js").wait(function() {
+            .script("<?= BASE_URL ?>js/fbinit.js")
+            .script("<?= BASE_URL ?>js/isotope.pkgd.min.js").wait()
+            .script("<?= BASE_URL ?>js/albumviewer.js").wait(function() {
                 getPosts(nextPage);
             })
             .script("//www.datejs.com/build/date.js")
             .script("//apis.google.com/js/client.js?onload=makeEvents").wait();
-    }
+    };
 
     var nextPage = 0;
-    var posts = [
-        {
-            title: "Family Camp 2014 (July 27-29)",
-            albumId: 409578535847055,
-            description: "Bacon ipsum dolor sit amet filet mignon short loin t-bone hamburger. Tenderloin shank kielbasa jerky andouille drumstick spare ribs bacon hamburger cow tri-tip jowl biltong t-bone. Capicola prosciutto shoulder landjaeger bresaola shankle corned beef leberkas. Ground round andouille pancetta salami meatball. Ham pork chop flank corned beef, turkey shoulder t-bone rump doner sausage. Flank jowl turkey bresaola, turducken pork frankfurter tongue cow. Tail tenderloin doner, salami pig drumstick jerky corned beef meatloaf."
-        },
-        {
-            title: "Swimming at Eileen Daily Pool (July 21)",
-            albumId: 407587682712807,
-            description: "Bacon ipsum dolor sit amet filet mignon short loin t-bone hamburger. Tenderloin shank kielbasa jerky andouille drumstick spare ribs bacon hamburger cow tri-tip jowl biltong t-bone. Capicola prosciutto shoulder landjaeger bresaola shankle corned beef leberkas. Ground round andouille pancetta salami meatball. Ham pork chop flank corned beef, turkey shoulder t-bone rump doner sausage. Flank jowl turkey bresaola, turducken pork frankfurter tongue cow. Tail tenderloin doner, salami pig drumstick jerky corned beef meatloaf."
-        }
-    ];
+    var posts = [];
 
     var getPosts = function(page, limit) {
 	    if(page == null) return;
 	    $.ajax({
-		    url: "json.php",
+		    url: "<?= BASE_URL ?>json.php",
 		    dataType: "json",
 		    method: "post",
 		    data: {
 				page: page,
-			    limit: limit
+			    limit: limit,
+                <?php if(isset($_GET["sub"])) echo "sections: [\"" . $_GET["sub"] ."\"]," ?>
 		    }
 	    }).done(function(response) {
             console.log(response);
-		    posts = response.data;
 
-		    if(typeof response.nextPage != "undefined")
-		        nextPage = null;
-		    else
-			    nextPage = response.nextPage;
+            nextPage = response.nextPage;
 
-		    genPosts();
+		    genPosts(response.data);
 	    });
     };
 
-    var genPosts = function() {
-	    var count = (typeof posts.nextPage == "undefined" ? posts.length : posts.length - 1);
-        for(var i = 0; i < count; i++) {
-            posts[i].elem = $('<div class="post">' +
-                    '<div class="title">' +
-                    posts[i].title +
+    var genPosts = function(newposts) {
+        for(var i = 0; i < newposts.length; i++) {
+            posts.push(newposts[i]);
+            posts[posts.length - 1].elem = $('<div class="post">' +
+                    '<div class="top">' +
+                    '<div class="title" title="' + newposts[i].title + '">' +
+                    newposts[i].title +
                     '</div>' +
-                    '<div class="photo loading" onclick="fbAlbumInit(' + posts[i].albumId + ');"></div>' +
+                    '<div class="date">' +
+                    newposts[i].date +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="photo loading" onclick="fbAlbumInit(' + newposts[i].albumId + ');"></div>' +
                     '<div class="words">' +
-                    cropWords(posts[i].description, 40) + "..." +
+                    newposts[i].description +
                     '</div>' +
-                    '<a href="javascript:void(0);" class="read-more"></a>' +
                     '</div>');
-            $(".main-content").append(posts[i].elem);
+            $(".main-content").append(posts[posts.length - 1].elem);
 
             FB.api(
-		            "/" + posts[i].albumId,
+		            "/" + newposts[i].albumId,
                     'get',
                     {
                         pretty: 0,
@@ -106,6 +96,8 @@
                     }
             );
         }
+        if(nextPage != null)
+            $(".main-content").append('<a href="#" onclick="getPosts(nextPage);$(this).remove();return false;" class="load-more"></a>');
     };
 
     var getPhotoData = function( photoId, callback ) {
@@ -177,7 +169,7 @@
                                 event.summary +
                                 '</a>' +
                                 '<div style="display:none;">' +
-                                '<b>Date:</b> ' + start.toString('dddd MMMM d, yyyy') + '<br/>' +
+                                '<b>Date:</b> ' + startTime.toString('dddd MMMM d, yyyy') + '<br/>' +
                                 '<b>Time:</b> ' + (useDateTime ? startTime.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') + ' &ndash; ' + endTime.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') : 'All Day') + '<br/>' +
                                 (event.location ? '<b>Location:</b> <a href="//maps.google.ca/maps?hl=en&q=' + event.location + '&source=calendar">' + event.location + '</a><br/>' : '') +
                                 '</div>' +
