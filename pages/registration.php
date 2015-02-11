@@ -1,7 +1,9 @@
 <div class="content-wrapper">
     <div class="main-content">
 	    <div class="post">
-		    <div class="title">Registration</div>
+		    <div class="top">
+		        <div class="title">Registration</div>
+		    </div>
 		    <div class="words">
 			    <table style="text-align: center; width: 100%">
 				    <thead style="text-decoration: underline; ">
