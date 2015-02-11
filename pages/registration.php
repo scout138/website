@@ -97,7 +97,9 @@
 		    </div>
 	    </div>
 	    <div class="post">
-		    <div class="title">Uniform Requirements<small style="font-size: 0.5em; margin-left: 10px;">(<a href="//files.scout138.com/scouts-uniform-brochure.pdf">brochure</a>)</small></div>
+		    <div class="top">
+		        <div class="title">Uniform Requirements<small style="font-size: 0.5em; margin-left: 10px;">(<a href="//files.scout138.com/scouts-uniform-brochure.pdf">brochure</a>)</small></div>
+		    </div>
 		    <div class="words">
 			    <table style="text-align: left; width: 100%">
 				    <thead style="text-decoration: underline; ">
