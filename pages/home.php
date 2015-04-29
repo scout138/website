@@ -21,7 +21,7 @@
             .script("<?= BASE_URL ?>js/albumviewer.js").wait(function() {
                 getPosts(nextPage);
             })
-            .script("//www.datejs.com/build/date.js")
+            .script("js/date.js")
             .script("//apis.google.com/js/client.js?onload=makeEvents").wait();
     };
 

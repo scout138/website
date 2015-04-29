@@ -20,32 +20,32 @@
 				    </tr>
 				    </thead>
 				    <tbody>
-				    <!--tr>
-					    <td align="left">
-						    Returning member (before June 30)
-					    </td>
-					    <td>
-						    $155
-					    </td>
-					    <td>
-						    Waived
-					    </td>
-					    <td>
-						    $155
-					    </td>
-				    </tr>
+                    <tr>
+                        <td align="left">
+                            New member (Remainder of the year)
+                        </td>
+                        <td>
+                            $55
+                        </td>
+                        <td>
+                            $20
+                        </td>
+                        <td>
+                            $75
+                        </td>
+                    </tr>
 				    <tr>
 					    <td align="left">
-						    Returning member (after June 30)
+						    Returning member (before June 30)
 					    </td>
 					    <td>
 						    $175
 					    </td>
 					    <td>
-						    $20
+						    Waived
 					    </td>
 					    <td>
-						    $195
+						    $175
 					    </td>
 				    </tr>
 				    <tr>
@@ -53,20 +53,6 @@
 						    New member (before June 30)
 					    </td>
 					    <td>
-						    $155
-					    </td>
-					    <td>
-						    $20
-					    </td>
-					    <td>
-						    $175
-					    </td>
-				    </tr-->
-				    <tr>
-					    <td align="left">
-						    New member
-					    </td>
-					    <td>
 						    $175
 					    </td>
 					    <td>
@@ -76,6 +62,34 @@
 						    $195
 					    </td>
 				    </tr>
+                    <tr>
+                        <td align="left">
+                            Returning member (after June 30)
+                        </td>
+                        <td>
+                            $190
+                        </td>
+                        <td>
+                            $20
+                        </td>
+                        <td>
+                            $210
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            New member (after June 30)
+                        </td>
+                        <td>
+                            $190
+                        </td>
+                        <td>
+                            $20
+                        </td>
+                        <td>
+                            $210
+                        </td>
+                    </tr>
 				    <tr>
 					    <td align="left">
 						    3<sup>rd</sup> & 4<sup>th</sup> member of the same family

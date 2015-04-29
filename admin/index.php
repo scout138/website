@@ -34,7 +34,7 @@ date_default_timezone_set('America/Vancouver');
 
 	<script type="text/javascript" src="../js/isotope.pkgd.min.js"></script>
 
-    <script type="text/javascript" src="//www.datejs.com/build/date.js"></script>
+    <script type="text/javascript" src="../js/date.js"></script>
 
 
 	<!--[if lt IE 9]>
