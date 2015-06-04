@@ -22,23 +22,9 @@
 				    </tr>
 				    </thead>
 				    <tbody>
-                    <tr>
-                        <td align="left">
-                            New member (Remainder of the year)
-                        </td>
-                        <td>
-                            $55
-                        </td>
-                        <td>
-                            $20
-                        </td>
-                        <td>
-                            $75
-                        </td>
-                    </tr>
 				    <tr>
 					    <td align="left">
-						    Returning member (before June 30)
+                            Before June 30 (Returning members)
 					    </td>
 					    <td>
 						    $175
@@ -52,7 +38,7 @@
 				    </tr>
 				    <tr>
 					    <td align="left">
-						    New member (before June 30)
+						    Before June 30 (New members)
 					    </td>
 					    <td>
 						    $175
@@ -66,7 +52,7 @@
 				    </tr>
                     <tr>
                         <td align="left">
-                            Returning member (after June 30)
+                            After June 30 (Returning members)
                         </td>
                         <td>
                             $190
@@ -80,7 +66,7 @@
                     </tr>
                     <tr>
                         <td align="left">
-                            New member (after June 30)
+                            After June 30 (New members)
                         </td>
                         <td>
                             $190
@@ -92,20 +78,34 @@
                             $210
                         </td>
                     </tr>
-				    <tr>
-					    <td align="left">
-						    3<sup>rd</sup> & 4<sup>th</sup> member of the same family
-					    </td>
-					    <td>
-						    Free
-					    </td>
-					    <td>
-						    Waived
-					    </td>
-					    <td>
-						    Free
-					    </td>
-				    </tr>
+                    <tr>
+                        <td align="left">
+                            After Jan 30, 2016
+                        </td>
+                        <td>
+                            $150
+                        </td>
+                        <td>
+                            $10
+                        </td>
+                        <td>
+                            $160
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            After May 30, 2016
+                        </td>
+                        <td>
+                            $45
+                        </td>
+                        <td>
+                            $5
+                        </td>
+                        <td>
+                            $50
+                        </td>
+                    </tr>
 				    </tbody>
 			    </table>
 			    <sub>*Cheques to be written to "138th East Vancouver Scout Group"</sub><br>
@@ -158,7 +158,7 @@
 		    <div class="title">
 			    Download Forms
 		    </div>
-		    <a href="http://files.scout138.com/participant-registration-form-2014.pdf">Participant Registration Form</a><br>
+		    <a href="http://files.scout138.com/participant-registration-form-2015.pdf">Participant Registration Form</a><br>
 		    <a href="http://files.scout138.com/volunteer-registration-form-2014.pdf">Volunteer Registration Form</a>
 	    </div>
     </div>
