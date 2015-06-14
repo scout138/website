@@ -24,7 +24,7 @@
 				    <tbody>
 				    <tr>
 					    <td align="left">
-                            Before June 30 (Returning members)
+                            Before June 30
 					    </td>
 					    <td>
 						    $175
@@ -36,37 +36,9 @@
 						    $175
 					    </td>
 				    </tr>
-				    <tr>
-					    <td align="left">
-						    Before June 30 (New members)
-					    </td>
-					    <td>
-						    $175
-					    </td>
-					    <td>
-						    $20
-					    </td>
-					    <td>
-						    $195
-					    </td>
-				    </tr>
                     <tr>
                         <td align="left">
-                            After June 30 (Returning members)
-                        </td>
-                        <td>
-                            $190
-                        </td>
-                        <td>
-                            $20
-                        </td>
-                        <td>
-                            $210
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left">
-                            After June 30 (New members)
+                            After June 30
                         </td>
                         <td>
                             $190
