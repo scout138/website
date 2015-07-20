@@ -28,7 +28,7 @@ $con = mysqli_connect($host,$user,$password,$db);
 $pdo = new PDO("mysql:host=" . $host . ";dbname=" . $db . ";", $user, $password);
 
 // validate album id
-$album_data = file_get_contents("http://graph.facebook.com/" . $_POST['album'] ."?access_token=524905380971501|vwvIt1ualZz_1V5DX17el6NJPe0&pretty=0");
+$album_data = file_get_contents("https://graph.facebook.com/" . $_POST['album'] ."?access_token=524905380971501|vwvIt1ualZz_1V5DX17el6NJPe0&pretty=0");
 $album_data = json_decode($album_data, true);
 if(isset($album_data["error"]) || !isset($album_data["from"]))
 	die("That Facebook album does not exist");
