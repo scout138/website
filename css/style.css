@@ -193,6 +193,7 @@ ul.nav li.parent > ul > li.parent > ul {
 }
 
 .content-wrapper .main-content .post .photo {
+    display: block;
     width: 590px;
     height: 332px;
     background-repeat: no-repeat;
@@ -206,9 +207,10 @@ ul.nav li.parent > ul > li.parent > ul {
     height: 11px;
     background-size: contain;
     background-image: url(../images/fbloading.gif);
+    cursor: default;
 }
 
-.content-wrapper .main-content .post .photo::after {
+.content-wrapper .main-content .post .photo:not(.loading)::after {
     transition: opacity 500ms ease;
     content: "";
     position: absolute;
@@ -237,6 +239,8 @@ ul.nav li.parent > ul > li.parent > ul {
 
 .content-wrapper .main-content .load-more {
     text-decoration: none;
+    display: block;
+    cursor: pointer;
 }
 .content-wrapper .main-content .load-more::after {
     content: "Load More Posts";
