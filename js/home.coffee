@@ -1,6 +1,10 @@
 nextPage = 0
 limit = 5
 
+String.prototype.toProperCase = ->
+  this.replace(/\w\S*/g, (txt) -> txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase() )
+
+
 getPosts = (page, limit) ->
   limit = limit || 5;
   FB.api(
@@ -24,7 +28,7 @@ appendPost = (data) ->
   if data.hasOwnProperty('description') then while((nextRef = data.description.indexOf('@[')) >= 0)
     ref = data.description.substring(nextRef, data.description.indexOf(']', nextRef) + 1)
     pts = ref.substring(2, ref.length - 1).split(':')
-    anchor = '<a href="//facebook.com/' + pts[0] + '">' + pts[2] + '</a>'
+    anchor = '<a href="//facebook.com/' + pts[0] + '" target="_blank">' + pts[2] + '</a>'
     data.description = data.description.replace(ref, anchor)
 
   $elem = $('<div/>')
@@ -158,9 +162,16 @@ appendEvent = (date, events) ->
       isAllDay = not event.start.hasOwnProperty('dateTime');
       isMultiDay = start.getDate() isnt end.getDate();
 
-      props['Date'] = start.toString('dddd MMMM d, yyyy')
-      props['Time'] = if isAllDay then 'All Day' else start.toString((if isMultiDay then 'ddd ' else '') + 'h:mmtt') + ' &ndash; ' + end.toString((if isMultiDay then 'ddd ' else '') + 'h:mmtt')
-      if event.location then props['Location'] = '<a href="//maps.google.ca/maps?hl=en&q=' + event.location + '&source=calendar">' + event.location + '</a>'
+      props['date'] = start.toString('dddd MMMM d, yyyy')
+      props['time'] = if isAllDay then 'All Day' else start.toString((if isMultiDay then 'ddd ' else '') + 'h:mmtt') + ' &ndash; ' + end.toString((if isMultiDay then 'ddd ' else '') + 'h:mmtt')
+
+      while (bb = event.description.indexOf('[info') >= 0)
+        event.description.replace(/\[info=([^\s\]]+)\s*\](.*(?=\[\/info\]))\[\/info\]/g, (match, p1, p2) ->
+          props[p1] = p2.replace(/\[url=([^\s\]]+)\s*\](.*(?=\[\/url\]))\[\/url\]/g, '<a href=\"$1\">$2</a>')
+        )
+        event.description = event.description.substring(bb + 5)
+
+      if event.location then props['location'] = '<a href="//maps.google.ca/maps?hl=en&q=' + event.location + '&source=calendar">' + event.location + '</a>'
 
       $event = $('<li/>')
         .addClass('item')
@@ -179,7 +190,7 @@ appendEvent = (date, events) ->
             .css('display', 'none')
         )
 
-      $props.append('<b>' + key + ':</b> ' + value + '<br>') for key, value of props
+      $props.append('<b>' + key.toProperCase() + ':</b> ' + value + '<br>') for key, value of props
       $events.append($event)
 
   $('ul.events.top').append($date)

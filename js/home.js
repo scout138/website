@@ -6,6 +6,12 @@
 
   limit = 5;
 
+  String.prototype.toProperCase = function() {
+    return this.replace(/\w\S*/g, function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  };
+
   getPosts = function(page, limit) {
     limit = limit || 5;
     return FB.api({
@@ -35,7 +41,7 @@
       while ((nextRef = data.description.indexOf('@[')) >= 0) {
         ref = data.description.substring(nextRef, data.description.indexOf(']', nextRef) + 1);
         pts = ref.substring(2, ref.length - 1).split(':');
-        anchor = '<a href="//facebook.com/' + pts[0] + '">' + pts[2] + '</a>';
+        anchor = '<a href="//facebook.com/' + pts[0] + '" target="_blank">' + pts[2] + '</a>';
         data.description = data.description.replace(ref, anchor);
       }
     }
@@ -121,7 +127,7 @@
       return $(this).toggleClass('open');
     })).append($container = $('<div/>').css('display', 'none').append($events = $('<ul/>').addClass('events')));
     fn = function(event) {
-      var $event, $eventLabel, $props, end, isAllDay, isMultiDay, key, prefix, props, start, value;
+      var $event, $eventLabel, $props, bb, end, isAllDay, isMultiDay, key, prefix, props, start, value;
       if ((prefix = event.summary.indexOf('GC')) >= 0) {
         $label.text(date + event.summary.substring(prefix + 2));
         return;
@@ -131,10 +137,16 @@
       end = Date.parse(event.end.dateTime || event.end.date);
       isAllDay = !event.start.hasOwnProperty('dateTime');
       isMultiDay = start.getDate() !== end.getDate();
-      props['Date'] = start.toString('dddd MMMM d, yyyy');
-      props['Time'] = isAllDay ? 'All Day' : start.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') + ' &ndash; ' + end.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt');
+      props['date'] = start.toString('dddd MMMM d, yyyy');
+      props['time'] = isAllDay ? 'All Day' : start.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') + ' &ndash; ' + end.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt');
+      while ((bb = event.description.indexOf('[info') >= 0)) {
+        event.description.replace(/\[info=([^\s\]]+)\s*\](.*(?=\[\/info\]))\[\/info\]/g, function(match, p1, p2) {
+          return props[p1] = p2.replace(/\[url=([^\s\]]+)\s*\](.*(?=\[\/url\]))\[\/url\]/g, '<a href=\"$1\">$2</a>');
+        });
+        event.description = event.description.substring(bb + 5);
+      }
       if (event.location) {
-        props['Location'] = '<a href="//maps.google.ca/maps?hl=en&q=' + event.location + '&source=calendar">' + event.location + '</a>';
+        props['location'] = '<a href="//maps.google.ca/maps?hl=en&q=' + event.location + '&source=calendar">' + event.location + '</a>';
       }
       $event = $('<li/>').addClass('item').append($eventLabel = $('<a/>').attr('href', 'javascript: void(0);').addClass('summary').text(event.summary).on('click', function() {
         $(this).next().slideToggle(200);
@@ -142,7 +154,7 @@
       })).append($props = $('<div/>').css('display', 'none'));
       for (key in props) {
         value = props[key];
-        $props.append('<b>' + key + ':</b> ' + value + '<br>');
+        $props.append('<b>' + key.toProperCase() + ':</b> ' + value + '<br>');
       }
       return $events.append($event);
     };
