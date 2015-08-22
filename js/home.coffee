@@ -165,7 +165,7 @@ appendEvent = (date, events) ->
       props['date'] = start.toString('dddd MMMM d, yyyy')
       props['time'] = if isAllDay then 'All Day' else start.toString((if isMultiDay then 'ddd ' else '') + 'h:mmtt') + ' &ndash; ' + end.toString((if isMultiDay then 'ddd ' else '') + 'h:mmtt')
 
-      while (bb = event.description.indexOf('[info') >= 0)
+      while (event.hasOwnProperty('description') && (bb = event.description.indexOf('[info')) >= 0)
         event.description.replace(/\[info=([^\s\]]+)\s*\](.*(?=\[\/info\]))\[\/info\]/g, (match, p1, p2) ->
           props[p1] = p2.replace(/\[url=([^\s\]]+)\s*\](.*(?=\[\/url\]))\[\/url\]/g, '<a href=\"$1\">$2</a>')
         )

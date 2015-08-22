@@ -139,7 +139,7 @@
       isMultiDay = start.getDate() !== end.getDate();
       props['date'] = start.toString('dddd MMMM d, yyyy');
       props['time'] = isAllDay ? 'All Day' : start.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt') + ' &ndash; ' + end.toString((isMultiDay ? 'ddd ' : '') + 'h:mmtt');
-      while ((bb = event.description.indexOf('[info') >= 0)) {
+      while (event.hasOwnProperty('description') && (bb = event.description.indexOf('[info')) >= 0) {
         event.description.replace(/\[info=([^\s\]]+)\s*\](.*(?=\[\/info\]))\[\/info\]/g, function(match, p1, p2) {
           return props[p1] = p2.replace(/\[url=([^\s\]]+)\s*\](.*(?=\[\/url\]))\[\/url\]/g, '<a href=\"$1\">$2</a>');
         });
