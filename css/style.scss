@@ -46,6 +46,16 @@ body {
         position: absolute;
         bottom: 0;
     }
+    .group-logo {
+        height: 90px;
+        width: 330px;
+        background-image: url("../images/group-logo.png");
+        background-repeat: no-repeat;
+        background-position: 0;
+        background-size: 247px;
+        position: absolute;
+        bottom: 14px;
+    }
     .title {
         font-weight: normal;
         font-size: 2em;

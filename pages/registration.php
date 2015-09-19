@@ -24,7 +24,7 @@
 				    <tbody>
 				    <tr>
 					    <td align="left">
-                            Before June 30
+                            Before June 30, 2015
 					    </td>
 					    <td>
 						    $175
@@ -38,7 +38,7 @@
 				    </tr>
                     <tr>
                         <td align="left">
-                            After June 30
+                            After June 30, 2015
                         </td>
                         <td>
                             $190

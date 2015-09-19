@@ -47,8 +47,8 @@ function generate_dom($nav) {
 ?>
 <div class="header">
     <a href="<?= BASE_URL ?>">
-        <div class="logo"></div>
-        <h2 class="title">138th Scout Group</h2>
+        <div class="group-logo"></div>
+<!--        <h2 class="title">138th Scout Group</h2>-->
     </a>
 
     <?php make_nav(); ?>

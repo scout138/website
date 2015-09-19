@@ -41,6 +41,15 @@ body {
     background-size: 180px;
     position: absolute;
     bottom: 0; }
+  .header .group-logo {
+    height: 90px;
+    width: 330px;
+    background-image: url("../images/group-logo.png");
+    background-repeat: no-repeat;
+    background-position: 0;
+    background-size: 247px;
+    position: absolute;
+    bottom: 14px; }
   .header .title {
     font-weight: normal;
     font-size: 2em;
@@ -179,7 +188,6 @@ body {
       .content-wrapper .main-content .post .words {
         margin-top: 10px; }
       .content-wrapper .main-content .post > a.read-more::before {
-        content: "Read More »";
         float: right;
         color: red;
         text-decoration: underline; }
