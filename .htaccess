@@ -1,6 +1,7 @@
 RewriteEngine On
-RewriteRule ^([a-zA-Z]+)$ ./?page=$1 [L]
-RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)$ ./?page=$1&sub=$2 [L]
-RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/([a-zA-Z]+)$ ./?page=$1&sub=$2&part=$3 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !index
+RewriteRule (.*) index.html [L]
 
 ErrorDocument 404 ./?page=404
