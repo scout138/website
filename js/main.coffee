@@ -90,12 +90,13 @@ app = angular.module('mainweb', ['ngRoute'])
     'Vikki Liu': 'Beaver Leader'
     'Robin Tsui': 'Head Pack Leader'
     'Linda Koch': 'Pack Leader'
-    'Karin Wong': 'Head Troop Leader'
+    'Karen Wong': 'Head Troop Leader'
     'Leslie Lai': 'Troop Leader'
+    'Leon Ho': 'Troop Leader'
     'Steve Lam': 'Troop Leader'
     'Lawrence Lai': 'Company Adviser'
-    'Laurie Lum': 'Company Adviser'
-    'Cameron Butler': 'Company Adviser'
+    'Laurie Lum': 'Company Advisor'
+    'Cameron Butler': 'Company Advisor'
 
   $scope.getFaceUrl = (name) ->
     'images/heads/' + name.toLowerCase().replace(' ', '-') + '.jpg'
