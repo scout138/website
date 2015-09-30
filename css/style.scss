@@ -451,7 +451,7 @@ body {
         color: #0000ee;
       }
 
-      &:hover, &.open {
+      &.open {
         &::before {
           border-bottom: 1px solid gray;
         }
@@ -477,7 +477,7 @@ body {
           border-top: 1px solid gray;
         }
         &.parent {
-          &:hover, &.open {
+          &.open {
             > a {
               border-bottom: 1px solid gray;
             }

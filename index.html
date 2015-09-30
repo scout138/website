@@ -16,11 +16,11 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <base href="/scout-web/">
 </head>
-<body ng-controller="MainController">
+<body ng-controller="MainController" ng-click="navopen = false;subopen = '';">
 <div id="header">
     <a href="./" class="group-logo"></a>
-    <ul class="nav">
-        <li ng-repeat="(name, child) in menuItems" nav name="name" link="child" ng-class="{parent: isParent(child)}"></li>
+    <ul class="nav" ng-click="navopen = !navopen;$event.stopPropagation();" ng-class="{open: navopen}">
+        <li ng-repeat="(name, child) in menuItems" nav name="name" link="child" ng-class="{parent: isParent(child), open: $parent.subopen == name}"></li>
     </ul>
 </div>
 <div id="content-wrapper" ng-view>

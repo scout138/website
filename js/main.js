@@ -63,9 +63,9 @@
           if (isParent(scope.link)) {
             element.addClass('parent');
           }
-          element.append('<a href="' + (isParent(scope.link) ? 'javascript: void(0);' : scope.link) + '" ng-class="{selected: isSelected()}">' + scope.name + '</a>');
+          element.append('<a href="' + (isParent(scope.link) ? 'javascript: void(0);' : scope.link) + '" ng-class="{selected: isSelected()}" ng-click="$parent.$parent.subopen = ($parent.$parent.subopen == name ? \'\' : name);subopen = \'\';$event.stopPropagation();">' + scope.name + '</a>');
           if (isParent(scope.link)) {
-            element.append('<ul><li ng-repeat="(nam, child) in link" nav name="nam" link="child"></li></ul>');
+            element.append('<ul><li ng-repeat="(name, child) in link" nav name="name" link="child" ng-class="{open: $parent.subopen == name}"></li></ul>');
           }
           $compile(element.contents())(scope);
         }
@@ -73,22 +73,6 @@
     }
   ]).controller('MainController', [
     '$scope', function($scope) {
-      var generateDom;
-      generateDom = function(items) {
-        var html, item, name;
-        html = '';
-        for (name in items) {
-          item = items[name];
-          if (typeof item === 'object') {
-            html += '<li class="parent"><a href="javascript: void(0);">' + name + '</a><ul>';
-            html += generateDom(item);
-            html += '</ul></li>';
-          } else {
-            html += '<li><a href="' + item + '" ng-class="getIsSelected(obj)">' + name + '</a></li>';
-          }
-        }
-        return html;
-      };
       $scope.menuItems = {
         'Calendar': 'calendar',
         'Resources': {
@@ -115,10 +99,6 @@
         'Registration': 'registration',
         'Leaders': 'leaders',
         'About Us': 'about-us'
-      };
-      $scope.getIsSelected = function(object) {
-        console.log(object);
-        return 'selected';
       };
     }
   ]).controller('LeadersController', [
