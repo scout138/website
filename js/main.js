@@ -104,6 +104,7 @@
   ]).controller('LeadersController', [
     '$scope', function($scope) {
       $scope.leadersList = {
+        'Jackson Li': 'Group Commissioner',
         'Rita Ho': 'Head Beaver Leader',
         'Celine Hsin': 'Beaver Leader',
         'Adrian Lee': 'Beaver Leader',
@@ -115,8 +116,7 @@
         'Steve Lam': 'Troop Leader',
         'Lawrence Lai': 'Company Adviser',
         'Laurie Lum': 'Company Adviser',
-        'Cameron Butler': 'Company Adviser',
-        'Jackson Li': 'Group Commissioner'
+        'Cameron Butler': 'Company Adviser'
       };
       return $scope.getFaceUrl = function(name) {
         return 'images/heads/' + name.toLowerCase().replace(' ', '-') + '.jpg';
