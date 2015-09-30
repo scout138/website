@@ -45,26 +45,15 @@ app = angular.module('mainweb', ['ngRoute'])
 
     if isParent scope.link then element.addClass 'parent'
 
-    element.append('<a href="' + (if isParent scope.link then 'javascript: void(0);' else scope.link) + '" ng-class="{selected: isSelected()}">' + scope.name + '</a>')
+    element.append '<a href="' + (if isParent scope.link then 'javascript: void(0);' else scope.link) + '" ng-class="{selected: isSelected()}" ng-click="$parent.$parent.subopen = ($parent.$parent.subopen == name ? \'\' : name);subopen = \'\';$event.stopPropagation();">' + scope.name + '</a>'
 
-    if isParent scope.link then element.append '<ul><li ng-repeat="(nam, child) in link" nav name="nam" link="child"></li></ul>'
+    if isParent scope.link then element.append '<ul><li ng-repeat="(name, child) in link" nav name="name" link="child" ng-class="{open: $parent.subopen == name}"></li></ul>'
 
     $compile(element.contents())(scope);
     return
 ]
 
 .controller 'MainController', ['$scope', ($scope) ->
-  generateDom = (items) ->
-    html = ''
-    for name, item of items
-      if typeof item is 'object'
-        html += '<li class="parent"><a href="javascript: void(0);">' + name + '</a><ul>'
-        html += generateDom(item)
-        html += '</ul></li>'
-      else
-        html += '<li><a href="' + item + '" ng-class="getIsSelected(obj)">' + name + '</a></li>'
-    return html
-
   $scope.menuItems =
     'Calendar': 'calendar'
     'Resources':
@@ -88,10 +77,6 @@ app = angular.module('mainweb', ['ngRoute'])
     'Registration': 'registration'
     'Leaders': 'leaders'
     'About Us': 'about-us'
-
-  $scope.getIsSelected = (object) ->
-    console.log object
-    return 'selected'
 
   return
 ]

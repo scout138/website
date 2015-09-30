@@ -320,9 +320,9 @@ body {
         display: block;
         padding: 0 25px;
         color: #0000ee; }
-      #header ul.nav:hover::before, #header ul.nav.open::before {
+      #header ul.nav.open::before {
         border-bottom: 1px solid gray; }
-      #header ul.nav:hover > li, #header ul.nav.open > li {
+      #header ul.nav.open > li {
         display: block; }
       #header ul.nav li {
         list-style-type: none;
@@ -336,9 +336,9 @@ body {
           padding: 0 25px; }
         #header ul.nav li:not(:first-child) > a {
           border-top: 1px solid gray; }
-        #header ul.nav li.parent:hover > a, #header ul.nav li.parent.open > a {
+        #header ul.nav li.parent.open > a {
           border-bottom: 1px solid gray; }
-        #header ul.nav li.parent:hover > ul, #header ul.nav li.parent.open > ul {
+        #header ul.nav li.parent.open > ul {
           display: block; }
         #header ul.nav li.parent > ul {
           margin: 0;
