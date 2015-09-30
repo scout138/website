@@ -83,6 +83,7 @@ app = angular.module('mainweb', ['ngRoute'])
 
 .controller 'LeadersController', ['$scope', ($scope) ->
   $scope.leadersList =
+    'Jackson Li': 'Group Commissioner'
     'Rita Ho': 'Head Beaver Leader'
     'Celine Hsin': 'Beaver Leader'
     'Adrian Lee': 'Beaver Leader'
@@ -95,7 +96,6 @@ app = angular.module('mainweb', ['ngRoute'])
     'Lawrence Lai': 'Company Adviser'
     'Laurie Lum': 'Company Adviser'
     'Cameron Butler': 'Company Adviser'
-    'Jackson Li': 'Group Commissioner'
 
   $scope.getFaceUrl = (name) ->
     'images/heads/' + name.toLowerCase().replace(' ', '-') + '.jpg'
