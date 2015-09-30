@@ -119,8 +119,8 @@
         'Laurie Lum': 'Company Advisor',
         'Cameron Butler': 'Company Advisor'
       };
-      return $scope.getFaceUrl = function(name) {
-        return 'images/heads/' + name.toLowerCase().replace(' ', '-') + '.jpg';
+      return $scope.sluggify = function(name) {
+        return name.toLowerCase().replace(' ', '-');
       };
     }
   ]).controller('HomeController', [

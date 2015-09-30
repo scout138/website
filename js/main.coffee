@@ -98,8 +98,8 @@ app = angular.module('mainweb', ['ngRoute'])
     'Laurie Lum': 'Company Advisor'
     'Cameron Butler': 'Company Advisor'
 
-  $scope.getFaceUrl = (name) ->
-    'images/heads/' + name.toLowerCase().replace(' ', '-') + '.jpg'
+  $scope.sluggify = (name) ->
+    name.toLowerCase().replace(' ', '-')
 ]
 
 .controller 'HomeController', ['$scope', '$sce', ($scope, $sce) ->
