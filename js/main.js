@@ -92,7 +92,7 @@
             'Scouts': 'https://files.scout138.com/physical-fitness-forms/scouts/',
             'Venturers': 'https://files.scout138.com/physical-fitness-forms/venturers/'
           },
-          'Uniform Badge Placement': 'https://files.scout138.com/public/insignia-placement.pdf',
+          'Uniform Badge Placement': 'https://files.scout138.com/insignia-placement.pdf',
           'Police Record Check': 'https://justice.gov.bc.ca/eCRC/'
         },
         'Thank a Leader!': 'https://www.myscouts.ca/ca/commendation/submit',
