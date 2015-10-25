@@ -21,10 +21,10 @@ app = angular.module('mainweb', ['ngRoute'])
     scope.makeDetail = (detail) ->
       return $sce.trustAsHtml('<b>' + detail.key + ':</b> ' + detail.value)
 
-    element.append('<a href="javascript: void(0);" ng-click="open = !open" ng-class="{open: open}" class="summary' + (if scope.eventData.type is 'week' then ' day') + '">' + scope.eventData.title + '</a>')
+    element.append('<a href="javascript: void(0);" ng-click="open = !open" ng-class="{open: open, day: eventData.type == \'week\', holiday: eventData.type == \'holiday\'}" class="summary">' + scope.eventData.title + '</a>')
     if(scope.eventData.type is 'week')
       element.append('<div ng-show="open"><ul class="events"><li ng-repeat="date in eventData.dates" class="event-item item" event-data="date"></li></ul></div>')
-    else
+    else if(scope.eventData.type is 'date')
       element.append('<div ng-show="open"><div ng-repeat="detail in eventData.details" ng-bind-html="makeDetail(detail)" style="padding-left: 0;"></div></div>')
 
     $compile(element.contents())(scope);
@@ -156,14 +156,14 @@ app = angular.module('mainweb', ['ngRoute'])
     nextPage++
 
 
-  getEvents = ->
+  $scope.getEvents = ->
     if gapi.client is undefined
-      window.setTimeout(getEvents, 100)
+      window.setTimeout($scope.getEvents, 100)
       return
 
     today = new Date().clearTime()
     gapi.client.setApiKey(GCAL_API_KEY)
-    gapi.client.load('calendar', 'v3', ->
+    gapi.client.load('calendar', 'v3', $scope.getEvents = ->
       gapi.client.calendar.events.list(
         calendarId: 'pccrovers.com_pojeic2sd1ojijt7ohop7gt338@group.calendar.google.com'
         orderBy: 'startTime'
@@ -173,6 +173,9 @@ app = angular.module('mainweb', ['ngRoute'])
         timeZone: 'America/Vancouver'
         fields: 'items(summary,description,start,end,endTimeUnspecified,location,htmlLink,updated)'
       ).execute((response) ->
+        $scope.$apply ->
+          $scope.weeks = []
+
         if response.hasOwnProperty('error') then return
 
         g_weeks = []
@@ -192,10 +195,14 @@ app = angular.module('mainweb', ['ngRoute'])
             else return 0
           )
 
+          is_holiday = false
+          has_title = false
           ret_dates = []
           for g_event in g_events
             if (prefix = g_event.summary.indexOf('GC')) >= 0
               g_week += g_event.summary.substring(prefix + 2)
+              is_holiday = g_event.summary.toLowerCase().indexOf('no meeting') >= 0
+              has_title = true
               continue
 
             props = []
@@ -216,12 +223,21 @@ app = angular.module('mainweb', ['ngRoute'])
               )
               g_event.description = g_event.description.substring(bb + 5)
 
-            if g_event.location then props.push key: 'location', value: '<a href="//maps.google.ca/maps?hl=en&q=' + g_event.location + '&source=calendar">' + g_event.location + '</a>'
+            if g_event.location then props.push key: 'location', value: '<a href="//maps.google.ca/maps?hl=en&q=' + g_event.location + '&source=calendar" title="' + g_event.location + '">' + g_event.location + '</a>'
 
             ret_dates.push type: 'date', title: g_event.summary, details: props;
 
+          if not has_title
+            g_week += ' - Regular Meeting'
+
           $scope.$apply ->
-            $scope.weeks.push type: 'week', title: g_week, dates: ret_dates
+            if(is_holiday)
+              $scope.weeks.push type: 'holiday', title: g_week
+            else if(ret_dates.length == 1 && ret_dates[0].title.toLowerCase().indexOf("group") >= 0)
+              ret_dates[0].title = g_week
+              $scope.weeks.push ret_dates[0]
+            else
+              $scope.weeks.push type: 'week', title: g_week, dates: ret_dates
 
         return
       )
@@ -230,5 +246,6 @@ app = angular.module('mainweb', ['ngRoute'])
     return
 
   $scope.loadPosts()
-  getEvents()
+  $scope.getEvents()
+  return
 ]
