@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="post" ng-repeat="post in posts">
         <div class="top">
-            <div class="title" title="Garibaldi Lake Venturers Expedition">{{post.title}}</div>
+            <div class="title" title="{{post.title}}">{{post.title}}</div>
             <div class="date">{{post.date}}</div>
         </div>
         <a target="_blank" class="photo" href="{{post.link}}"><img src="{{post.cover}}"></a>
