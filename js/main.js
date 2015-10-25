@@ -32,10 +32,10 @@
           scope.makeDetail = function(detail) {
             return $sce.trustAsHtml('<b>' + detail.key + ':</b> ' + detail.value);
           };
-          element.append('<a href="javascript: void(0);" ng-click="open = !open" ng-class="{open: open}" class="summary' + (scope.eventData.type === 'week' ? ' day' : void 0) + '">' + scope.eventData.title + '</a>');
+          element.append('<a href="javascript: void(0);" ng-click="open = !open" ng-class="{open: open, day: eventData.type == \'week\', holiday: eventData.type == \'holiday\'}" class="summary">' + scope.eventData.title + '</a>');
           if (scope.eventData.type === 'week') {
             element.append('<div ng-show="open"><ul class="events"><li ng-repeat="date in eventData.dates" class="event-item item" event-data="date"></li></ul></div>');
-          } else {
+          } else if (scope.eventData.type === 'date') {
             element.append('<div ng-show="open"><div ng-repeat="detail in eventData.details" ng-bind-html="makeDetail(detail)" style="padding-left: 0;"></div></div>');
           }
           $compile(element.contents())(scope);
@@ -125,7 +125,7 @@
     }
   ]).controller('HomeController', [
     '$scope', '$sce', function($scope, $sce) {
-      var ACCESS_TOKEN, GCAL_API_KEY, getEvents, limit, nextPage;
+      var ACCESS_TOKEN, GCAL_API_KEY, limit, nextPage;
       ACCESS_TOKEN = '524905380971501|vwvIt1ualZz_1V5DX17el6NJPe0';
       GCAL_API_KEY = 'AIzaSyCvuJzS-Q7uGdliRFqySq0mYar0YOBQEGE';
       nextPage = 0;
@@ -178,15 +178,15 @@
         });
         return nextPage++;
       };
-      getEvents = function() {
+      $scope.getEvents = function() {
         var today;
         if (gapi.client === void 0) {
-          window.setTimeout(getEvents, 100);
+          window.setTimeout($scope.getEvents, 100);
           return;
         }
         today = new Date().clearTime();
         gapi.client.setApiKey(GCAL_API_KEY);
-        gapi.client.load('calendar', 'v3', function() {
+        gapi.client.load('calendar', 'v3', $scope.getEvents = function() {
           return gapi.client.calendar.events.list({
             calendarId: 'pccrovers.com_pojeic2sd1ojijt7ohop7gt338@group.calendar.google.com',
             orderBy: 'startTime',
@@ -196,7 +196,10 @@
             timeZone: 'America/Vancouver',
             fields: 'items(summary,description,start,end,endTimeUnspecified,location,htmlLink,updated)'
           }).execute(function(response) {
-            var bb, end, g_event, g_events, g_week, g_weeks, isAllDay, isMultiDay, item, j, k, len, len1, prefix, props, ref1, ret_dates, start;
+            var bb, end, g_event, g_events, g_week, g_weeks, has_title, isAllDay, isMultiDay, is_holiday, item, j, k, len, len1, prefix, props, ref1, ret_dates, start;
+            $scope.$apply(function() {
+              return $scope.weeks = [];
+            });
             if (response.hasOwnProperty('error')) {
               return;
             }
@@ -227,11 +230,15 @@
                   return 0;
                 }
               });
+              is_holiday = false;
+              has_title = false;
               ret_dates = [];
               for (k = 0, len1 = g_events.length; k < len1; k++) {
                 g_event = g_events[k];
                 if ((prefix = g_event.summary.indexOf('GC')) >= 0) {
                   g_week += g_event.summary.substring(prefix + 2);
+                  is_holiday = g_event.summary.toLowerCase().indexOf('no meeting') >= 0;
+                  has_title = true;
                   continue;
                 }
                 props = [];
@@ -259,7 +266,7 @@
                 if (g_event.location) {
                   props.push({
                     key: 'location',
-                    value: '<a href="//maps.google.ca/maps?hl=en&q=' + g_event.location + '&source=calendar">' + g_event.location + '</a>'
+                    value: '<a href="//maps.google.ca/maps?hl=en&q=' + g_event.location + '&source=calendar" title="' + g_event.location + '">' + g_event.location + '</a>'
                   });
                 }
                 ret_dates.push({
@@ -268,19 +275,32 @@
                   details: props
                 });
               }
+              if (!has_title) {
+                g_week += ' - Regular Meeting';
+              }
               $scope.$apply(function() {
-                return $scope.weeks.push({
-                  type: 'week',
-                  title: g_week,
-                  dates: ret_dates
-                });
+                if (is_holiday) {
+                  return $scope.weeks.push({
+                    type: 'holiday',
+                    title: g_week
+                  });
+                } else if (ret_dates.length === 1 && ret_dates[0].title.toLowerCase().indexOf("group") >= 0) {
+                  ret_dates[0].title = g_week;
+                  return $scope.weeks.push(ret_dates[0]);
+                } else {
+                  return $scope.weeks.push({
+                    type: 'week',
+                    title: g_week,
+                    dates: ret_dates
+                  });
+                }
               });
             }
           });
         });
       };
       $scope.loadPosts();
-      return getEvents();
+      $scope.getEvents();
     }
   ]);
 

@@ -202,7 +202,7 @@ body {
         #content-wrapper .right-side .widget .events .item:last-child {
           border-bottom: 0; }
         #content-wrapper .right-side .widget .events .item > a {
-          color: #BF9608;
+          color: #00ADD8;
           text-decoration: none;
           background-repeat: no-repeat;
           background-position: 0 9px;
@@ -214,14 +214,21 @@ body {
           text-overflow: ellipsis;
           overflow: hidden;
           display: block; }
-          #content-wrapper .right-side .widget .events .item > a.day {
-            color: #4DB810; }
-          #content-wrapper .right-side .widget .events .item > a:hover {
+          #content-wrapper .right-side .widget .events .item > a:hover:not(.holiday) {
             text-decoration: underline; }
           #content-wrapper .right-side .widget .events .item > a.open {
             background-image: url(../images/minus.png);
             white-space: normal; }
+          #content-wrapper .right-side .widget .events .item > a.day {
+            color: #4DB810; }
+          #content-wrapper .right-side .widget .events .item > a.holiday {
+            color: #C600d8;
+            cursor: default;
+            background-image: none; }
         #content-wrapper .right-side .widget .events .item div {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
           padding-left: 20px; }
           #content-wrapper .right-side .widget .events .item div b {
             text-transform: capitalize; }

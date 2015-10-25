@@ -16,6 +16,7 @@
         </div>
         <ul class="events top">
             <li ng-repeat="week in weeks" class="item event-item" event-data="week"></li>
+            <li class="loading" ng-hide="weeks.length">Loading...</li>
         </ul>
     </div>
 </div>

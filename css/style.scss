@@ -261,7 +261,7 @@ body {
             border-bottom: 0;
           }
           > a {
-            color: #BF9608;
+            color: #00ADD8;
             text-decoration: none;
             background-repeat: no-repeat;
             background-position: 0 9px;
@@ -274,18 +274,26 @@ body {
             overflow: hidden;
             display: block;
 
-            &.day {
-              color: #4DB810;
-            }
-            &:hover {
+            &:hover:not(.holiday) {
               text-decoration: underline;
             }
             &.open {
               background-image: url(../images/minus.png);
               white-space: normal;
             }
+            &.day {
+              color: #4DB810;
+            }
+            &.holiday {
+              color: #C600D8;
+              cursor: default;
+              background-image: none;
+            }
           }
           div {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
             padding-left: 20px;
 
             b {
