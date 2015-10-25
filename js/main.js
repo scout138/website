@@ -144,7 +144,7 @@
           var data, fn, j, len;
           $scope.hasMorePosts = response.length >= limit;
           fn = function(data) {
-            var anchor, i, nextRef, pts, ref;
+            var anchor, i, ndi, nextRef, pts, ref;
             if (data.hasOwnProperty('description')) {
               while ((nextRef = data.description.indexOf('@[')) >= 0) {
                 ref = data.description.substring(nextRef, data.description.indexOf(']', nextRef) + 1);
@@ -154,6 +154,9 @@
               }
             } else {
               data.description = '';
+            }
+            if ((ndi = data.name.indexOf(' - ')) >= 0) {
+              data.name = data.name.substring(ndi + 3);
             }
             i = $scope.posts.length;
             $scope.posts.push({

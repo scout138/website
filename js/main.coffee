@@ -132,6 +132,9 @@ app = angular.module('mainweb', ['ngRoute'])
             else
               data.description = '';
 
+            if (ndi = data.name.indexOf(' - ')) >= 0
+              data.name = data.name.substring(ndi + 3);
+
             i = $scope.posts.length;
             $scope.posts.push
               description: $sce.trustAsHtml(data.description)
