@@ -83,6 +83,12 @@
             'Scouts': 'https://files.scout138.com/canadian-path/scouts.pdf?dl',
             'Venturers': 'https://files.scout138.com/canadian-path/venturers.pdf?dl'
           },
+          'Scouters\' Handbooks': {
+            'Beavers': 'http://www.scouts.ca/vstk/pdf/tools/beaver/beaver-leader-handbook.pdf',
+            'Cubs': 'http://www.scouts.ca/vstk/pdf/tools/cubs/cub-leader-handbook.pdf',
+            'Scouts': 'http://www.scouts.ca/vstk/pdf/tools/scouts/scout-leader-handbook.pdf',
+            'Venturers': 'http://www.scouts.ca/vstk/pdf/tools/venturer/Venturer-Advisors-Handbook.pdf'
+          },
           'Tech Guide': 'https://sites.google.com/a/scout138.com/wiki/',
           'Attendance': 'http://attendance.scout138.com/',
           'Leaders\' Contact Info': 'javascript: void(0);',
