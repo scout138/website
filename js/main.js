@@ -101,6 +101,7 @@
           'Uniform Badge Placement': 'https://files.scout138.com/insignia-placement.pdf',
           'Police Record Check': 'https://justice.gov.bc.ca/eCRC/'
         },
+        'Notices': 'https://files.scout138.com/notices/',
         'Thank a Leader!': 'https://www.myscouts.ca/ca/commendation/submit',
         'Registration': 'registration',
         'Leaders': 'leaders',
