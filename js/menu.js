@@ -54,6 +54,12 @@
 
                 if (self.isParent)
                     $element.toggleClass('open', self.open = !self.open);
+                else if (self.href.indexOf('//') == -1){
+                    $scope.$apply(function() {
+                        $location.path(self.href);
+                    });
+                    $event.preventDefault();
+                }
 
                 $event.stopPropagation();
             });
