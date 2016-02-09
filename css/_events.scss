@@ -1,0 +1,57 @@
+event-group {
+  padding: 0;
+  margin: 0;
+
+  event-item {
+    border-bottom: 1px solid #ccc;
+    padding: 12px 0;
+    display: block;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+    > a {
+      color: #00ADD8;
+      text-decoration: none;
+      background-repeat: no-repeat;
+      background-position: 0 9px;
+      padding: 3px 0 3px 15px;
+      margin: 0 20px 0 5px;
+      background-image: url(../images/plus.png);
+      font-weight: bold;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: block;
+
+      &:hover:not(.holiday) {
+        text-decoration: underline;
+      }
+      &.open {
+        background-image: url(../images/minus.png);
+        white-space: normal;
+      }
+      &.day {
+        color: #4DB810;
+      }
+      &.holiday {
+        color: #C600D8;
+        cursor: default;
+        background-image: none;
+      }
+    }
+    .detail-container {
+      padding-left: 20px;
+    }
+    event-detail {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+
+      b {
+        text-transform: capitalize;
+      }
+    }
+  }
+}

@@ -1,7 +1,1 @@
-<div class="leaders">
-    <div class="leader" ng-repeat="(name, section) in leadersList">
-        <div class="name">{{name}}</div>
-        <img ng-src="images/heads/{{sluggify(name)}}.jpg" onerror="this.src='images/heads/generic.jpg';">
-        <div class="section">{{section}}</div>
-    </div>
-</div>
+<mugshot-group model="leaders"></mugshot-group>

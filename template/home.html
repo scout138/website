@@ -1,23 +1,9 @@
-<div class="main-content">
-    <div class="post" ng-repeat="post in posts">
-        <div class="top">
-            <div class="title" title="{{post.title}}">{{post.title}}</div>
-            <div class="date">{{post.date}}</div>
-        </div>
-        <a target="_blank" class="photo" href="{{post.link}}"><img src="{{post.cover}}"></a>
-        <div class="description" ng-bind-html="post.description"></div>
-    </div>
-    <div class="load-more" ng-show="hasMorePosts" ng-click="loadPosts()"></div>
-</div>
 <div class="right-side">
-    <div class="widget">
+    <div class="block">
         <div class="title">
             Upcoming Events
         </div>
-        <ul class="events top">
-            <li ng-repeat="week in weeks" class="item event-item" event-data="week"></li>
-            <li class="loading" ng-hide="weeks.length">Loading...</li>
-        </ul>
+        <event-group events="events"></event-group>
     </div>
 </div>
-<div style="clear: both;"></div>
+<album-list load-more="loadMorePosts(accessToken,callback)" class="left-side"></album-list>

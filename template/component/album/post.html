@@ -1,0 +1,6 @@
+<div class="head">
+    <div class="title" title="{{$ctrl.album.title}}">{{$ctrl.album.title}}</div>
+    <div class="date">{{$ctrl.album.date}}</div>
+</div>
+<a target="_blank" class="photo" href="{{$ctrl.album.link}}"><img ng-src="{{$ctrl.album.image}}"></a>
+<p class="left-align" ng-bind-html="$ctrl.album.description"></p>

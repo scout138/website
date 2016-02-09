@@ -1,0 +1,25 @@
+mugshot-group {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+
+  mugshot-item {
+    min-width: 200px;
+    flex-grow: 0;
+    text-align: center;
+    margin: 15px;
+
+    .name {
+      font-size: 20pt;
+      font-weight: bold;
+    }
+    img {
+      width: 150px;
+      height: 225px;
+      margin: 0 auto;
+    }
+    .section {
+      font-size: 12pt;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+<a href="" ng-click="$ctrl.open = !$ctrl.open" ng-class="{open: $ctrl.open, day: $ctrl.event.type == 'group', holiday: $ctrl.event.type == 'holiday'}" class="summary">{{$ctrl.event.title}}</a>
+<div ng-show="$ctrl.open" class="detail-container" ng-if="$ctrl.event.type != 'holiday'">
+    <event-group ng-if="$ctrl.event.type == 'group'" events="$ctrl.event.dates"></event-group>
+    <event-detail ng-if="$ctrl.event.type == 'date'" ng-repeat="(name,detail) in $ctrl.event.details" name="name" detail="detail"></event-detail>
+</div>

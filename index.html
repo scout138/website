@@ -1,32 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="mainweb">
+<html lang="en" ng-app="138Web">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The 138th East Vancouver Scout Group</title>
-    <!--<script type="application/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
-    <script type="application/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
-    <script type="application/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
-    <script type="application/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
-    <script type="application/javascript" src="//apis.google.com/js/client.js"></script>
-    <script type="application/javascript" src="js/date.js"></script>
-    <script type="application/javascript" src="js/main.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="favicon.png">
     <base href="/">
 </head>
-<body ng-controller="MainController" ng-click="navopen = false;subopen = '';">
+<body ng-controller="MainController">
 <div id="header">
     <a href="./" class="group-logo"></a>
-    <ul class="nav" ng-click="navopen = !navopen;$event.stopPropagation();" ng-class="{open: navopen}">
-        <li ng-repeat="(name, child) in menuItems" nav name="name" link="child" ng-class="{parent: isParent(child), open: $parent.subopen == name}"></li>
-    </ul>
+    <menu-group items="menuItems"></menu-group>
 </div>
 <div id="content-wrapper" ng-view>
 </div>
 <div id="footer">
     Copyright &copy; 2009 - 2016 The 138th East Vancouver Scout Group
 </div>
+
+<script type="application/javascript" src="js/LAB.min.js"></script>
+<script type="application/javascript" src="js/init.min.js"></script>
 </body>
 </html>
