@@ -1,7 +1,8 @@
 <div class="right-side">
-    <div class="block">
-        <div class="title">
-            Upcoming Events
+    <div class="block" ng-init="loadEvents()">
+        <div class="head">
+            <div class="title">Upcoming Events</div>
+            <div class="date refresh-events" ng-class="{loading: loadingEvents}" ng-click="loadEvents(true)"></div>
         </div>
         <event-group events="events"></event-group>
     </div>

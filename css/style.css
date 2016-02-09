@@ -295,6 +295,31 @@ mugshot-group {
       font-size: 12pt; }
 
 /* ********** START EVENT STYLES ********** */
+@keyframes refresh-icon {
+  from {
+    transform: rotateZ(0deg); }
+  to {
+    transform: rotateZ(-180deg); } }
+.block .head .refresh-events {
+  position: relative; }
+  .block .head .refresh-events::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 1.5em;
+    width: 1.5em;
+    background-image: url(../images/refresh-icon.svg);
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer; }
+  .block .head .refresh-events.loading::before {
+    animation-name: refresh-icon;
+    animation-duration: .8s;
+    animation-iteration-count: infinite;
+    cursor: wait; }
+
 event-group {
   padding: 0;
   margin: 0; }
@@ -307,11 +332,9 @@ event-group {
     event-group event-item > a {
       color: #00ADD8;
       text-decoration: none;
-      background-repeat: no-repeat;
-      background-position: 0 9px;
       padding: 3px 0 3px 15px;
       margin: 0 20px 0 5px;
-      background-image: url(../images/plus.png);
+      background: url(../images/plus.png) no-repeat 0 9px;
       font-weight: bold;
       white-space: nowrap;
       text-overflow: ellipsis;

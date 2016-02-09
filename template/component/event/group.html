@@ -1,2 +1,2 @@
-<div class="loading" ng-if="events.length">Loading...</div>
-<event-item ng-repeat="event in $ctrl.events" event="event" ng-if="!events.length"></event-item>
+<p ng-if="!$ctrl.events.length">Loading...</p>
+<event-item ng-repeat="event in $ctrl.events" event="event" ng-if="$ctrl.events.length"></event-item>

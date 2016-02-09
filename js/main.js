@@ -108,11 +108,20 @@
                 });
         };
 
-        $http
-            .get('https://api.scout138.com/events/list')
-            .success(function(data) {
-                $scope.events = data;
-            })
+        $scope.loadEvents = function(flush) {
+            $scope.loadingEvents = true;
+            $scope.events = [];
+            $http
+                .get('https://api.scout138.com/events/list', {
+                    'params': {
+                        'flush': flush ? '1' : '0'
+                    }
+                })
+                .success(function (data) {
+                    $scope.loadingEvents = false;
+                    $scope.events = data;
+                });
+        };
     }])
 
     .controller('LeadersController', [
