@@ -8,20 +8,20 @@
         //'templateUrl': 'template/component/menu/group.html',
         'template': '<menu-item ng-repeat="(name,data) in $ctrl.items" name="name" data="data"></menu-item>',
         'controller': ['$scope', '$element', function($scope, $element) {
-            var self = this;
+            var $ctrl = this;
 
             if (!$element.hasClass('child')) {
                 $element.on('click', function($event) {
-                    $element.toggleClass('open', self.open = !self.open);
+                    $element.toggleClass('open', $ctrl.open = !$ctrl.open);
 
-                    if (!self.open)
+                    if (!$ctrl.open)
                         $scope.$broadcast('closemenu', $scope);
 
                     $event.stopPropagation();
                 });
 
                 angular.element(document).on('click', function($event) {
-                    $element.toggleClass('open', self.open = false);
+                    $element.toggleClass('open', $ctrl.open = false);
                     $scope.$broadcast('closemenu', $scope);
                 });
             }
@@ -39,24 +39,24 @@
     .component('menuItem', {
         'templateUrl': 'template/component/menu/item.html',
         'controller': ['$location', '$scope', '$element', function($location, $scope, $element) {
-            var self = this;
+            var $ctrl = this;
 
-            self.isParent = typeof self.data == 'object';
-            self.isSelected = !self.isParent && $location.path() == '/' + self.href;
+            $ctrl.isParent = typeof $ctrl.data == 'object';
+            $ctrl.isSelected = !$ctrl.isParent && $location.path() == '/' + $ctrl.href;
 
-            if (!self.isParent)
-                self.href = self.data;
+            if (!$ctrl.isParent)
+                $ctrl.href = $ctrl.data;
             else
                 $element.addClass('parent');
 
             $element.on('click', function($event) {
                 $scope.$emit('menuopen');
 
-                if (self.isParent)
-                    $element.toggleClass('open', self.open = !self.open);
-                else if (self.href.indexOf('//') == -1){
+                if ($ctrl.isParent)
+                    $element.toggleClass('open', $ctrl.open = !$ctrl.open);
+                else if ($ctrl.href.indexOf('//') == -1){
                     $scope.$apply(function() {
-                        $location.path(self.href);
+                        $location.path($ctrl.href);
                     });
                     $event.preventDefault();
                 }
@@ -68,8 +68,8 @@
                 if ($targetScope == $scope)
                     return;
 
-                if (self.isParent && self.open) {
-                    self.open = false;
+                if ($ctrl.isParent && $ctrl.open) {
+                    $ctrl.open = false;
                     $element.removeClass('open');
                 }
             });
