@@ -4,6 +4,18 @@
 
     angular.module('138Web', ['ngRoute'])
 
+    .run(['$rootScope', function($rootScope) {
+        var first = true;
+
+        $rootScope.$on('$routeChangeSuccess', function() {
+            if (first)
+                return first = false;
+
+            if (typeof _gaq !== 'undefined')
+                _gaq.push(['_trackPageview']);
+        })
+    }])
+
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
