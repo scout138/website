@@ -96,6 +96,7 @@
             'Leon Ho': 'Troop Scouter',
             'Steve Lam': 'Troop Scouter',
             'Lawrence Lai': 'Company Adviser',
+            'Milly Cheung': 'Company Advisor',
             'Laurie Lum': 'Company Advisor',
             'Cameron Butler': 'Company Advisor'
         };
