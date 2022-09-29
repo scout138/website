@@ -1,0 +1,7 @@
+.Page {
+    font-size: 0;
+
+    >* {
+        font-size: initial;
+    }
+}

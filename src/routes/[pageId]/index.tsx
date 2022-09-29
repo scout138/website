@@ -1,7 +1,8 @@
-import { Resource, component$ } from '@builder.io/qwik';
+import { Resource, component$, useStyles$ } from '@builder.io/qwik';
 import { RequestHandler, StaticGenerateHandler, useEndpoint } from '@builder.io/qwik-city';
 import { getContent, getData } from '~/libs/cms';
 import NotFound from '../not-found/index';
+import styles from './index.scss?inline';
 
 export const onGet: RequestHandler<{ page: string; side?: string | null }> = async ({ url, response, abort }) => {
   if (url.pathname.match(/\.\w+$/)) {
@@ -27,6 +28,8 @@ export const onGet: RequestHandler<{ page: string; side?: string | null }> = asy
 };
 
 export default component$(() => {
+  useStyles$(styles);
+
   const resource = useEndpoint<typeof onGet>();
   return (
     <Resource
