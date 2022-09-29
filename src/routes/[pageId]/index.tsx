@@ -1,9 +1,15 @@
-import { Resource, component$, useStyles$ } from '@builder.io/qwik';
+import { Resource, component$ } from '@builder.io/qwik';
 import { RequestHandler, StaticGenerateHandler, useEndpoint } from '@builder.io/qwik-city';
 import { getContent, getData } from '~/libs/cms';
 import NotFound from '../not-found/index';
 
-export const onGet: RequestHandler<{ page: string; side?: string | null }> = async ({ url, response }) => {
+export const onGet: RequestHandler<{ page: string; side?: string | null }> = async ({ url, response, abort }) => {
+  if (url.pathname.match(/\.\w+$/)) {
+    // probably a static file
+    abort();
+    return;
+  }
+
   let [page, side] = await Promise.all([
     getContent('page', url),
     getContent('side-bar', url),
