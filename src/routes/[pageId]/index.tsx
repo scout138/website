@@ -31,31 +31,33 @@ export default component$(() => {
   return (
     <Resource
       value={resource}
-      onResolved={(resolved) => (
-        resolved ? (
-          resolved.side ? (
-            <div className="Page">
-              {resolved.side ? (
-                <div
-                  className="right-side"
-                  dangerouslySetInnerHTML={resolved.side}
-                />
-              ) : null}
-              <div
-                className={"left-side"}
-                dangerouslySetInnerHTML={resolved.page}
-              />
-            </div>
-          ) : (
+      onResolved={(resolved) => {
+        if (!resolved) {
+          return <NotFound />;
+        }
+
+        if (!resolved.side) {
+          return (
             <div
               className={'Page single-column'}
               dangerouslySetInnerHTML={resolved.page}
             />
           )
-        ) : (
-          <NotFound />
+        }
+
+        return (
+          <div className="Page">
+            <div
+              className="right-side"
+              dangerouslySetInnerHTML={resolved.side}
+            />
+            <div
+              className={"left-side"}
+              dangerouslySetInnerHTML={resolved.page}
+            />
+          </div>
         )
-      )}
+      }}
     />
   );
 });
