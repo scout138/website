@@ -35,12 +35,12 @@ export default component$(() => {
         resolved ? (
           resolved.side ? (
             <div className="Page">
-              {resolved.side && (
+              {resolved.side ? (
                 <div
                   className="right-side"
                   dangerouslySetInnerHTML={resolved.side}
                 />
-              )}
+              ) : null}
               <div
                 className={"left-side"}
                 dangerouslySetInnerHTML={resolved.page}
