@@ -1,0 +1,229 @@
+.MenuItem-submenu {
+  display: flex;
+  z-index: 2;
+
+  >input[type=checkbox] {
+    display: none;
+  }
+
+  >.MenuItem {
+    position: relative;
+    background-color: white;
+    white-space: nowrap;
+
+    >a,
+    >a:visited {
+      line-height: 40px;
+      padding: 0 15px;
+      text-decoration: none;
+      color: rgb(0, 0, 238);
+      cursor: pointer;
+    }
+  }
+}
+
+@media (min-width: 760px) {
+  .MenuItem-submenu {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    bottom: 0;
+    right: 25px;
+
+    >.MenuItem {
+      display: inline-block;
+
+      >a,
+      >a:visited {
+        display: inline-block;
+        border-radius: 10px 10px 0 0;
+        border: 1px solid white;
+        border-bottom-width: 0;
+      }
+
+      &.parent::after {
+        height: 1px;
+        background-color: white;
+        position: absolute;
+        bottom: -1px;
+        left: 1px;
+        right: 1px;
+        z-index: 5;
+      }
+
+      >.MenuItem-submenu {
+        display: none;
+        border: 1px solid gray;
+        flex-direction: column;
+        bottom: auto;
+        right: auto;
+
+        >.MenuItem {
+
+          &.parent {
+            >a::after {
+              content: "\00BB";
+              position: absolute;
+              line-height: 40px;
+              top: 0;
+              right: 15px;
+            }
+          }
+
+          >.MenuItem-submenu> :first-child::before {
+            width: 1px;
+            background-color: #eeeeee;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -1px;
+          }
+
+          >a {
+            display: block;
+            padding: 0 30px 0 15px;
+            border-radius: 0;
+            border: 0;
+          }
+
+          >.MenuItem-submenu {
+            top: 0;
+            left: 100%;
+          }
+
+          &:hover,
+          &:focus-within {
+            >a {
+              background-color: #eee;
+            }
+
+            >.MenuItem-submenu> :first-child {
+              &::before {
+                content: "";
+              }
+            }
+          }
+        }
+      }
+
+      &:hover,
+      &:focus-within {
+        a {
+          border-color: gray;
+        }
+
+        &.parent {
+          &::after {
+            content: "";
+          }
+        }
+
+        >.MenuItem-submenu {
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 760px) and (max-width: 1050px) {
+  .MenuItem-submenu:not(.child) {
+    justify-content: center;
+    left: 0;
+    right: 0;
+
+    .MenuItem {
+      white-space: nowrap;
+
+      a {
+        text-overflow: clip;
+      }
+    }
+  }
+}
+
+@media (max-width: 759px) {
+  .MenuItem {
+    display: flex;
+    flex-direction: column;
+  }
+
+  //.MenuItem-submenu {
+  //  height: 0;
+  //  overflow: hidden;
+  //  flex-direction: column;
+  //  background-color: white;
+  //  transition: height 0.5s;
+  //  z-index: 50;
+  //
+  //  position: absolute;
+  //  top: 40px;
+  //  display: block;
+  //  border: 1px solid transparent;
+  //  overflow: initial;
+  //
+  //  &.open {
+  //    border-color: gray;
+  //  }
+  //  &:not(.open) {
+  //    display: none;
+  //  }
+  //
+  //  > .MenuItem {
+  //
+  //    > a {
+  //      display: block;
+  //      line-height: 40px;
+  //      padding: 0 15px;
+  //    }
+  //
+  //    &:not(:last-child) > a {
+  //      border-bottom: 1px solid gray;
+  //    }
+  //    > .MenuItem-submenu {
+  //      margin-left: 20px;
+  //      border-left: 1px solid gray;
+  //    }
+  //    &.parent {
+  //      > a::after {
+  //        content: "\25BC";
+  //        position: absolute;
+  //        line-height: 40px;
+  //        top: 0;
+  //        right: 15px;
+  //      }
+  //    }
+  //  }
+  //  &.open, > .MenuItem.open > .MenuItem-submenu {
+  //    height: auto;
+  //
+  //    &:not(.child) {
+  //      display: flex;
+  //    }
+  //  }
+  //  > .MenuItem.open + .MenuItem {
+  //    border-top: 1px solid gray;
+  //  }
+  //}
+  //:not(.MenuItem-submenu) > .MenuItem.parent > .MenuItem-submenu {
+  //  right: 30px;
+  //  top: 80px;
+  //
+  //  &::before {
+  //    content: '';
+  //    width: 40px;
+  //    height: 40px;
+  //
+  //    position: absolute;
+  //    right: -1px;
+  //    top: -51px;
+  //
+  //    background: #eee url(menu-icon.svg) no-repeat center;
+  //    background-size: 25px;
+  //
+  //    border: 1px solid gray;
+  //  }
+  //}
+}

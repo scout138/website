@@ -1,0 +1,60 @@
+.Header {
+  background-color: #ffffff;
+  -webkit-border-top-left-radius: 15px;
+  -webkit-border-top-right-radius: 15px;
+  -moz-border-radius-topleft: 15px;
+  -moz-border-radius-topright: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom: 1px solid gray;
+  padding: 5px 25px;
+  position: relative;
+
+  a {
+    text-decoration: none;
+  }
+
+  .group-logo {
+    height: 95px;
+    width: 246px;
+    background: url(/group-logo.png) no-repeat bottom;
+    background-size: 247px;
+    position: absolute;
+    bottom: 10px;
+    z-index: 25;
+  }
+}
+
+@media (min-width: 1050px) {
+  .Header {
+    height: 80px;
+    margin-top: 50px;
+  }
+}
+
+@media (min-width: 760px) and (max-width: 1050px) {
+  .Header {
+    height: 110px;
+    margin-top: 40px;
+
+    .group-logo {
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@media (max-width: 759px) {
+  .Header {
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 0;
+    height: 100px;
+
+    .group-logo {
+      left: 5px;
+      bottom: 0;
+    }
+  }
+}

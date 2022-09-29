@@ -1,0 +1,23 @@
+.Scouter {
+  min-width: 200px;
+  flex-grow: 0;
+  text-align: center;
+  margin: 15px;
+
+  .Scouter-name {
+    font-size: 20pt;
+    font-weight: bold;
+  }
+
+  .Scouter-portrait {
+    width: 150px;
+    height: 225px;
+    margin: 0 auto;
+    background: url(/generic.jpg) center;
+    background-size: contain;
+  }
+
+  .Scouter-title {
+    font-size: 12pt;
+  }
+}

@@ -1,0 +1,36 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: url(/background.jpg) no-repeat fixed center;
+  background-size: cover;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  margin: 0;
+  overflow-y: scroll;
+}
+
+.left-align {
+  text-align: left !important;
+}
+
+.center-align {
+  text-align: center !important;
+}
+
+@media (max-width: 759px) {
+  body {
+    background-image: none;
+  }
+}
+
+vite-error-overlay {
+  z-index: 50;
+}

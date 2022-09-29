@@ -1,0 +1,32 @@
+.NotFound {
+  text-align: center;
+}
+
+.NotFound-message {
+  width: 700px;
+  height: 500px;
+  position: relative;
+  display: inline-block;
+
+  background: url(/campfire.png) no-repeat left center;
+  background-size: 300px;
+
+  &::before,
+  &::after {
+    position: absolute;
+    left: 350px;
+    display: block;
+    transform: translateY(-50%);
+  }
+
+  &::before {
+    content: "Oops!";
+    font-size: 2em;
+    top: 45%;
+  }
+
+  &::after {
+    content: "Whatever was here seems to be gone now...";
+    top: 60%;
+  }
+}
