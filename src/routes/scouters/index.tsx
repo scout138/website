@@ -21,15 +21,13 @@ export default component$(() => {
   const resource = useEndpoint<typeof onGet>();
 
   return (
-    <Resource
-      value={resource}
-      onPending={() => <div>Loading...</div>}
-      onRejected={() => <div>Error</div>}
-      onResolved={(sections) => (
-        <div className="Scouters single-column">
-          {Array.from(sections, (section) => <Section section={section} />)}
-        </div>
-      )}
-    />
+    <div className="Scouters single-column">
+      <Resource
+        value={resource}
+        onPending={() => <div>Loading...</div>}
+        onRejected={() => <div>Error</div>}
+        onResolved={(sections) => (<>{Array.from(sections, (section) => <Section section={section} />)}</>)}
+      />
+    </div>
   );
 });
