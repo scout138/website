@@ -1,5 +1,5 @@
 import { component$, useStyles$ } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import { Link, useLocation } from '@builder.io/qwik-city';
 import styles from './menu.scss?inline';
 
 export interface MenuDefinition {
@@ -16,9 +16,11 @@ export interface MenuProps {
 
 export const Menu = component$(({ menu, child }: MenuProps) => {
   useStyles$(styles);
+  const location = useLocation();
+  const selected = location.pathname === menu.link;
 
   return (
-    <div className={'MenuItem' + (menu.children ? ' parent' : '') + (!child ? ' top' : '')}>
+    <div className={'MenuItem' + (menu.children ? ' parent' : '') + (!child ? ' top' : '') + (selected ? ' current' : '')}>
       {menu.name && (
         <Link
           href={menu.link || 'javascript:void(0)'}

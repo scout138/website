@@ -43,14 +43,17 @@
         border-bottom-width: 0;
       }
 
-      &.parent::after {
-        height: 1px;
-        background-color: white;
-        position: absolute;
-        bottom: -1px;
-        left: 1px;
-        right: 1px;
-        z-index: 5;
+      &.parent,
+      &.current {
+        &::after {
+          height: 1px;
+          background-color: white;
+          position: absolute;
+          bottom: -1px;
+          left: 1px;
+          right: 1px;
+          z-index: 5;
+        }
       }
 
       >.MenuItem-submenu {
@@ -93,6 +96,7 @@
             left: 100%;
           }
 
+          &.current,
           &:hover,
           &:focus-within {
             >a {
@@ -108,6 +112,11 @@
         }
       }
 
+      &.current::after {
+        content: "";
+      }
+
+      &.current,
       &:hover,
       &:focus-within {
         a {
